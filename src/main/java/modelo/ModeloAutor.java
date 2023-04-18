@@ -11,7 +11,7 @@ public class ModeloAutor extends Conector {
 	
 	public void registrarAutor(Autor autor) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO autor (Id_Autor, Nombre, Apellido) VALUES (Secuencia_Autor.nextval, ?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Autor (Id_Autor, Nombre, Apellido) VALUES (Secuencia_Autor.nextval, ?,?)");
 			pst.setInt(1, autor.getId_autor());
 			pst.setString(2, autor.getNombre());
 			pst.setString(3, autor.getApellido());
@@ -25,7 +25,7 @@ public class ModeloAutor extends Conector {
 	
 	public void eliminarAutor(int id_autor) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM autor WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("DELETE * FROM Autor WHERE Id_Autor = ?");
 			pst.setInt(1, id_autor);
 			
 			pst.execute();
@@ -37,7 +37,7 @@ public class ModeloAutor extends Conector {
 	
 	public void modificarAutor(int id_autor) {
 		try {
-			pst = conexion.prepareStatement("UPDATE autor SET Nombre = ? Apellido = ? WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("UPDATE Autor SET Nombre = ? Apellido = ? WHERE Id_Autor = ?");
 			pst.setInt(1, id_autor);
 			
 			pst.executeUpdate();
@@ -51,7 +51,7 @@ public class ModeloAutor extends Conector {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM autor WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("SELECT * FROM Autor WHERE Id_Autor = ?");
 			
 			pst.setInt(1, id_autor);
 			
@@ -75,7 +75,7 @@ public class ModeloAutor extends Conector {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM autor");
+			pst = conexion.prepareStatement("SELECT * FROM Autor");
 			
 			pst.executeQuery();
 			

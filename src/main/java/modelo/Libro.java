@@ -9,6 +9,9 @@ public class Libro {
 	private int num_paginas;
 	private Date fecha_publicacion;
 	private String idioma;
+	private int stock;
+	private String categoria;
+	
 	
 	public int getId_libro() {
 		return id_libro;
@@ -45,6 +48,19 @@ public class Libro {
 	}
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
+	}
+	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 }

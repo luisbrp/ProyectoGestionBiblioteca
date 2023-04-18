@@ -11,7 +11,7 @@ public class ModeloUsuario extends Conector{
 	
 	public void registrarUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO usuario (Id_Usuario, Dni, Nombre, Apellido, Direccion, Tlfno, Email, Rol) VALUES (Secuencia_Usuario.nextval,?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Id_Usuario, Dni, Nombre, Apellido, Direccion, Tlfno, Email, Rol) VALUES (Secuencia_Usuario.nextval,?,?,?,?,?,?,?)");
 			pst.setInt(1, usuario.getId_usuario());
 			pst.setString(2, usuario.getDni());
 			pst.setString(3, usuario.getNombre());
@@ -30,7 +30,7 @@ public class ModeloUsuario extends Conector{
 	
 	public void eliminarUsuario(int id_usuario) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM usuario WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("DELETE * FROM Usuario WHERE Id_Usuario = ?");
 			pst.setInt(1, id_usuario);
 			
 			pst.execute();
@@ -43,7 +43,7 @@ public class ModeloUsuario extends Conector{
 	public void modificarUsuario(int id_usuario) {
 		Usuario usuario = new Usuario();
 		try {
-			pst = conexion.prepareStatement("UPDATE usuario SET Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
 			pst.setInt(1, id_usuario);
 			pst.setString(2, usuario.getDni());
 			pst.setString(3, usuario.getNombre());
@@ -65,7 +65,7 @@ public class ModeloUsuario extends Conector{
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		Usuario usuario = new Usuario();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM usuario WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("SELECT * FROM Usuario WHERE Id_Usuario = ?");
 			
 			pst.setInt(1, id_usuario);
 			
@@ -93,7 +93,7 @@ public class ModeloUsuario extends Conector{
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM usuario");
+			pst = conexion.prepareStatement("SELECT * FROM Usuario");
 			
 			pst.executeQuery();
 			
