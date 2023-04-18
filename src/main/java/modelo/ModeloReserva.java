@@ -12,7 +12,7 @@ public class ModeloReserva extends Conector{
 	
 	public void registrarReserva(Reserva reserva) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Reserva (Fecha_Reserva, Id_Libro, Id_Usuario) VALUES (Secuencia_Autor.nextval, ?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Reserva (Fecha_Reserva, Id_Libro, Id_Usuario) VALUES (Secuencia_Reserva.nextval,?,?,?,?)");
 			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
 			pst.setInt(2, reserva.getId_libro());
 			pst.setInt(3, reserva.getId_usuario());
