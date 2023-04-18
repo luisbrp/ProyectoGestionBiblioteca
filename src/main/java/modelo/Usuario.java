@@ -7,8 +7,10 @@ public class Usuario {
 	private String apellido;
 	private String direccion;
 	private int telefono;
+	private String email;
 	private String rol;
 	private String contraseña;
+	
 	public int getId_usuario() {
 		return id_usuario;
 	}
@@ -44,6 +46,12 @@ public class Usuario {
 	}
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getRol() {
 		return rol;
