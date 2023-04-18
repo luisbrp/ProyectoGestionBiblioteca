@@ -4,12 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class ModeloUsuario extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
-	
 	public void registrarUsuario(Usuario usuario) {
+		
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Usuario (Id_Usuario, Dni, Nombre, Apellido, Direccion, Tlfno, Email, Rol) VALUES (Secuencia_Usuario.nextval,?,?,?,?,?,?,?)");
 			pst.setInt(1, usuario.getId_usuario());

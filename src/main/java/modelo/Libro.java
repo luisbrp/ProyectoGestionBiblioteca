@@ -11,8 +11,15 @@ public class Libro {
 	private String idioma;
 	private int stock;
 	private String categoria;
+	private String foto;
 	
 	
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 	public int getId_libro() {
 		return id_libro;
 	}

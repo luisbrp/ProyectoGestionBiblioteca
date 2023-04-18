@@ -3,7 +3,6 @@ package modelo;
 public class Editorial {
 	private int id_editorial;
 	private String nombre;
-	private String descripcion;
 	private int id_libro;
 	
 	public int getId_editorial() {
@@ -18,12 +17,7 @@ public class Editorial {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 	public int getId_libro() {
 		return id_libro;
 	}

@@ -11,11 +11,10 @@ public class ModeloEditorial extends Conector {
 	
 	public void registrarEditorial(Editorial editorial) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Editorial(Id_Editorial, Nombre, Descripcion, Id_Libro) VALUES (Secuencia_Editorial.nextval,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Editorial(Id_Editorial, Nombre, Id_Libro) VALUES (Secuencia_Editorial.nextval,?,?)");
 			pst.setInt(1, editorial.getId_editorial());
 			pst.setString(2, editorial.getNombre());
-			pst.setString(3, editorial.getDescripcion());
-			pst.setInt(4, editorial.getId_libro());
+			pst.setInt(3, editorial.getId_libro());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -62,7 +61,6 @@ public class ModeloEditorial extends Conector {
 			while(rs.next()) {
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
-				editorial.setDescripcion(rs.getString("Descripcion"));
 				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}
@@ -85,7 +83,6 @@ public class ModeloEditorial extends Conector {
 				Editorial editorial = new Editorial();
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
-				editorial.setDescripcion(rs.getString("Descripcion"));
 				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}

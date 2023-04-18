@@ -5,22 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class ModeloLibro extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
-	
+	Scanner scan = new Scanner(System.in);
 	public void registrarLibro(Libro libro) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Libro (Id_Libro, ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria) VALUES (Secuencia_Libro.nextval,?,?,?,?,?,?,?)");
-			pst.setInt(1, libro.getId_libro());
-			pst.setLong(2, libro.getIsbn());
-			pst.setString(3, libro.getTitulo());
-			pst.setInt(4, libro.getNum_paginas());
-			pst.setDate(5, new Date(libro.getFecha_publicacion().getTime()));
-			pst.setString(6, libro.getIdioma());
-			pst.setInt(7, libro.getStock());
-			pst.setString(8, libro.getCategoria());
+			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto) VALUES (?,?,?,?,?,?,?,?)");
+			pst.setLong(1, libro.getIsbn());
+			pst.setString(2, libro.getTitulo());
+			pst.setInt(3, libro.getNum_paginas());
+			pst.setDate(4, new Date(libro.getFecha_publicacion().getTime()));
+			pst.setString(5, libro.getIdioma());
+			pst.setInt(6, libro.getStock());
+			pst.setString(7, libro.getCategoria());
+			pst.setString(8, libro.getFoto());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -81,6 +81,7 @@ public class ModeloLibro extends Conector{
 				libro.setIdioma(rs.getString("Idioma"));
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
