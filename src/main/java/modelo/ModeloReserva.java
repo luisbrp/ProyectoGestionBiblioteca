@@ -26,7 +26,7 @@ public class ModeloReserva extends Conector{
 	
 	public void AnularReserva(Reserva reserva) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Reserva WHERE Fecha_Reserva = ? Id_Lbro = ? Id_Usuario = ?");
+			pst = conexion.prepareStatement("DELETE * FROM Reserva WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
 			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
 			pst.setInt(2, reserva.getId_libro());
 			pst.setInt(3, reserva.getId_usuario());
@@ -40,7 +40,7 @@ public class ModeloReserva extends Conector{
 	
 	public void modificarReserva(Reserva reserva) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Reserva SET Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ? WHERE Fecha_Reserva = ? Id_Lbro = ? Id_Usuario = ?");
+			pst = conexion.prepareStatement("UPDATE Reserva SET Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ? WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
 			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
 			pst.setInt(2, reserva.getId_libro());
 			pst.setInt(3, reserva.getId_usuario());
@@ -56,7 +56,7 @@ public class ModeloReserva extends Conector{
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Reserva WHERE Fecha_Reserva = ? Id_Lbro = ? Id_Usuario = ?");
+			pst = conexion.prepareStatement("SELECT * FROM Reserva WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
 			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
 			pst.setInt(2, reserva.getId_libro());
 			pst.setInt(3, reserva.getId_usuario());
