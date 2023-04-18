@@ -6,8 +6,8 @@ public class Prestamo {
 	private int id_prestamo;
 	private Date fecha_prestamo;
 	private boolean devuelto;
-	private Usuario id_usuario;
-	private Libro id_libro;
+	private int id_usuario;
+	private int id_libro;
 	
 	public int getId_prestamo() {
 		return id_prestamo;
@@ -27,16 +27,17 @@ public class Prestamo {
 	public void setDevuelto(boolean devuelto) {
 		this.devuelto = devuelto;
 	}
-	public Usuario getId_usuario() {
+	public int getId_usuario() {
 		return id_usuario;
 	}
-	public void setId_usuario(Usuario id_usuario) {
+	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
-	public Libro getId_libro() {
+	public int getId_libro() {
 		return id_libro;
 	}
-	public void setId_libro(Libro id_libro) {
+	public void setId_libro(int id_libro) {
 		this.id_libro = id_libro;
 	}
+	
 }
