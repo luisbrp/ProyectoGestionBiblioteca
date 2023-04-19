@@ -102,7 +102,7 @@ public class ModeloLibro extends Conector{
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				Libro libro = new Libro();
-				libro.setId_libro(rs.getInt("Id_Autor"));
+				libro.setId_libro(rs.getInt(1));
 				libro.setIsbn(rs.getLong("ISBN"));
 				libro.setTitulo(rs.getString("Titulo"));
 				libro.setNum_paginas(rs.getInt("Num_pag"));
@@ -110,6 +110,7 @@ public class ModeloLibro extends Conector{
 				libro.setIdioma(rs.getString("Idioma"));
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
