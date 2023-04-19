@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ModeloLibro extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
-	Scanner scan = new Scanner(System.in);
+	
 	public void registrarLibro(Libro libro) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto) VALUES (?,?,?,?,?,?,?,?)");
