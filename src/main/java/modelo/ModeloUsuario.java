@@ -50,6 +50,7 @@ public class ModeloUsuario extends Conector{
 
 	
 	public void eliminarUsuario(int id_usuario) {
+		
 		try {
 			pst = conexion.prepareStatement("DELETE * FROM Usuario WHERE Id_Usuario = ?");
 			pst.setInt(1, id_usuario);

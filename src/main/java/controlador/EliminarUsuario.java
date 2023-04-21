@@ -31,20 +31,22 @@ public class EliminarUsuario extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-			ModeloUsuario modeloUsuario = new ModeloUsuario();
+	
+
+		ModeloUsuario modeloUsuario = new ModeloUsuario();
+		modeloUsuario.conectar();
 		
-			int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
-			
-			modeloUsuario.conectar();
-			modeloUsuario.eliminarUsuario(id_usuario);
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			usuarios = modeloUsuario.getUsuarios();
-			modeloUsuario.cerrar();
-			
-			request.setAttribute("usuarios", usuarios);
-			
-			request.getRequestDispatcher("VerUsuarios.jsp").forward(request, response);
+		int id_usuario = Integer.parseInt(request.getParameter("id"));
+		
+		modeloUsuario.eliminarUsuario(id_usuario);
+		ArrayList<Usuario> usuarios = modeloUsuario.getUsuarios();
+		modeloUsuario.cerrar();
+		
+		request.setAttribute("usuarios", usuarios);
+		
+		request.getRequestDispatcher("VerUsuarios.jsp").forward(request, response);
+		
+		System.out.println(id_usuario);
 	}
 
 	/**

@@ -27,7 +27,7 @@
          <td>${usuario.rol}</td>
          <td><a href="VerUsuario?id=${usuario.id_usuario}" class="btn btn-primary ">Ver</a>
       	 <a href="ModificarUsuario?id=${usuario.id_usuario}" class="btn btn-success ">Editar</a> 
-      	<a href="EliminarUsuario?id=${usuario.id_usuario}" class="btn btn-danger" >eliminar </a></td>
+   		<a href="EliminarUsuario?id=${usuario.id_usuario}" class="btn btn-success ">Eliminar</a></td> 
       </tr>
     </c:forEach>
   </tbody>
