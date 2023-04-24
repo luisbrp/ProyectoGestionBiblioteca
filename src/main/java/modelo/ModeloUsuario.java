@@ -29,17 +29,19 @@ public class ModeloUsuario extends Conector{
 	
 	public void registroDeUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
 			pst.setString(1, usuario.getDni());
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
 			pst.setString(4, usuario.getDireccion());
-			pst.setInt(5, usuario.getTelefono());
-			pst.setString(6, usuario.getEmail());
+			pst.setString(5, usuario.getContraseña());
+			pst.setInt(6, usuario.getTelefono());
+			pst.setString(7, usuario.getEmail());
 			if(usuario.getRol() == null || usuario.getRol().isEmpty()) {
 				usuario.setRol("Cliente");
 			}
-			pst.setString(7, usuario.getRol());
+			pst.setString(8, usuario.getRol());
+			
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -68,11 +70,12 @@ public class ModeloUsuario extends Conector{
 			pst.setInt(1, usuario.getId_usuario());
 			pst.setString(2, usuario.getDni());
 			pst.setString(3, usuario.getNombre());
-			pst.setString(3, usuario.getNombre());
+			pst.setString(4, usuario.getApellido());
 			pst.setString(5, usuario.getDireccion());
-			pst.setInt(6, usuario.getTelefono());
-			pst.setString(7, usuario.getEmail());
-			pst.setString(8, usuario.getRol());
+			pst.setString(6, usuario.getContraseña());
+			pst.setInt(7, usuario.getTelefono());
+			pst.setString(8, usuario.getEmail());
+			pst.setString(9, usuario.getRol());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -98,6 +101,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
+				usuario.setContraseña(rs.getString("Contraseña"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
@@ -125,6 +129,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
+				usuario.setContraseña(rs.getString("Contraseña"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
