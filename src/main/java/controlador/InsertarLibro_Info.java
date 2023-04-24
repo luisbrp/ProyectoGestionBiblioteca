@@ -1,3 +1,4 @@
+
 package controlador;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class InsertarLibro_Info extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("InsertarLibros_Info.jsp").forward(request, response);
+		request.getRequestDispatcher("InsertarLibro_Info.jsp").forward(request, response);
 	}
 
 	/**
