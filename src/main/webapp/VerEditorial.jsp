@@ -8,11 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>Información del editorial:</h2>
-		<p>Id: ${editorial.id_editorial}</p>
-		<p>nombre: ${editorial.nombre}</p>
-		<p>Id_libro: ${editorial.id_libro}</p>
-	</div>
-	<a href="Editoriales" class="btn btn-primary">Volver</a>
+<div>
+	<h2>Información del editorial:</h2>
+	<p>Id: ${editorial.id_editorial}</p>
+	<p>nombre: ${editorial.nombre}</p>
+	<p>Id_libro: ${editorial.id_libro}</p>
+</div>
+<a href="Editoriales" class="btn btn-primary">Volver</a>
+
 </body>
 </html>

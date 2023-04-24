@@ -31,19 +31,19 @@ public class VerEditorial extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ModeloEditorial modeloEditorial = new ModeloEditorial();
-		Editorial editorial = new Editorial();
-		
-		modeloEditorial.conectar();
-		
-		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
-		System.out.println(id_editorial);
-		modeloEditorial.getEditorial(id_editorial);
-		modeloEditorial.cerrar();
+			ModeloEditorial modeloEditorial = new ModeloEditorial();
+			modeloEditorial.conectar();
+			
+			int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
+			Editorial editorial = modeloEditorial.getEditorial(id_editorial);
+			
+			modeloEditorial.cerrar();
+			
+			request.setAttribute("editorial", editorial);
+			request.getRequestDispatcher("VerEditorial.jsp").forward(request, response);
+		}
+
 	
-		request.setAttribute("editorial", editorial);
-		request.getRequestDispatcher("VerEditorial.jsp").forward(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

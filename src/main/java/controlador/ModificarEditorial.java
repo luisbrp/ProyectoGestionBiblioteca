@@ -30,16 +30,15 @@ public class ModificarEditorial extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloEditorial modeloEditorial = new ModeloEditorial();
-		Editorial editorial = new Editorial();
+		modeloEditorial.conectar();
 		
 		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
+		Editorial editorial = modeloEditorial.getEditorial(id_editorial);
 		
-		modeloEditorial.conectar();
-		modeloEditorial.getEditorial(id_editorial);
 		modeloEditorial.cerrar();
-	
+		
 		request.setAttribute("editorial", editorial);
-		request.getRequestDispatcher("ModificarEditorial.jsp").forward(request, response);
+		request.getRequestDispatcher("ModificarEditorial.jsp").forward(request, response);;
 	
 	}
 

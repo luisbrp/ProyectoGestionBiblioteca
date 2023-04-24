@@ -39,7 +39,7 @@ public class AnularPrestamo extends HttpServlet {
 		
 		String fechaR = request.getParameter("fecha_prestamo");
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		int id_usuario = Integer.parseInt(request.getParameter("id_libro"));
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		
 		Date fecha;
 		try {

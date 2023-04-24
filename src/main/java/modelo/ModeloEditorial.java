@@ -50,26 +50,29 @@ public class ModeloEditorial extends Conector {
 	
 	public Editorial getEditorial(int id_editorial) {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
-		Editorial editorial = new Editorial();
 		try {
 			pst = conexion.prepareStatement("SELECT * FROM editorial WHERE Id_Editorial = ?");
 			pst.setInt(1, id_editorial);
 			
-			pst.executeQuery();
-			
 			rs = pst.executeQuery();
 			while(rs.next()) {
+				Editorial editorial = new Editorial();
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
 				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return editorial;
+		
+		if(editoriales.size() > 0) {
+			return editoriales.get(0);
+		} else {
+			return null;
+		}
 	}
+
 	
 	public ArrayList<Editorial> getEditoriales() {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
