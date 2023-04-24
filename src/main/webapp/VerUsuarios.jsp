@@ -16,9 +16,10 @@
       <th>Nombre</th>
       <th>rol</th>
       <th>Acciones <a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 40px;">InsertarUsuario</a></th>
-      <th><a href="Prestamos" class="btn btn-primary" style="margin-left: 40px;">Prestamos</a></th>
-      <th><a href="Autores" class="btn btn-primary" style="margin-left: 40px;">Autores</a></th>
-      <th><a href="Editoriales" class="btn btn-primary" style="margin-left: 40px;">Editoriales</a></th>
+      <th><a href="Prestamos" class="btn btn-primary" style="margin-left: 20px;">Prestamos</a></th>
+      <th><a href="Autores" class="btn btn-primary" style="margin-left: 20px;">Autores</a></th>
+      <th><a href="Editoriales" class="btn btn-primary" style="margin-left: 20px;">Editoriales</a></th>
+      <th><a href="VerLibros" class="btn btn-primary" style="margin-left: 20px;">Libro</a></th>
     </tr>
   </thead>
   <tbody>

@@ -28,7 +28,7 @@ public class ModeloLibro extends Conector{
 		}
 	}
 	
-	public void eliminarUsuario(int id_libro) {
+	public void eliminarLibro(int id_libro) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Libro WHERE Id_Libro = ?");
 			pst.setInt(1, id_libro);
@@ -40,18 +40,18 @@ public class ModeloLibro extends Conector{
 		}
 	}
 	
-	public void modificarLibro(int id_libro) {
-		Libro libro = new Libro();
+	public void modificarLibro(int id_libro, Libro libro) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Libro SET Id_Libro = ? ISBN = ? Titulo = ? Num_pag = ? Fecha_Publicacion = ? Idioma = ? Stock = ? Categoria = ? WHERE Id_Autor = ?");
-			pst.setInt(1, libro.getId_libro());
-			pst.setLong(2, libro.getIsbn());
-			pst.setString(3, libro.getTitulo());
-			pst.setInt(4, libro.getNum_paginas());
-			pst.setDate(5, new Date(libro.getFecha_publicacion().getTime()));
-			pst.setString(6, libro.getIdioma());
-			pst.setInt(7, libro.getStock());
-			pst.setString(8, libro.getCategoria());
+			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ? WHERE Id_Libro = ?");
+			pst.setInt(9, libro.getId_libro());
+			pst.setLong(1, libro.getIsbn());
+			pst.setString(2, libro.getTitulo());
+			pst.setInt(3, libro.getNum_paginas());
+			pst.setDate(4, new Date(libro.getFecha_publicacion().getTime()));
+			pst.setString(5, libro.getIdioma());
+			pst.setInt(6, libro.getStock());
+			pst.setString(7, libro.getCategoria());
+			pst.setString(8, libro.getFoto());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class ModeloLibro extends Conector{
 			
 			rs = pst.executeQuery();
 			while(rs.next()) {
-				libro.setId_libro(rs.getInt("Id_Autor"));
+				libro.setId_libro(rs.getInt("Id_Libro"));
 				libro.setIsbn(rs.getLong("ISBN"));
 				libro.setTitulo(rs.getString("Titulo"));
 				libro.setNum_paginas(rs.getInt("Num_Pag"));

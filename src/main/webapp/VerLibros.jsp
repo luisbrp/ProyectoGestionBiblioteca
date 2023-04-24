@@ -8,19 +8,25 @@
 <title>Libros</title>
 </head>
 <body>
-<c:forEach items="${libros}" var="libro">
-	<div>
-		<h2>Información del del Libro:</h2>
-		<p>id:${libro.id_libro}</p>
-		<p>isbn:${libro.isbn}</p>
-		<p>titulo${libro.titulo}</p>
-		<p>num_pag:${libro.num_paginas}</p>
-		<p>Fecha de publicacion: ${libro.fecha_publicacion}</p>
-		<p>idioma: ${libro.idioma}</p>
-		<p>stock: ${libro.stock}</p>
-		<p>categoria: ${libro.categoria}</p>	
-	</div>
-	</c:forEach>
-	<a href="VerUsuarios" class="btn btn-primary">Volver</a>
+<table>
+  <tbody>
+    <c:forEach items="${libros}" var="libro">
+      <tr>
+		<td>${libro.id_libro}</td> 
+		<td>${libro.isbn}</td> 
+		<td>${libro.titulo}</td> 
+		<td>${libro.num_paginas}</td> 
+		<td>${libro.fecha_publicacion}</td> 
+		<td>${libro.idioma}</td> 
+		<td>${libro.stock}</td> 
+		<td>${libro.categoria}</td>
+		 <td>${libro.foto}</td>
+         <td><a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary ">Ver</a>
+      	 <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
+   		<a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Eliminar</a></td> 
+      </tr>
+    </c:forEach>
+  </tbody>
+</table>
 </body>
 </html>
