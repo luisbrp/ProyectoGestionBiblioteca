@@ -33,7 +33,7 @@ public class VerUsuario extends HttpServlet {
 		Usuario usuario = new Usuario();
 		
 		modeloUsuario.conectar();
-		int id_usuario = Integer.parseInt(request.getParameter("id"));
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		usuario = modeloUsuario.getUsuario(id_usuario);
 		modeloUsuario.cerrar();
 		

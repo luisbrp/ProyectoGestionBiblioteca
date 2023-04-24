@@ -64,18 +64,18 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
-	public void modificarUsuario(Usuario usuario) {
+	public void modificarUsuario(int id_usuario, Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Usuario SET Id_Usuario = ? Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
-			pst.setInt(1, usuario.getId_usuario());
-			pst.setString(2, usuario.getDni());
-			pst.setString(3, usuario.getNombre());
-			pst.setString(4, usuario.getApellido());
-			pst.setString(5, usuario.getDireccion());
-			pst.setString(6, usuario.getContraseña());
-			pst.setInt(7, usuario.getTelefono());
-			pst.setString(8, usuario.getEmail());
-			pst.setString(9, usuario.getRol());
+			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, Direccion = ?, Contraseña = ?, Tlfno = ?, Email = ?, Rol = ? WHERE Id_Usuario = ?");
+			pst.setString(1, usuario.getDni());
+			pst.setString(2, usuario.getNombre());
+			pst.setString(3, usuario.getApellido());
+			pst.setString(4, usuario.getDireccion());
+			pst.setString(5, usuario.getContraseña());
+			pst.setInt(6, usuario.getTelefono());
+			pst.setString(7, usuario.getEmail());
+			pst.setString(8, usuario.getRol());
+			pst.setInt(9, id_usuario);
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {

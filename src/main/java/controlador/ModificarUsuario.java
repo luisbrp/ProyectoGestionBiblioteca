@@ -30,12 +30,11 @@ public class ModificarUsuario extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloUsuario modeloUsuario = new ModeloUsuario();
+		Usuario usuario = new Usuario();
 		
 		modeloUsuario.conectar();
 		
-		int id_usuario = Integer.parseInt(request.getParameter("id"));
-		
-		Usuario usuario = new Usuario();
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		
 		usuario = modeloUsuario.getUsuario(id_usuario);
 		request.setAttribute("usuario", usuario);
@@ -51,7 +50,7 @@ public class ModificarUsuario extends HttpServlet {
 		ModeloUsuario modeloUsuario = new ModeloUsuario();
 		Usuario usuario = new Usuario();
 		
-		int id_usuario = Integer.parseInt(request.getParameter("id"));
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		String dni = request.getParameter("dni");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
@@ -73,7 +72,7 @@ public class ModificarUsuario extends HttpServlet {
 		
 		
 		modeloUsuario.conectar();
-		modeloUsuario.modificarUsuario(usuario);
+		modeloUsuario.modificarUsuario(id_usuario, usuario);
 		modeloUsuario.cerrar();
 	}
 	

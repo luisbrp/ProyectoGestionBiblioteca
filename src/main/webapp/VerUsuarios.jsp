@@ -28,9 +28,9 @@
          <td>${usuario.dni}</td>
         <td>${usuario.nombre}</td>
          <td>${usuario.rol}</td>
-         <td><a href="VerUsuario?id=${usuario.id_usuario}" class="btn btn-primary ">Ver</a>
-      	 <a href="ModificarUsuario?id=${usuario.id_usuario}" class="btn btn-success ">Editar</a> 
-   		<a href="EliminarUsuario?id=${usuario.id_usuario}" class="btn btn-success ">Eliminar</a></td> 
+         <td><a href="VerUsuario?id_usuario=${usuario.id_usuario}" class="btn btn-primary ">Ver</a>
+      	 <a href="ModificarUsuario?id_usuario=${usuario.id_usuario}" class="btn btn-success ">Editar</a> 
+   		<a href="EliminarUsuario?id_usuario=${usuario.id_usuario}" class="btn btn-success ">Eliminar</a></td> 
       </tr>
     </c:forEach>
   </tbody>
