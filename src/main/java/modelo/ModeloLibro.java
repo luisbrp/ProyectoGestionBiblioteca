@@ -30,7 +30,7 @@ public class ModeloLibro extends Conector{
 	
 	public void eliminarUsuario(int id_libro) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Libro WHERE Id_Libro = ?");
+			pst = conexion.prepareStatement("DELETE FROM Libro WHERE Id_Libro = ?");
 			pst.setInt(1, id_libro);
 			
 			pst.execute();
@@ -75,7 +75,7 @@ public class ModeloLibro extends Conector{
 				libro.setId_libro(rs.getInt("Id_Autor"));
 				libro.setIsbn(rs.getLong("ISBN"));
 				libro.setTitulo(rs.getString("Titulo"));
-				libro.setNum_paginas(rs.getInt("Num_pag"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
 				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
 				libro.setIdioma(rs.getString("Idioma"));
 				libro.setStock(rs.getInt("Stock"));
@@ -104,7 +104,7 @@ public class ModeloLibro extends Conector{
 				libro.setId_libro(rs.getInt(1));
 				libro.setIsbn(rs.getLong("ISBN"));
 				libro.setTitulo(rs.getString("Titulo"));
-				libro.setNum_paginas(rs.getInt("Num_pag"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
 				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
 				libro.setIdioma(rs.getString("Idioma"));
 				libro.setStock(rs.getInt("Stock"));

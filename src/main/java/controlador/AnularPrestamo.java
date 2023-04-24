@@ -15,16 +15,16 @@ import modelo.ModeloPrestamo;
 import modelo.Prestamo;
 
 /**
- * Servlet implementation class RealizarPrestamo
+ * Servlet implementation class AnularPrestamo
  */
-@WebServlet("/RealizarPrestamo")
-public class RealizarPrestamo extends HttpServlet {
+@WebServlet("/AnularPrestamo")
+public class AnularPrestamo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RealizarPrestamo() {
+    public AnularPrestamo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,36 +33,36 @@ public class RealizarPrestamo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("RealizarPrestamo.jsp").forward(request, response);
+		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
+		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();
+		Prestamo prestamo = new Prestamo();
+		
+		String fechaR = request.getParameter("fecha_prestamo");
+		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		int id_usuario = Integer.parseInt(request.getParameter("id_libro"));
+		
+		Date fecha;
+		try {
+			fecha = fechaFormato.parse(fechaR);
+			prestamo.setFecha_prestamo(fecha);
+			prestamo.setId_libro(id_libro);
+			prestamo.setId_usuario(id_usuario);
+			
+			modeloPrestamo.conectar();
+			modeloPrestamo.AnularPrestamo(fecha, id_libro, id_usuario);
+			modeloPrestamo.cerrar();
+		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
-		Prestamo prestamo = new Prestamo();
-		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();
-		
-		String fechaP = request.getParameter("fecha_Prestamo");
-		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		String devuelto = request.getParameter("devuelto");
-		
-		try {
-		Date fecha = fechaFormato.parse(fechaP);
-		prestamo.setFecha_prestamo(fecha);
-		prestamo.setId_usuario(id_usuario);
-		prestamo.setId_libro(id_libro);
-		prestamo.setDevuelto(devuelto);
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-		modeloPrestamo.conectar();
-		modeloPrestamo.realizarPrestamo(prestamo);
-		modeloPrestamo.cerrar();
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

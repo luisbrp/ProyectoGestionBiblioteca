@@ -16,7 +16,7 @@ public class ModeloPrestamo extends Conector{
 			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
 			pst.setInt(2, prestamo.getId_libro());
 			pst.setInt(3, prestamo.getId_usuario());
-			pst.setBoolean(4, prestamo.getDevuelto());
+			pst.setString(4, prestamo.getDevuelto());
 			pst.execute();
 		} catch (SQLException e) {
 			
@@ -24,12 +24,12 @@ public class ModeloPrestamo extends Conector{
 		}
 	}
 	
-	public void AnularPrestamo(Prestamo prestamo) {
+	public void AnularPrestamo(java.util.Date fecha, int id_libro, int id_usuario) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Prestamo WHERE Fecha_Prestamo = ?  Id_Lbro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setInt(2, prestamo.getId_libro());
-			pst.setInt(3, prestamo.getId_usuario());
+			pst = conexion.prepareStatement("DELETE FROM Prestamo WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			pst.setDate(1, new Date(fecha.getTime()));
+			pst.setInt(2, id_libro);
+			pst.setInt(3, id_usuario);
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -66,7 +66,7 @@ public class ModeloPrestamo extends Conector{
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
-				prestamo.setDevuelto(rs.getBoolean("Devuelto"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamo.setId_libro(rs.getInt("Id_Libro"));
 				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
 				prestamos.add(prestamo);
@@ -78,11 +78,11 @@ public class ModeloPrestamo extends Conector{
 		return prestamo;
 	}
 	
-	public ArrayList<Prestamo> getReservas() {
+	public ArrayList<Prestamo> getPrestamos() {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Reserva");
+			pst = conexion.prepareStatement("SELECT * FROM prestamo");
 			
 			pst.executeQuery();
 			
@@ -90,7 +90,7 @@ public class ModeloPrestamo extends Conector{
 			while(rs.next()) {
 				Prestamo prestamo = new Prestamo();
 				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
-				prestamo.setDevuelto(rs.getBoolean("Devuelto"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamo.setId_libro(rs.getInt("Id_Libro"));
 				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
 				prestamos.add(prestamo);

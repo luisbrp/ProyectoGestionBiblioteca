@@ -11,10 +11,10 @@ public class ModeloAutor extends Conector {
 	
 	public void registrarAutor(Autor autor) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Autor (Id_Autor, Nombre, Apellido) VALUES (Secuencia_Autor.nextval, ?,?)");
-			pst.setInt(1, autor.getId_autor());
-			pst.setString(2, autor.getNombre());
-			pst.setString(3, autor.getApellido());
+			pst = conexion.prepareStatement("INSERT INTO Autor (Nombre, Apellido, Descripcion) VALUES (?,?,?)");
+			pst.setString(1, autor.getNombre());
+			pst.setString(2, autor.getApellido());
+			pst.setString(3, autor.getDescripcion());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -25,7 +25,7 @@ public class ModeloAutor extends Conector {
 	
 	public void eliminarAutor(int id_autor) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Autor WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("DELETE FROM Autor WHERE Id_Autor = ?");
 			pst.setInt(1, id_autor);
 			
 			pst.execute();
@@ -37,7 +37,7 @@ public class ModeloAutor extends Conector {
 	
 	public void modificarAutor(int id_autor) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Autor SET Nombre = ? Apellido = ? WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("UPDATE Autor SET Nombre = ? Apellido = ? Descripcion = ? WHERE Id_Autor = ?");
 			pst.setInt(1, id_autor);
 			
 			pst.executeUpdate();
@@ -62,6 +62,7 @@ public class ModeloAutor extends Conector {
 				autor.setId_autor(rs.getInt("Id_Autor"));
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
+				autor.setDescripcion(rs.getString("Descripcion"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
@@ -85,6 +86,7 @@ public class ModeloAutor extends Conector {
 				autor.setId_autor(rs.getInt("Id_Autor"));
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
+				autor.setDescripcion(rs.getString("Descripcion"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {

@@ -3,9 +3,9 @@ package modelo;
 import java.util.Date;
 
 public class Prestamo {
-	String No;
+
 	private Date fecha_prestamo;
-	private boolean devuelto = Boolean.parseBoolean(No);
+	private String devuelto;
 	private int id_usuario;
 	private int id_libro;
 	
@@ -15,10 +15,11 @@ public class Prestamo {
 	public void setFecha_prestamo(Date fecha_prestamo) {
 		this.fecha_prestamo = fecha_prestamo;
 	}
-	public boolean getDevuelto() {
+	
+	public String getDevuelto() {
 		return devuelto;
 	}
-	public void setDevuelto(boolean devuelto) {
+	public void setDevuelto(String devuelto) {
 		this.devuelto = devuelto;
 	}
 	public int getId_usuario() {

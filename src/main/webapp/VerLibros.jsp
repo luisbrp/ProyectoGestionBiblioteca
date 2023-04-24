@@ -11,11 +11,10 @@
 <c:forEach items="${libros}" var="libro">
 	<div>
 		<h2>Información del del Libro:</h2>
-		<img alt="" src="${libro.foto}">
 		<p>id:${libro.id_libro}</p>
 		<p>isbn:${libro.isbn}</p>
 		<p>titulo${libro.titulo}</p>
-		<p>num_pag:${libro.num_pag}</p>
+		<p>num_pag:${libro.num_paginas}</p>
 		<p>Fecha de publicacion: ${libro.fecha_publicacion}</p>
 		<p>idioma: ${libro.idioma}</p>
 		<p>stock: ${libro.stock}</p>
