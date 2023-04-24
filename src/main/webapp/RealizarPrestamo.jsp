@@ -12,7 +12,7 @@
   		<div class="form-group">
     		<div class="form-group">
 		    <label>Fecha del prestamo:</label>
-		    <input type="Date" name="fecha_Prestamo" required 
+		    <input type="Date" name="fecha_prestamo" required 
 		           class="form-control" 
 		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha válida')" 
 		           onchange="this.setCustomValidity('')" /><br/>

@@ -45,7 +45,7 @@ public class RealizarPrestamo extends HttpServlet {
 		Prestamo prestamo = new Prestamo();
 		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();
 		
-		String fechaP = request.getParameter("fecha_Prestamo");
+		String fechaP = request.getParameter("fecha_prestamo");
 		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
 		String devuelto = request.getParameter("devuelto");
