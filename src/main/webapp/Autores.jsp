@@ -16,7 +16,9 @@
       		<td>${autor.nombre}</td>
         	<td>${autor.apellido}</td>
          	<td>${autor.descripcion}</td>
-         	<td><a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-success">Eliminar</a></td>
+         	<td><a href="VerAutor?id_autor=${autor.id_autor}" class="btn btn-primary ">Ver</a>
+         	<a href="ModificarAutor?id_autor=${autor.id_autor}" class="btn btn-primary ">Editar</a>
+         	<a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-success">Eliminar</a></td>
       </tr>
     </c:forEach>
     </tbody>

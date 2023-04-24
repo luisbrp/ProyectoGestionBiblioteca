@@ -35,10 +35,13 @@ public class ModeloAutor extends Conector {
 		}
 	}
 	
-	public void modificarAutor(int id_autor) {
+	public void modificarAutor(int id_autor, Autor autor) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Autor SET Nombre = ? Apellido = ? Descripcion = ? WHERE Id_Autor = ?");
-			pst.setInt(1, id_autor);
+			pst = conexion.prepareStatement("UPDATE autor SET Nombre = ?, Apellido = ?, Descripcion = ? WHERE Id_Autor = ?");
+			pst.setInt(4, id_autor);
+			pst.setString(1, autor.getNombre());
+			pst.setString(2, autor.getApellido());
+			pst.setString(3, autor.getDescripcion());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -51,8 +54,7 @@ public class ModeloAutor extends Conector {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Autor WHERE Id_Autor = ?");
-			
+			pst = conexion.prepareStatement("SELECT * FROM autor WHERE Id_Autor = ?");
 			pst.setInt(1, id_autor);
 			
 			pst.executeQuery();
