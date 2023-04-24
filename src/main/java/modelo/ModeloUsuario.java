@@ -52,7 +52,7 @@ public class ModeloUsuario extends Conector{
 	public void eliminarUsuario(int id_usuario) {
 		
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Usuario WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("DELETE FROM Usuario WHERE Id_Usuario = ?");
 			pst.setInt(1, id_usuario);
 			
 			pst.execute();
@@ -62,11 +62,10 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
-	public void modificarUsuario(int id_usuario) {
-		Usuario usuario = new Usuario();
+	public void modificarUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
-			pst.setInt(1, id_usuario);
+			pst = conexion.prepareStatement("UPDATE Usuario SET Id_Usuario = ? Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
+			pst.setInt(1, usuario.getId_usuario());
 			pst.setString(2, usuario.getDni());
 			pst.setString(3, usuario.getNombre());
 			pst.setString(3, usuario.getNombre());
@@ -74,7 +73,6 @@ public class ModeloUsuario extends Conector{
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			pst.setString(8, usuario.getRol());
-			
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {

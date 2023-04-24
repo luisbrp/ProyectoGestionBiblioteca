@@ -46,7 +46,6 @@ public class EliminarUsuario extends HttpServlet {
 		
 		request.getRequestDispatcher("VerUsuarios.jsp").forward(request, response);
 		
-		System.out.println(id_usuario);
 	}
 
 	/**
