@@ -52,6 +52,7 @@ public class InsertarLibro extends HttpServlet {
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		String categoria = request.getParameter("categoria");
 		String foto = request.getParameter("foto");
+		
 		try {
 			libro.setTitulo(titulo);
 			libro.setIsbn(isbn);

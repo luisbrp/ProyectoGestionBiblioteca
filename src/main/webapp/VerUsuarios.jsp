@@ -16,6 +16,7 @@
       <th>Nombre</th>
       <th>rol</th>
       <th>Acciones <a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 40px;">InsertarUsuario</a></th>
+      <th><a href="RealizarPrestamo" class="btn btn-primary" style="margin-left: 40px;">Prestamo</a></th>
     </tr>
   </thead>
   <tbody>

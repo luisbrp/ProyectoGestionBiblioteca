@@ -3,9 +3,9 @@ package modelo;
 import java.util.Date;
 
 public class Prestamo {
-	
+	String No;
 	private Date fecha_prestamo;
-	private boolean devuelto;
+	private boolean devuelto = Boolean.parseBoolean(No);
 	private int id_usuario;
 	private int id_libro;
 	

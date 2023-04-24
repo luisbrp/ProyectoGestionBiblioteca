@@ -10,14 +10,13 @@ public class ModeloPrestamo extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
-	public void registrarPrestamo(Prestamo prestamo) {
+	public void realizarPrestamo(Prestamo prestamo) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Prestamo (Fecha_Prestamo, Devuelto, Id_Libro, Id_Usuario) VALUES (Secuencia_Prestamo.nextval,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Prestamo (Fecha_Prestamo, Id_Libro, Id_Usuario, Devuelto) VALUES (?,?,?,?)");
 			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setBoolean(2, prestamo.getDevuelto());
 			pst.setInt(2, prestamo.getId_libro());
 			pst.setInt(3, prestamo.getId_usuario());
-			
+			pst.setBoolean(4, prestamo.getDevuelto());
 			pst.execute();
 		} catch (SQLException e) {
 			
