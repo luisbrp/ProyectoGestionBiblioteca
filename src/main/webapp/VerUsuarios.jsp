@@ -19,7 +19,10 @@
       <th><a href="Prestamos" class="btn btn-primary" style="margin-left: 20px;">Prestamos</a></th>
       <th><a href="Autores" class="btn btn-primary" style="margin-left: 20px;">Autores</a></th>
       <th><a href="Editoriales" class="btn btn-primary" style="margin-left: 20px;">Editoriales</a></th>
-      <th><a href="VerLibros" class="btn btn-primary" style="margin-left: 20px;">Libro</a></th>
+      <th><a href="VerLibros" class="btn btn-primary" style="margin-left: 20px;">Libros</a></th>
+      <th><a href="Reservas" class="btn btn-primary" style="margin-left: 20px;">Reservas</a></th>
+      <th><a href="Prestamos" class="btn btn-primary" style="margin-left: 20px;">Prestamos</a></th>
+      <th><a href="Libros_Info" class="btn btn-primary" style="margin-left: 20px;">Libros_Info</a></th>
     </tr>
   </thead>
   <tbody>

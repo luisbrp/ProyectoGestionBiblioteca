@@ -1,8 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,20 +30,14 @@ public class VerLibro_Info extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloLibro_Info modeloLibro_Info = new ModeloLibro_Info();
-		Libro_Info libro_Info = new Libro_Info();
-		
-			
 		int id_autor = Integer.parseInt(request.getParameter("id_autor"));
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		
-		
 		modeloLibro_Info.conectar();
-		modeloLibro_Info.getLibro_Info(id_libro, id_autor, libro_Info);
+		Libro_Info libro_Info = modeloLibro_Info.getLibro_Info(id_libro, id_autor);
 		modeloLibro_Info.cerrar();
-		
 		request.setAttribute("libro_Info", libro_Info);
-		
 		request.getRequestDispatcher("VerLibro_Info.jsp").forward(request, response);
+
 	}
 	
 
