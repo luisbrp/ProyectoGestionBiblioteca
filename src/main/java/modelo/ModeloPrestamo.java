@@ -38,13 +38,13 @@ public class ModeloPrestamo extends Conector{
 		}
 	}
 	
-	public void modificarPrestamo(java.util.Date fecha, int id_libro, int id_usuario, Prestamo prestamo) {
+	public void modificarPrestamo(java.util.Date fecha, int id_libro, int id_usuario, Prestamo prestamo, String devuelto) {
 	    try {
-	        pst = conexion.prepareStatement("UPDATE Prestamo SET Fecha_Prestamo = ?, Id_Libro = ?, Id_Usuario = ?, Devuelto = ? WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
+	        pst = conexion.prepareStatement("UPDATE Prestamo SET Fecha_Prestamo = IFNULL(?, fecha), Id_Libro = IFNULL(?, id_libro), Id_Usuario = IFNULL(?, id_usuario, Devuelto = ? WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
 	        pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
 	        pst.setInt(2, prestamo.getId_libro());
 	        pst.setInt(3, prestamo.getId_usuario());
-	        pst.setString(4, prestamo.getDevuelto());
+	        pst.setString(4, devuelto);
 	        pst.setDate(5, new Date(fecha.getTime()));
 	        pst.setInt(6, id_libro);
 	        pst.setInt(7, id_usuario);

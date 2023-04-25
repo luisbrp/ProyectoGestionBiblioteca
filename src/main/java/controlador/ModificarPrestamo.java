@@ -74,14 +74,20 @@ public class ModificarPrestamo extends HttpServlet {
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
 		String devuelto = request.getParameter("devuelto");
 		
+		String nueva_fechaP = request.getParameter("nueva_fecha_prestamo");
+		int nuevo_id_usuario = Integer.parseInt(request.getParameter("nuevo_id_usuario"));
+		int nuevo_id_libro = Integer.parseInt(request.getParameter("nuevo_id_libro"));
+		String nuevo_devuelto = request.getParameter("nuevo_devuelto");
+		
 		try {
 		Date fecha = fechaFormato.parse(fechaP);
-		prestamo.setFecha_prestamo(fecha);
-		prestamo.setId_usuario(id_usuario);
-		prestamo.setId_libro(id_libro);
-		prestamo.setDevuelto(devuelto);
+		Date nuevaFecha = fechaFormato.parse(nueva_fechaP);
+		prestamo.setFecha_prestamo(nuevaFecha);
+		prestamo.setId_usuario(nuevo_id_usuario);
+		prestamo.setId_libro(nuevo_id_libro);
+		prestamo.setDevuelto(nuevo_devuelto);
 		modeloPrestamo.conectar();
-		modeloPrestamo.modificarPrestamo(fecha, id_libro, id_usuario, prestamo);
+		modeloPrestamo.modificarPrestamo(fecha, id_libro, id_usuario, prestamo, devuelto);
 		modeloPrestamo.cerrar();
 		} catch (ParseException e) {
 			
