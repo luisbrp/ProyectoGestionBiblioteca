@@ -15,6 +15,6 @@
 		<p>apellido: ${autor.apellido}</p>
 		<p>descripcion: ${autor.descripcion}</p>
 	</div>
-	<a href="VerUsuarios" class="btn btn-primary">Volver</a>
+	<a href="OpcionesDeAdministrador" class="btn btn-primary">Volver</a>
 </body>
 </html>

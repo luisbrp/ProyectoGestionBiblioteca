@@ -49,7 +49,7 @@ public class EliminarLibro_Info extends HttpServlet {
 		
 		request.setAttribute("libros_Info", libros_Info);
 		
-		request.getRequestDispatcher("Libros_Info.jsp").forward(request, response);
+		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
 	}
 	
 

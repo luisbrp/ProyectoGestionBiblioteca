@@ -15,6 +15,6 @@
 		<p>Id_Usuario: ${reserva.id_libro}</p>
 
 	</div>
-	<a href="Prestamos" class="btn btn-primary">Volver</a>
+	<a href="OpcionesDeAdministrador" class="btn btn-primary">Volver</a>
 </body>
 </html>

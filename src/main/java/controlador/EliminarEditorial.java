@@ -42,7 +42,7 @@ public class EliminarEditorial extends HttpServlet {
 		modeloEditorial.cerrar();
 	
 		request.setAttribute("editoriales", editoriales);
-		request.getRequestDispatcher("Editoriales.jsp").forward(request, response);
+		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
 	}
 
 	/**

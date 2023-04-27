@@ -44,7 +44,7 @@ public class EliminarUsuario extends HttpServlet {
 		
 		request.setAttribute("usuarios", usuarios);
 		
-		request.getRequestDispatcher("VerUsuarios.jsp").forward(request, response);
+		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
 		
 	}
 

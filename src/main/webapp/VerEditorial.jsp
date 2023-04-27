@@ -14,7 +14,7 @@
 	<p>nombre: ${editorial.nombre}</p>
 	<p>Id_libro: ${editorial.id_libro}</p>
 </div>
-<a href="Editoriales" class="btn btn-primary">Volver</a>
+<a href="OpcionesDeAdministrador" class="btn btn-primary">Volver</a>
 
 </body>
 </html>

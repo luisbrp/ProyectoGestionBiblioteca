@@ -44,7 +44,7 @@ public class EliminarAutor extends HttpServlet {
 		
 		request.setAttribute("autores", autores);
 		
-		request.getRequestDispatcher("Autores.jsp").forward(request, response);
+		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
 	}
 
 	/**
