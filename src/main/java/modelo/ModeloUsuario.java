@@ -8,15 +8,14 @@ import java.util.ArrayList;
 public class ModeloUsuario extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
-	
 	public void registrarUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Usuario (Id_Usuario, Dni, Nombre, Apellido, Direccion, Tlfno, Email, Rol) VALUES (Secuencia_Usuario.nextval,?,?,?,?,?,?,?)");
-			pst.setInt(1, usuario.getId_usuario());
-			pst.setString(2, usuario.getDni());
-			pst.setString(3, usuario.getNombre());
-			pst.setString(4, usuario.getApellido());
-			pst.setString(5, usuario.getDireccion());
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
+			pst.setString(1, usuario.getDni());
+			pst.setString(2, usuario.getNombre());
+			pst.setString(3, usuario.getApellido());
+			pst.setString(4, usuario.getDireccion());
+			pst.setString(5, usuario.getContraseña());
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			pst.setString(8, usuario.getRol());
@@ -27,10 +26,35 @@ public class ModeloUsuario extends Conector{
 			e.printStackTrace();
 		}
 	}
+	
+	public void registroDeUsuario(Usuario usuario) {
+		try {
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
+			pst.setString(1, usuario.getDni());
+			pst.setString(2, usuario.getNombre());
+			pst.setString(3, usuario.getApellido());
+			pst.setString(4, usuario.getDireccion());
+			pst.setString(5, usuario.getContraseña());
+			pst.setInt(6, usuario.getTelefono());
+			pst.setString(7, usuario.getEmail());
+			if(usuario.getRol() == null || usuario.getRol().isEmpty()) {
+				usuario.setRol("Cliente");
+			}
+			pst.setString(8, usuario.getRol());
+			
+			
+			pst.execute();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
 	
 	public void eliminarUsuario(int id_usuario) {
+		
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Usuario WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("DELETE FROM Usuario WHERE Id_Usuario = ?");
 			pst.setInt(1, id_usuario);
 			
 			pst.execute();
@@ -40,19 +64,18 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
-	public void modificarUsuario(int id_usuario) {
-		Usuario usuario = new Usuario();
+	public void modificarUsuario(int id_usuario, Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ? Nombre = ? Apellido = ? Direccion = ? Tlfno = ? Email = ? Rol = ? WHERE Id_Usuario = ?");
-			pst.setInt(1, id_usuario);
-			pst.setString(2, usuario.getDni());
-			pst.setString(3, usuario.getNombre());
-			pst.setString(3, usuario.getNombre());
-			pst.setString(5, usuario.getDireccion());
+			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, Direccion = ?, Contraseña = ?, Tlfno = ?, Email = ?, Rol = ? WHERE Id_Usuario = ?");
+			pst.setString(1, usuario.getDni());
+			pst.setString(2, usuario.getNombre());
+			pst.setString(3, usuario.getApellido());
+			pst.setString(4, usuario.getDireccion());
+			pst.setString(5, usuario.getContraseña());
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			pst.setString(8, usuario.getRol());
-			
+			pst.setInt(9, id_usuario);
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -78,6 +101,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
+				usuario.setContraseña(rs.getString("Contraseña"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
@@ -105,6 +129,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
+				usuario.setContraseña(rs.getString("Contraseña"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);

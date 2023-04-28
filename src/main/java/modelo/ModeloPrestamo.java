@@ -10,13 +10,26 @@ public class ModeloPrestamo extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
-	public void registrarPrestamo(Prestamo prestamo) {
+	public void realizarPrestamo(Prestamo prestamo) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Prestamo (Fecha_Prestamo, Devuelto, Id_Libro, Id_Usuario) VALUES (Secuencia_Prestamo.nextval,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Prestamo (Fecha_Prestamo, Id_Libro, Id_Usuario, Devuelto) VALUES (?,?,?,?)");
 			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setBoolean(2, prestamo.getDevuelto());
 			pst.setInt(2, prestamo.getId_libro());
 			pst.setInt(3, prestamo.getId_usuario());
+			pst.setString(4, prestamo.getDevuelto());
+			pst.execute();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void AnularPrestamo(java.util.Date fecha, int id_libro, int id_usuario) {
+		try {
+			pst = conexion.prepareStatement("DELETE FROM Prestamo WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			pst.setDate(1, new Date(fecha.getTime()));
+			pst.setInt(2, id_libro);
+			pst.setInt(3, id_usuario);
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -25,49 +38,39 @@ public class ModeloPrestamo extends Conector{
 		}
 	}
 	
-	public void AnularPrestamo(Prestamo prestamo) {
-		try {
-			pst = conexion.prepareStatement("DELETE * FROM Prestamo WHERE Fecha_Prestamo = ?  Id_Lbro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setInt(2, prestamo.getId_libro());
-			pst.setInt(3, prestamo.getId_usuario());
-			
-			pst.execute();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+	public void modificarPrestamo(java.util.Date fecha, int id_libro, int id_usuario, Prestamo prestamo, String devuelto) {
+	    try {
+	        pst = conexion.prepareStatement("UPDATE Prestamo SET Fecha_Prestamo = IFNULL(?, fecha), Id_Libro = IFNULL(?, id_libro), Id_Usuario = IFNULL(?, id_usuario, Devuelto = ? WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
+	        pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
+	        pst.setInt(2, prestamo.getId_libro());
+	        pst.setInt(3, prestamo.getId_usuario());
+	        pst.setString(4, devuelto);
+	        pst.setDate(5, new Date(fecha.getTime()));
+	        pst.setInt(6, id_libro);
+	        pst.setInt(7, id_usuario);
+	        
+	        pst.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
-	public void modificarPrestamo(Prestamo prestamo) {
-		try {
-			pst = conexion.prepareStatement("UPDATE Prestamo SET Fecha_Prestamo = ? Id_Libro = ? Id_Usuario = ? WHERE Fecha_Prestamo = ? Id_Lbro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setInt(2, prestamo.getId_libro());
-			pst.setInt(3, prestamo.getId_usuario());
-			
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public Prestamo getPrestamo(Prestamo prestamo) {
+	public Prestamo getPrestamo(java.util.Date fecha, int id_libro, int id_usuario) {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
-		
+		Prestamo prestamo = new Prestamo();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Prestamo WHERE Fecha_Prestamo = ? Id_Lbro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(prestamo.getFecha_prestamo().getTime()));
-			pst.setInt(2, prestamo.getId_libro());
-			pst.setInt(3, prestamo.getId_usuario());
+			pst = conexion.prepareStatement("SELECT * FROM Prestamo WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			pst.setDate(1, new Date(fecha.getTime()));
+			pst.setInt(2, id_libro);
+			pst.setInt(3, id_usuario);
 			
 			pst.executeQuery();
 			
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
-				prestamo.setDevuelto(rs.getBoolean("Devuelto"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamo.setId_libro(rs.getInt("Id_Libro"));
 				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
 				prestamos.add(prestamo);
@@ -79,11 +82,11 @@ public class ModeloPrestamo extends Conector{
 		return prestamo;
 	}
 	
-	public ArrayList<Prestamo> getReservas() {
+	public ArrayList<Prestamo> getPrestamos() {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Reserva");
+			pst = conexion.prepareStatement("SELECT * FROM prestamo");
 			
 			pst.executeQuery();
 			
@@ -91,7 +94,7 @@ public class ModeloPrestamo extends Conector{
 			while(rs.next()) {
 				Prestamo prestamo = new Prestamo();
 				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
-				prestamo.setDevuelto(rs.getBoolean("Devuelto"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamo.setId_libro(rs.getInt("Id_Libro"));
 				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
 				prestamos.add(prestamo);

@@ -4,6 +4,8 @@ public class Autor {
 	private int id_autor;
 	private String nombre;
 	private String apellido;
+	private String descripcion;
+	
 	
 	public int getId_autor() {
 		return id_autor;
@@ -23,5 +25,10 @@ public class Autor {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

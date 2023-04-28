@@ -12,7 +12,7 @@ public class ModeloReserva extends Conector{
 	
 	public void registrarReserva(Reserva reserva) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Reserva (Fecha_Reserva, Id_Libro, Id_Usuario) VALUES (Secuencia_Reserva.nextval,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Reserva (Fecha_Reserva, Id_Libro, Id_Usuario) VALUES (?,?,?)");
 			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
 			pst.setInt(2, reserva.getId_libro());
 			pst.setInt(3, reserva.getId_usuario());
@@ -24,12 +24,12 @@ public class ModeloReserva extends Conector{
 		}
 	}
 	
-	public void AnularReserva(Reserva reserva) {
+	public void AnularReserva(java.util.Date fecha, int id_libro, int id_usuario) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM Reserva WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
-			pst.setInt(2, reserva.getId_libro());
-			pst.setInt(3, reserva.getId_usuario());
+			pst = conexion.prepareStatement("DELETE FROM Reserva WHERE Fecha_Reserva = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			pst.setDate(1, new Date(fecha.getTime()));
+			pst.setInt(2, id_libro);
+			pst.setInt(3, id_usuario);
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -38,12 +38,16 @@ public class ModeloReserva extends Conector{
 		}
 	}
 	
-	public void modificarReserva(Reserva reserva) {
+	public void modificarReserva(java.util.Date fecha, int id_libro, int id_usuario, Reserva reserva) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Reserva SET Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ? WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
-			pst.setInt(2, reserva.getId_libro());
-			pst.setInt(3, reserva.getId_usuario());
+			pst = conexion.prepareStatement("UPDATE Reserva SET Fecha_Reserva = ?, Id_Libro = ?, Id_Usuario = ? WHERE Fecha_Reserva = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			 pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
+		        pst.setInt(2, reserva.getId_libro());
+		        pst.setInt(3, reserva.getId_usuario());
+		        pst.setDate(4, new Date(fecha.getTime()));
+		        pst.setInt(5, id_libro);
+		        pst.setInt(6, id_usuario);
+		        
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -52,14 +56,14 @@ public class ModeloReserva extends Conector{
 		}
 	}
 	
-	public Reserva getReserva(Reserva reserva) {
+	public Reserva getReserva(java.util.Date fecha, int id_libro, int id_usuario) {
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-		
+		Reserva reserva = new Reserva();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Reserva WHERE Fecha_Reserva = ? Id_Libro = ? Id_Usuario = ?");
-			pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
-			pst.setInt(2, reserva.getId_libro());
-			pst.setInt(3, reserva.getId_usuario());
+			pst = conexion.prepareStatement("SELECT * FROM Reserva WHERE Fecha_Reserva = ? AND Id_Libro = ? AND Id_Usuario = ?");
+			pst.setDate(1, new Date(fecha.getTime()));
+			pst.setInt(2, id_libro);
+			pst.setInt(3, id_usuario);
 			
 			pst.executeQuery();
 			

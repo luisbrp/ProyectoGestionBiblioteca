@@ -11,11 +11,9 @@ public class ModeloEditorial extends Conector {
 	
 	public void registrarEditorial(Editorial editorial) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Editorial(Id_Editorial, Nombre, Descripcion, Id_Libro) VALUES (Secuencia_Editorial.nextval,?,?,?)");
-			pst.setInt(1, editorial.getId_editorial());
-			pst.setString(2, editorial.getNombre());
-			pst.setString(3, editorial.getDescripcion());
-			pst.setInt(4, editorial.getId_libro());
+			pst = conexion.prepareStatement("INSERT INTO editorial (Nombre, Id_Libro) VALUES (?,?)");
+			pst.setString(1, editorial.getNombre());
+			pst.setInt(2, editorial.getId_libro());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -24,9 +22,9 @@ public class ModeloEditorial extends Conector {
 		}
 	}
 	
-	public void eliminarAutor(int id_editorial) {
+	public void eliminarEditorial(int id_editorial) {
 		try {
-			pst = conexion.prepareStatement("DELETE * FROM autor WHERE Id_Editorial = ?");
+			pst = conexion.prepareStatement("DELETE FROM editorial WHERE Id_Editorial = ?");
 			pst.setInt(1, id_editorial);
 			
 			pst.execute();
@@ -36,10 +34,12 @@ public class ModeloEditorial extends Conector {
 		}
 	}
 	
-	public void modificarAutor(int id_editorial) {
+	public void modificarEditorial(int id_editorial, Editorial editorial) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Editorial SET Nombre = ?  WHERE Id_Editorial = ?");
-			pst.setInt(1, id_editorial);
+			pst = conexion.prepareStatement("UPDATE editorial SET Nombre = ?, Id_Libro = ? WHERE Id_Editorial = ?");
+			pst.setString(1, editorial.getNombre());
+			pst.setInt(2, editorial.getId_libro());
+			pst.setInt(3, id_editorial);
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -50,33 +50,34 @@ public class ModeloEditorial extends Conector {
 	
 	public Editorial getEditorial(int id_editorial) {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
-		Editorial editorial = new Editorial();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Editorial WHERE Id_Autor = ?");
-			
+			pst = conexion.prepareStatement("SELECT * FROM editorial WHERE Id_Editorial = ?");
 			pst.setInt(1, id_editorial);
-			
-			pst.executeQuery();
 			
 			rs = pst.executeQuery();
 			while(rs.next()) {
+				Editorial editorial = new Editorial();
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
-				editorial.setDescripcion(rs.getString("Descripcion"));
 				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return editorial;
+		
+		if(editoriales.size() > 0) {
+			return editoriales.get(0);
+		} else {
+			return null;
+		}
 	}
+
 	
 	public ArrayList<Editorial> getEditoriales() {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Editorial");
+			pst = conexion.prepareStatement("SELECT * FROM editorial");
 			
 			pst.executeQuery();
 			
@@ -85,7 +86,6 @@ public class ModeloEditorial extends Conector {
 				Editorial editorial = new Editorial();
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
-				editorial.setDescripcion(rs.getString("Descripcion"));
 				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}
