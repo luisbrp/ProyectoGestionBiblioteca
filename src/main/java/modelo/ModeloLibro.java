@@ -118,4 +118,36 @@ public class ModeloLibro extends Conector{
 		}
 		return libros;
 	}
+
+	public ArrayList<Libro> getLibrosPorNombreAutor (String nombre) {
+		ArrayList<Libro> librosDelAutor = new ArrayList<Libro>();
+		try {
+			pst = conexion.prepareStatement(" SELECT LIBRO.*\r\n"
+					+ "FROM Libro\r\n"
+					+ "INNER JOIN Libro_Info ON Libro.Id_Libro = Libro.Id_Libro\r\n"
+					+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\r\n"
+					+ "WHERE Autor.Nombre = ?");
+			pst.setString(1, nombre);
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				Libro libro = new Libro();
+				libro.setId_libro(rs.getInt(1));
+				libro.setIsbn(rs.getLong("ISBN"));
+				libro.setTitulo(rs.getString("Titulo"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
+				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+				libro.setIdioma(rs.getString("Idioma"));
+				libro.setStock(rs.getInt("Stock"));
+				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
+				librosDelAutor.add(libro);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return librosDelAutor;
+	}
 }
