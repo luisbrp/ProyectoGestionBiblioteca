@@ -122,7 +122,7 @@ public class ModeloLibro extends Conector{
 	public ArrayList<Libro> getLibrosPorNombreAutor (String nombre) {
 		ArrayList<Libro> librosDelAutor = new ArrayList<Libro>();
 		try {
-			pst = conexion.prepareStatement(" SELECT LIBRO.*\r\n"
+			pst = conexion.prepareStatement("SELECT LIBRO.*\r\n"
 					+ "FROM Libro\r\n"
 					+ "INNER JOIN Libro_Info ON Libro.Id_Libro = Libro.Id_Libro\r\n"
 					+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\r\n"
@@ -150,4 +150,48 @@ public class ModeloLibro extends Conector{
 		}
 		return librosDelAutor;
 	}
+	
+	public ArrayList<Libro> buscarLibro(String busqueda) {
+		ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
+		try {
+			pst = conexion.prepareStatement("SELECT l.*, a.Nombre AS Autor_Nombre, a.Apellido AS Autor_Apellido, e.Nombre AS Editorial_Nombre FROM Libro l LEFT JOIN Libro_Info li ON l.Id_Libro = li.Id_Libro LEFT JOIN Autor a ON li.Id_Autor = a.Id_Autor LEFT JOIN Editorial e ON l.Id_Libro = e.Id_Libro WHERE l.Titulo LIKE ? OR l.Categoria LIKE ? OR a.Nombre LIKE ? OR a.Apellido LIKE ? OR l.ISBN LIKE ?");
+			pst.setString(1, "%" + busqueda + "%");
+			pst.setString(2, "%" + busqueda + "%");
+			pst.setString(3, "%" + busqueda + "%");
+			pst.setString(4, "%" + busqueda + "%");
+			pst.setString(5, "%" + busqueda + "%");
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				Libro libro = new Libro();
+				libro.setId_libro(rs.getInt("Id_Libro"));
+				libro.setIsbn(rs.getLong("ISBN"));
+				libro.setTitulo(rs.getString("Titulo"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
+				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+				libro.setIdioma(rs.getString("Idioma"));
+				libro.setStock(rs.getInt("Stock"));
+				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
+				
+				Autor autor = new Autor();
+				autor.setNombre(rs.getString("Autor_Nombre"));
+				autor.setApellido(rs.getString("Autor_Apellido"));
+				libro.setAutor(autor);
+				
+				Editorial editorial = new Editorial();
+				editorial.setNombre(rs.getString("Editorial_Nombre"));
+				libro.setEditorial(editorial);
+				
+				librosEncontrados.add(libro);
+			}
+		} catch (SQLException e) {
+			
+		e.printStackTrace();
+		
+		}
+		return librosEncontrados;
+	}
+
 }
