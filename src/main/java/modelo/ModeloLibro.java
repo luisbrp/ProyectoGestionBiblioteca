@@ -161,7 +161,7 @@ public class ModeloLibro extends Conector{
 			pst.setString(4, "%" + busqueda + "%");
 			pst.setString(5, "%" + busqueda + "%");
 			
-			ResultSet rs = pst.executeQuery();
+			rs = pst.executeQuery();
 			
 			while (rs.next()) {
 				Libro libro = new Libro();
@@ -194,4 +194,33 @@ public class ModeloLibro extends Conector{
 		return librosEncontrados;
 	}
 
+	public ArrayList<Libro> buscarPorCategoria(String categoriaSeleccionada) {
+		ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM Libro WHERE categoria = ?");
+			pst.setString(1, categoriaSeleccionada);
+		
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				Libro libro = new Libro();
+				libro.setId_libro(rs.getInt("Id_Libro"));
+				libro.setIsbn(rs.getLong("ISBN"));
+				libro.setTitulo(rs.getString("Titulo"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
+				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+				libro.setIdioma(rs.getString("Idioma"));
+				libro.setStock(rs.getInt("Stock"));
+				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
+				librosPorCategoria.add(libro);
+			}
+		} catch (SQLException e) {
+			
+		e.printStackTrace();
+		
+		}
+		return librosPorCategoria;
+	}
+			
 }

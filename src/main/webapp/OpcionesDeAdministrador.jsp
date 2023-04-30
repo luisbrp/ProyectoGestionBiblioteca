@@ -182,7 +182,7 @@
                     <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
                     <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a></td> 
                 </tr>
-              
+               
               </c:forEach>
             </tbody>
           </table>

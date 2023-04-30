@@ -71,41 +71,32 @@
                   <a class="nav-link active" aria-current="page" href="#">Pagina principal</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Libros</a>
+                  <a class="nav-link" href="">Libros</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Autores</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categorias
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Fantasía</a></li>
-                    <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Misterio</a></li>
-                    <li><a class="dropdown-item" href="#">Aventura</a></li>
-                    <li><a class="dropdown-item" href="#">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="#">Biografía</a></li>
-                    <li><a class="dropdown-item" href="#">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="#">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="#">Poesía</a></li>
-                    <li><a class="dropdown-item" href="#">Drama</a></li>
-                    <li><a class="dropdown-item" href="#">Comedia</a></li>
-                  </ul>
-                </li>
-                <li>
-                    <div class="sidebar">
-                        <ul>
-                          <li><a href="#">Libros</a></li>
-                          <li><a href="#">Autores</a></li>
-                          <li><a href="#">Editoriales</a></li>
-                          <li><a href="#">Usuarios</a></li>
-                        </ul>
-                      </div>
-
-                </li>
+              <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Categorias
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Fantasia">Fantasía</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ciencia%20Ficcion">Ciencia Ficción</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Romance">Romance</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Misterio">Misterio</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Aventura">Aventura</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Erotismo">Erotismo</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Biografia">Biografía</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Autobiografia">AutoBiografía</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ensayo">Ensayo</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Poesia">Poesía</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Drama">Drama</a></li>
+    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Comedia">Comedia</a></li>
+  </ul>
+</li>
+              
+                
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cuenta</a>
                 </li>

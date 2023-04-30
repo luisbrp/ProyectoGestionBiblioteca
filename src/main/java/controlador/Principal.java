@@ -30,27 +30,76 @@ public class Principal extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   
-		    request.getRequestDispatcher("Principal.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ModeloLibro modeloLibro = new ModeloLibro();
+        ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
+        
+        String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
+        
+        if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
+            modeloLibro.conectar();
+            librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+            modeloLibro.cerrar();
+            request.setAttribute("librosPorCategoria", librosPorCategoria);
+            request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("Principal.jsp").forward(request, response);
+        }
+    }
 
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ModeloLibro modeloLibro = new ModeloLibro();
-	    ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
-	    
-	    String busqueda = request.getParameter("busqueda");
-	    
-	    modeloLibro.conectar();
-	    librosEncontrados = modeloLibro.buscarLibro(busqueda);
-	    modeloLibro.cerrar();
-	    
-	    request.setAttribute("librosEncontrados", librosEncontrados);
-	    request.getRequestDispatcher("ResultadoDeBusqueda.jsp").forward(request, response);
+			ModeloLibro modeloLibro = new ModeloLibro();
+			
+			ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
+		    ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>(); 
+		    
+			String busqueda = request.getParameter("busqueda");
+		    String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
+		   
+		    if (busqueda != null && !busqueda.isEmpty()) {
+		        modeloLibro.conectar();
+		        librosEncontrados = modeloLibro.buscarLibro(busqueda);
+		        modeloLibro.cerrar();
+		        request.setAttribute("librosEncontrados", librosEncontrados);
+		        request.getRequestDispatcher("ResultadoDeBusqueda.jsp").forward(request, response);
+		    } else if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
+		        modeloLibro.conectar();
+		       
+		        if (categoriaSeleccionada.equals("Fantasia")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Ciencia Ficcion")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Romance")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Misterio")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Aventura")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Erotismo")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Biografia")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Autobiografia")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Ensayo")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Poesia")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Drama")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        } else if (categoriaSeleccionada.equals("Comedia")) {
+		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+		        }	
+		        modeloLibro.cerrar();
+		        request.setAttribute("librosPorCategoria", librosPorCategoria);
+		        request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
+		    } else {
+		        response.sendRedirect("paginaDeError.jsp");
+		    }
 	}
 
 }
