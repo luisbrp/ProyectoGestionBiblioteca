@@ -221,6 +221,53 @@ public class ModeloLibro extends Conector{
 		
 		}
 		return librosPorCategoria;
+	}	
+	
+	public ArrayList<Libro> categoriasMasPrestadas() {
+	    ArrayList<Libro> categoriasMasPrestadas = new ArrayList<Libro>();
+	    try {
+	        pst = conexion.prepareStatement(
+	            "SELECT PrestamosPorCategoria.Categoria, PrestamosPorCategoria.Id_Libro, " +
+	            "Libro.Titulo, Libro.Foto, COUNT(*) AS Prestamos " +
+	            "FROM ( " +
+	            "    SELECT Libro.Categoria, Prestamo.Id_Libro, COUNT(*) AS Prestamos " +
+	            "    FROM Prestamo " +
+	            "    INNER JOIN Libro ON Prestamo.Id_Libro = Libro.Id_Libro " +
+	            "    GROUP BY Libro.Categoria, Prestamo.Id_Libro " +
+	            ") AS PrestamosPorCategoria " +
+	            "INNER JOIN Libro ON PrestamosPorCategoria.Id_Libro = Libro.Id_Libro " +
+	            "WHERE PrestamosPorCategoria.Categoria IN ( " +
+	            "    SELECT Categoria " +
+	            "    FROM ( " +
+	            "        SELECT Libro.Categoria, COUNT(*) AS Prestamos " +
+	            "        FROM Prestamo " +
+	            "        INNER JOIN Libro ON Prestamo.Id_Libro = Libro.Id_Libro " +
+	            "        GROUP BY Libro.Categoria " +
+	            "        ORDER BY Prestamos DESC " +
+	            "        LIMIT 3 " +
+	            "    ) AS TopCategorias " +
+	            ") " +
+	            "GROUP BY PrestamosPorCategoria.Categoria, PrestamosPorCategoria.Id_Libro " +
+	            "ORDER BY PrestamosPorCategoria.Categoria, Prestamos DESC " +
+	            "LIMIT 9"
+	        );
+
+	        rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            Libro libro = new Libro();
+	            libro.setId_libro(rs.getInt("Id_Libro"));
+	            libro.setTitulo(rs.getString("Titulo"));
+	            libro.setCategoria(rs.getString("Categoria"));
+	            libro.setFoto(rs.getString("Foto"));
+	            categoriasMasPrestadas.add(libro);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println(e.getMessage());
+	    }
+
+	    return categoriasMasPrestadas;
 	}
-			
+
 }

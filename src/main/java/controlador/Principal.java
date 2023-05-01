@@ -32,20 +32,26 @@ public class Principal extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ModeloLibro modeloLibro = new ModeloLibro();
-        ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
-        
+
+        modeloLibro.conectar();
+
+        ArrayList<Libro> categoriasMasPrestadas = modeloLibro.categoriasMasPrestadas();
+        request.setAttribute("categoriasMasPrestadas", categoriasMasPrestadas);
+       
         String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
-        
         if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
-            modeloLibro.conectar();
-            librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
-            modeloLibro.cerrar();
+            ArrayList<Libro> librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
             request.setAttribute("librosPorCategoria", librosPorCategoria);
             request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }
+        
+        modeloLibro.cerrar();
     }
+
+
+
 
 
 	/**
@@ -57,6 +63,7 @@ public class Principal extends HttpServlet {
 			ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
 		    ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>(); 
 		    
+
 			String busqueda = request.getParameter("busqueda");
 		    String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
 		   
@@ -95,7 +102,7 @@ public class Principal extends HttpServlet {
 		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
 		        }	
 		        modeloLibro.cerrar();
-		        request.setAttribute("librosPorCategoria", librosPorCategoria);
+		       	request.setAttribute("librosPorCategoria", librosPorCategoria);
 		        request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
 		    } else {
 		        response.sendRedirect("paginaDeError.jsp");

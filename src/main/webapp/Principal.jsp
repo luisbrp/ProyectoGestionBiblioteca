@@ -61,7 +61,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">EASY BOOKS</a>
+            <a class="navbar-brand" href="">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -76,25 +76,25 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Autores</a>
                 </li>
-              <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Categorias
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Fantasia">Fantasía</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ciencia%20Ficcion">Ciencia Ficción</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Romance">Romance</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Misterio">Misterio</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Aventura">Aventura</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Erotismo">Erotismo</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Biografia">Biografía</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Autobiografia">AutoBiografía</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ensayo">Ensayo</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Poesia">Poesía</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Drama">Drama</a></li>
-    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Comedia">Comedia</a></li>
-  </ul>
-</li>
+			  <li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				    Categorias
+				  </a>
+					  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Fantasia">Fantasía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ciencia%20Ficcion">Ciencia Ficción</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Romance">Romance</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Misterio">Misterio</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Aventura">Aventura</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Erotismo">Erotismo</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Biografia">Biografía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Autobiografia">AutoBiografía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ensayo">Ensayo</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Poesia">Poesía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Drama">Drama</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Comedia">Comedia</a></li>
+					  </ul>
+			</li>
               
                 
                 <li class="nav-item">
@@ -109,142 +109,59 @@
           </div>
         </nav>
       </header>
-
-      <div style="text-align: center;">
-        <br>
-      <h1>Generos mas buscados</h1>
-      <br>
-        <div style="display: inline-block;">
-            <h2>Ciencia Ficción</h2>
-            <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 1</h5>
-                                <p>Información adicional sobre la imagen 1.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 2</h5>
-                                <p>Información adicional sobre la imagen 2.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 3</h5>
-                                <p>Información adicional sobre la imagen 3.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+      
+   <c:forEach var="libro" items="${categoriasMasPrestadas}">
+    <div style="display: inline-block;">
+        <h2>${libro.categoria}</h2>
+        <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <c:forEach var="i" begin="0" end="2">
+                        <c:choose>
+                            <c:when test="${i==0}">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i+1}"></button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </div>
+                <div class="carousel-inner">
+                    <c:forEach var="i" begin="0" end="2">
+                        <c:choose>
+                            <c:when test="${i==0}">
+                                <div class="carousel-item active">
+                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>${libro.titulo}</h5>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="carousel-item">
+                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>${libro.titulo}</h5>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
-        <div style="display: inline-block;">
-            <h2>Erotismo</h2>
-            <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-                <div id="carouselExampleIndicators1" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 1</h5>
-                                <p>Información adicional sobre la imagen 1.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 2</h5>
-                                <p>Información adicional sobre la imagen 2.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 3</h5>
-                                <p>Información adicional sobre la imagen 3.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div style="display: inline-block;">
-            <h2>Acción</h2>
-            <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-                <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 1</h5>
-                                <p>Información adicional sobre la imagen 1.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 2</h5>
-                                <p>Información adicional sobre la imagen 2.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://marketplace.canva.com/EAFI171fL0M/1/0/1003w/canva-portada-de-libro-de-novela-ilustrado-color-azul-aqua-PQeWaiiK0aA.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Título de la imagen 3</h5>
-                                <p>Información adicional sobre la imagen 3.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-      </div>
-   
+    </div>
+	</c:forEach>
+       
     <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
         <div class="container">
           <div class="row align-items-center">
