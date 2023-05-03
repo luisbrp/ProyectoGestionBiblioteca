@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Libro;
+import modelo.CategoriaLibros;
 import modelo.ModeloLibro;
 
 /**
@@ -32,12 +34,11 @@ public class Principal extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ModeloLibro modeloLibro = new ModeloLibro();
-
         modeloLibro.conectar();
 
-        ArrayList<Libro> categoriasMasPrestadas = modeloLibro.categoriasMasPrestadas();
-        request.setAttribute("categoriasMasPrestadas", categoriasMasPrestadas);
-       
+        ArrayList<CategoriaLibros> categoriasLibros = modeloLibro.categoriasRecomendadas();
+        request.setAttribute("categoriasLibros", categoriasLibros);
+
         String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
         if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
             ArrayList<Libro> librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
@@ -46,12 +47,9 @@ public class Principal extends HttpServlet {
         } else {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }
-        
+
         modeloLibro.cerrar();
     }
-
-
-
 
 
 	/**

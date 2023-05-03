@@ -223,11 +223,11 @@ public class ModeloLibro extends Conector{
 		return librosPorCategoria;
 	}	
 	
-	public ArrayList<Libro> categoriasMasPrestadas() {
-	    ArrayList<Libro> categoriasMasPrestadas = new ArrayList<Libro>();
+	public ArrayList<Libro> categoriasMasPopulares() {
+	    ArrayList<Libro> categoriasMasPopulares = new ArrayList<Libro>();
 	    try {
 	        pst = conexion.prepareStatement(
-	            "SELECT PrestamosPorCategoria.Categoria, PrestamosPorCategoria.Id_Libro, " +
+	            "SELECT PrestamosPorCategoria.Categoria, " +
 	            "Libro.Titulo, Libro.Foto, COUNT(*) AS Prestamos " +
 	            "FROM ( " +
 	            "    SELECT Libro.Categoria, Prestamo.Id_Libro, COUNT(*) AS Prestamos " +
@@ -256,18 +256,56 @@ public class ModeloLibro extends Conector{
 
 	        while (rs.next()) {
 	            Libro libro = new Libro();
-	            libro.setId_libro(rs.getInt("Id_Libro"));
 	            libro.setTitulo(rs.getString("Titulo"));
 	            libro.setCategoria(rs.getString("Categoria"));
 	            libro.setFoto(rs.getString("Foto"));
-	            categoriasMasPrestadas.add(libro);
+	            categoriasMasPopulares.add(libro);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        System.out.println(e.getMessage());
 	    }
 
-	    return categoriasMasPrestadas;
+	    return categoriasMasPopulares;
 	}
+	
+	public ArrayList<CategoriaLibros> categoriasRecomendadas() {
+		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
+
+	    try {
+	        pst = conexion.prepareStatement("SELECT l.Titulo, l.Categoria, l.Foto FROM ( SELECT DISTINCT Categoria FROM Libro ORDER BY RAND() LIMIT 3 ) c JOIN Libro l ON l.Categoria = c.Categoria JOIN ( SELECT Id_Libro, Id_Autor FROM Libro_Info GROUP BY Id_Libro ORDER BY RAND() LIMIT 3 ) li ON li.Id_Libro = l.Id_Libro ORDER BY l.Categoria LIMIT 0, 25;");
+
+	        rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            String categoria = rs.getString("Categoria");
+	            Libro libro = new Libro();
+	            libro.setTitulo(rs.getString("Titulo"));
+	            libro.setFoto(rs.getString("Foto"));
+
+	            CategoriaLibros categoriaLibros = null;
+	            for (CategoriaLibros cl : categoriasLibros) {
+	                if (cl.getCategoria().equals(categoria)) {
+	                    categoriaLibros = cl;
+	                    break;
+	                }
+	            }
+
+	            if (categoriaLibros == null) {
+	                categoriaLibros = new CategoriaLibros();
+	                categoriaLibros.setCategoria(categoria);
+	                categoriaLibros.setLibros(new ArrayList<>());
+	                categoriasLibros.add(categoriaLibros);
+	            }
+
+	            categoriaLibros.getLibros().add(libro);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return categoriasLibros;
+	}
+
 
 }

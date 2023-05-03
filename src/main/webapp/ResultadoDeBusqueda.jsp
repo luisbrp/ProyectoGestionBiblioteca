@@ -115,17 +115,6 @@
                     <li><a class="dropdown-item" href="#">Comedia</a></li>
                   </ul>
                 </li>
-                <li>
-                    <div class="sidebar">
-                        <ul>
-                          <li><a href="#">Libros</a></li>
-                          <li><a href="#">Autores</a></li>
-                          <li><a href="#">Editoriales</a></li>
-                          <li><a href="#">Usuarios</a></li>
-                        </ul>
-                      </div>
-
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cuenta</a>
                 </li>
