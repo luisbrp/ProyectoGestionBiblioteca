@@ -273,30 +273,31 @@ public class ModeloLibro extends Conector{
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
 	    try {
-	        pst = conexion.prepareStatement("SELECT l.Titulo, l.Categoria, l.Foto \r\n"
-	        		+ "FROM (\r\n"
-	        		+ "    SELECT Libro.Titulo, Libro.Categoria, Libro.Foto, \r\n"
-	        		+ "           @row_num := IF(@prev_cat = Libro.Categoria, @row_num + 1, 1) AS row_number, \r\n"
-	        		+ "           @prev_cat := Libro.Categoria \r\n"
-	        		+ "    FROM Libro\r\n"
-	        		+ "    JOIN (SELECT @row_num := 0, @prev_cat := NULL) AS vars\r\n"
-	        		+ "    JOIN (\r\n"
-	        		+ "        SELECT DISTINCT Categoria \r\n"
-	        		+ "        FROM Libro \r\n"
-	        		+ "        ORDER BY RAND() \r\n"
-	        		+ "        LIMIT 3\r\n"
-	        		+ "    ) AS c ON Libro.Categoria = c.Categoria\r\n"
-	        		+ "    ORDER BY Libro.Categoria, RAND()\r\n"
-	        		+ ") l\r\n"
-	        		+ "WHERE l.row_number <= 3\r\n"
-	        		+ "ORDER BY l.Categoria\r\n"
-	        		+ "LIMIT 0, 25;");
+	    	pst = conexion.prepareStatement("SELECT l.Id_Libro, l.Titulo, l.Categoria, l.Foto \r\n" +
+	                "FROM (\r\n" +
+	                "    SELECT Libro.Id_Libro, Libro.Titulo, Libro.Categoria, Libro.Foto, \r\n" +
+	                "           @row_num := IF(@prev_cat = Libro.Categoria, @row_num + 1, 1) AS row_number, \r\n" +
+	                "           @prev_cat := Libro.Categoria \r\n" +
+	                "    FROM Libro\r\n" +
+	                "    JOIN (SELECT @row_num := 0, @prev_cat := NULL) AS vars\r\n" +
+	                "    JOIN (\r\n" +
+	                "        SELECT DISTINCT Categoria \r\n" +
+	                "        FROM Libro \r\n" +
+	                "        ORDER BY RAND() \r\n" +
+	                "        LIMIT 3\r\n" +
+	                "    ) AS c ON Libro.Categoria = c.Categoria\r\n" +
+	                "    ORDER BY Libro.Categoria, RAND()\r\n" +
+	                ") l\r\n" +
+	                "WHERE l.row_number <= 3\r\n" +
+	                "ORDER BY l.Categoria\r\n" +
+	                "LIMIT 0, 25;");
 
 	        rs = pst.executeQuery();
 
 	        while (rs.next()) {
-	            String categoria = rs.getString("Categoria");
 	            Libro libro = new Libro();
+	            libro.setId_libro(rs.getInt("Id_Libro"));
+	            String categoria = rs.getString("Categoria");
 	            libro.setTitulo(rs.getString("Titulo"));
 	            libro.setFoto(rs.getString("Foto"));
 

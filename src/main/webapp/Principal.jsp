@@ -27,10 +27,19 @@
      margin-top: 50px; /* ajusta según el espacio deseado */
      width: 300px;
      max-width: 100%;
-}
+}	
+	
+
 .social-icons {
   display: flex;
 }
+
+.carousel-container img {
+   max-width: 100%;
+   height: auto;
+   object-fit: contain;
+}
+
 
 .social-icons a {
   margin-right: 10px;
@@ -51,6 +60,10 @@
 	font-size: 20px;
 }
 
+.sectionCategorias {
+	margin-left: 400px;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -65,17 +78,14 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="">EASY BOOKS</a>
+            <a class="navbar-brand" href="Principal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Pagina principal</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Libros</a>
+                  <a class="nav-link" href="#">Libros</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Autores</a>
@@ -100,7 +110,6 @@
 					  </ul>
 			</li>
               
-                
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cuenta</a>
                 </li>
@@ -114,9 +123,9 @@
         </nav>
       </header>
       
-	<h1>Categorias mas populares</h1>
-	
+	<h1 class="mainh1 mt-5" style="margin-left: 620px;">Categorias Recomendadas</h1>
 
+<div class="sectionCategorias mt-5">
 <c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
     <div style="display: inline-block;">
         <h2>${categoria.categoria}</h2>
@@ -133,7 +142,7 @@
                             <c:choose>
                                 <c:when test="${libroStatus.index==0}">
                                     <div class="carousel-item active">
-                                        <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                        <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5 class="TituloEnFotos">${libro.titulo}</h5>
                                         </div>
@@ -141,8 +150,8 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div class="carousel-item">
-                                        <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
-                                        <div class="carousel-caption d-none d-md-block">
+                                       <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
+                                       	 <div class="carousel-caption d-none d-md-block">
                                             <h5 class="TituloEnFotos">${libro.titulo}</h5>
                                         </div>
                                     </div>
@@ -163,8 +172,7 @@
         </div>
     </div>
 </c:forEach>
-
-		
+</div>
     <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
         <div class="container">
           <div class="row align-items-center">

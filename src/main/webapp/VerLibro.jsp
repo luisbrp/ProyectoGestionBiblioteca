@@ -19,6 +19,6 @@
 		<p>stock: ${libro.stock}</p>
 		<p>categoria: ${libro.categoria}</p>	
 	</div>
-	<a href="OpcionesDeAdministrador" class="btn btn-primary">Volver</a>
+	<a href="Principal" class="btn btn-primary">Volver</a>
 </body>
 </html>

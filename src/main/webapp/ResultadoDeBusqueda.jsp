@@ -81,15 +81,12 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">EASY BOOKS</a>
+            <a class="navbar-brand" href="Principal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Pagina principal</a>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Libros</a>
                 </li>
@@ -100,20 +97,20 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Categorias
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Fantasía</a></li>
-                    <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Misterio</a></li>
-                    <li><a class="dropdown-item" href="#">Aventura</a></li>
-                    <li><a class="dropdown-item" href="#">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="#">Biografía</a></li>
-                    <li><a class="dropdown-item" href="#">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="#">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="#">Poesía</a></li>
-                    <li><a class="dropdown-item" href="#">Drama</a></li>
-                    <li><a class="dropdown-item" href="#">Comedia</a></li>
-                  </ul>
+                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Fantasia">Fantasía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ciencia%20Ficcion">Ciencia Ficción</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Romance">Romance</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Misterio">Misterio</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Aventura">Aventura</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Erotismo">Erotismo</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Biografia">Biografía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Autobiografia">AutoBiografía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Ensayo">Ensayo</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Poesia">Poesía</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Drama">Drama</a></li>
+					    <li><a class="dropdown-item" href="Principal?categoriaSeleccionada=Comedia">Comedia</a></li>
+					  </ul>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cuenta</a>
@@ -188,7 +185,9 @@
             <small>Todos los derechos reservados © 2023</small>
           </div>
         </div>
-      </footer>
+      </footer>ç
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
 
