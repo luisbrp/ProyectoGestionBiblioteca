@@ -19,6 +19,4 @@ public class Categoria {
 	public void setLibrosPorCategoria(ArrayList<Libro> librosPorCategoria) {
 		this.librosPorCategoria = librosPorCategoria;
 	}
-	
-	
 }

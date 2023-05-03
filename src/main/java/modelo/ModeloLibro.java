@@ -273,7 +273,24 @@ public class ModeloLibro extends Conector{
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
 	    try {
-	        pst = conexion.prepareStatement("SELECT l.Titulo, l.Categoria, l.Foto FROM ( SELECT DISTINCT Categoria FROM Libro ORDER BY RAND() LIMIT 3 ) c JOIN Libro l ON l.Categoria = c.Categoria JOIN ( SELECT Id_Libro, Id_Autor FROM Libro_Info GROUP BY Id_Libro ORDER BY RAND() LIMIT 3 ) li ON li.Id_Libro = l.Id_Libro ORDER BY l.Categoria LIMIT 0, 25;");
+	        pst = conexion.prepareStatement("SELECT l.Titulo, l.Categoria, l.Foto \r\n"
+	        		+ "FROM (\r\n"
+	        		+ "    SELECT Libro.Titulo, Libro.Categoria, Libro.Foto, \r\n"
+	        		+ "           @row_num := IF(@prev_cat = Libro.Categoria, @row_num + 1, 1) AS row_number, \r\n"
+	        		+ "           @prev_cat := Libro.Categoria \r\n"
+	        		+ "    FROM Libro\r\n"
+	        		+ "    JOIN (SELECT @row_num := 0, @prev_cat := NULL) AS vars\r\n"
+	        		+ "    JOIN (\r\n"
+	        		+ "        SELECT DISTINCT Categoria \r\n"
+	        		+ "        FROM Libro \r\n"
+	        		+ "        ORDER BY RAND() \r\n"
+	        		+ "        LIMIT 3\r\n"
+	        		+ "    ) AS c ON Libro.Categoria = c.Categoria\r\n"
+	        		+ "    ORDER BY Libro.Categoria, RAND()\r\n"
+	        		+ ") l\r\n"
+	        		+ "WHERE l.row_number <= 3\r\n"
+	        		+ "ORDER BY l.Categoria\r\n"
+	        		+ "LIMIT 0, 25;");
 
 	        rs = pst.executeQuery();
 

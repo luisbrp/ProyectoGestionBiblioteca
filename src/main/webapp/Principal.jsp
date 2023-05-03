@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,54 +116,55 @@
       
 	<h1>Categorias mas populares</h1>
 	
-				<c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
-				    <div style="display: inline-block;">
-				        <h2>${categoria.categoria}</h2>
-				        <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-				            <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">
-				                <div class="carousel-indicators">
-				                    <c:forEach var="i" begin="0" end="2">
-				                        <c:choose>
-				                            <c:when test="${i==0}">
-				                                <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i+1}"></button>
-				                            </c:when>
-				                            <c:otherwise>
-				                                <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
-				                            </c:otherwise>
-				                        </c:choose>
-				                    </c:forEach>
-				                </div>
-				                <div class="carousel-inner">
-				                   <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
-									    <c:if test="${not empty libro.foto}">
-									        <c:choose>
-									            <c:when test="${libroStatus.index==0}">
-									                <div class="carousel-item active">
-									                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
-									                    <div class="carousel-caption d-none d-md-block">
-									                        <h5 class="TituloEnFotos">${libro.titulo}</h5>
-									                    </div>
-									                </div>
-									            </c:when>
-									            <c:otherwise>
-									                <div class="carousel-item">
-									                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
-									                    <div class="carousel-caption d-none d-md-block">
-									                        <h5 class="TituloEnFotos">${libro.titulo}</h5>
-									                    </div>
-									                </div>
-									            </c:otherwise>
-									        </c:choose>
-									    </c:if>
-									</c:forEach>
-				                   
-				                </div>
-				            </div>
-				        </div>
-				    </div>
-				</c:forEach>
-	
-           
+
+<c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
+    <div style="display: inline-block;">
+        <h2>${categoria.categoria}</h2>
+        <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
+            <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <c:forEach var="i" begin="0" end="${fn:length(categoria.libros) - 1}">
+                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" <c:if test="${i==0}">class="active"</c:if> aria-label="Slide ${i+1}"></button>
+                    </c:forEach>
+                </div>
+                <div class="carousel-inner">
+                    <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
+                        <c:if test="${not empty libro.foto}">
+                            <c:choose>
+                                <c:when test="${libroStatus.index==0}">
+                                    <div class="carousel-item active">
+                                        <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="TituloEnFotos">${libro.titulo}</h5>
+                                        </div>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="carousel-item">
+                                        <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="TituloEnFotos">${libro.titulo}</h5>
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
+                    </c:forEach>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:forEach>
+
+		
     <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
         <div class="container">
           <div class="row align-items-center">
