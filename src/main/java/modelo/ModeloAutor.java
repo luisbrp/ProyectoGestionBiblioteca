@@ -74,6 +74,30 @@ public class ModeloAutor extends Conector {
 		return autor;
 	}
 	
+	public Autor getAutorPorNombre(String nombre) {
+		ArrayList<Autor> autores = new ArrayList<Autor>();
+		Autor autor = new Autor();
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM autor WHERE Nombre = ?");
+			pst.setString(1, nombre);
+			
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				autor.setId_autor(rs.getInt("Id_Autor"));
+				autor.setNombre(rs.getString("Nombre"));
+				autor.setApellido(rs.getString("Apellido"));
+				autor.setDescripcion(rs.getString("Descripcion"));
+				autores.add(autor);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return autor;
+	}
+	
 	public ArrayList<Autor> getAutores() {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		

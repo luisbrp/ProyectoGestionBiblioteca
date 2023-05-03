@@ -1,28 +1,29 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Autor;
+import modelo.Libro;
 import modelo.ModeloAutor;
-import modelo.ModeloUsuario;
-import modelo.Usuario;
+import modelo.ModeloLibro;
 
 /**
- * Servlet implementation class VerAutor
+ * Servlet implementation class Autor
  */
-@WebServlet("/VerAutor")
-public class VerAutor extends HttpServlet {
+@WebServlet("/Autor")
+public class Autor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VerAutor() {
+    public Autor() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +36,24 @@ public class VerAutor extends HttpServlet {
 		Autor autor = new Autor();
 		
 		modeloAutor.conectar();
-		int id_autor = Integer.parseInt(request.getParameter("id_autor"));
-		autor = modeloAutor.getAutor(id_autor);
+		String nombre = request.getParameter("nombre");
+		modeloAutor.getAutorPorNombre(nombre);
 		modeloAutor.cerrar();
 		
 		
+		ModeloLibro modeloLibro = new ModeloLibro();
+		
+		ArrayList<Libro> librosDelAutor = new ArrayList<Libro>();
+		
+		modeloLibro.conectar();
+		librosDelAutor = modeloLibro.getLibrosPorNombreAutor(nombre);
+		modeloLibro.cerrar();
+	
 		
 		request.setAttribute("autor", autor);
+		request.setAttribute("librosDelAutor ", librosDelAutor);
 		
-		request.getRequestDispatcher("VerAutor.jsp").forward(request, response);
+		request.getRequestDispatcher("Autor.jsp").forward(request, response);
 	}
 
 	/**
