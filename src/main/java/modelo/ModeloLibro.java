@@ -223,11 +223,11 @@ public class ModeloLibro extends Conector{
 		return librosPorCategoria;
 	}	
 	
-	public ArrayList<Libro> categoriasMasPrestadas() {
-	    ArrayList<Libro> categoriasMasPrestadas = new ArrayList<Libro>();
+	public ArrayList<Libro> categoriasMasPopulares() {
+	    ArrayList<Libro> categoriasMasPopulares = new ArrayList<Libro>();
 	    try {
 	        pst = conexion.prepareStatement(
-	            "SELECT PrestamosPorCategoria.Categoria, PrestamosPorCategoria.Id_Libro, " +
+	            "SELECT PrestamosPorCategoria.Categoria, " +
 	            "Libro.Titulo, Libro.Foto, COUNT(*) AS Prestamos " +
 	            "FROM ( " +
 	            "    SELECT Libro.Categoria, Prestamo.Id_Libro, COUNT(*) AS Prestamos " +
@@ -256,18 +256,74 @@ public class ModeloLibro extends Conector{
 
 	        while (rs.next()) {
 	            Libro libro = new Libro();
-	            libro.setId_libro(rs.getInt("Id_Libro"));
 	            libro.setTitulo(rs.getString("Titulo"));
 	            libro.setCategoria(rs.getString("Categoria"));
 	            libro.setFoto(rs.getString("Foto"));
-	            categoriasMasPrestadas.add(libro);
+	            categoriasMasPopulares.add(libro);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        System.out.println(e.getMessage());
 	    }
 
-	    return categoriasMasPrestadas;
+	    return categoriasMasPopulares;
 	}
+	
+	public ArrayList<CategoriaLibros> categoriasRecomendadas() {
+		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
+
+	    try {
+	    	pst = conexion.prepareStatement("SELECT l.Id_Libro, l.Titulo, l.Categoria, l.Foto \r\n" +
+	                "FROM (\r\n" +
+	                "    SELECT Libro.Id_Libro, Libro.Titulo, Libro.Categoria, Libro.Foto, \r\n" +
+	                "           @row_num := IF(@prev_cat = Libro.Categoria, @row_num + 1, 1) AS row_number, \r\n" +
+	                "           @prev_cat := Libro.Categoria \r\n" +
+	                "    FROM Libro\r\n" +
+	                "    JOIN (SELECT @row_num := 0, @prev_cat := NULL) AS vars\r\n" +
+	                "    JOIN (\r\n" +
+	                "        SELECT DISTINCT Categoria \r\n" +
+	                "        FROM Libro \r\n" +
+	                "        ORDER BY RAND() \r\n" +
+	                "        LIMIT 3\r\n" +
+	                "    ) AS c ON Libro.Categoria = c.Categoria\r\n" +
+	                "    ORDER BY Libro.Categoria, RAND()\r\n" +
+	                ") l\r\n" +
+	                "WHERE l.row_number <= 3\r\n" +
+	                "ORDER BY l.Categoria\r\n" +
+	                "LIMIT 0, 25;");
+
+	        rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            Libro libro = new Libro();
+	            libro.setId_libro(rs.getInt("Id_Libro"));
+	            String categoria = rs.getString("Categoria");
+	            libro.setTitulo(rs.getString("Titulo"));
+	            libro.setFoto(rs.getString("Foto"));
+
+	            CategoriaLibros categoriaLibros = null;
+	            for (CategoriaLibros cl : categoriasLibros) {
+	                if (cl.getCategoria().equals(categoria)) {
+	                    categoriaLibros = cl;
+	                    break;
+	                }
+	            }
+
+	            if (categoriaLibros == null) {
+	                categoriaLibros = new CategoriaLibros();
+	                categoriaLibros.setCategoria(categoria);
+	                categoriaLibros.setLibros(new ArrayList<>());
+	                categoriasLibros.add(categoriaLibros);
+	            }
+
+	            categoriaLibros.getLibros().add(libro);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return categoriasLibros;
+	}
+
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +27,19 @@
      margin-top: 50px; /* ajusta según el espacio deseado */
      width: 300px;
      max-width: 100%;
-}
+}	
+	
+
 .social-icons {
   display: flex;
 }
+
+.carousel-container img {
+   max-width: 100%;
+   height: auto;
+   object-fit: contain;
+}
+
 
 .social-icons a {
   margin-right: 10px;
@@ -45,7 +55,14 @@
   transition: transform 1s ease-in-out;
 }
 
+.TituloEnFotos {
+	color: white;
+	font-size: 20px;
+}
 
+.sectionCategorias {
+	margin-left: 400px;
+}
 
 @keyframes spin {
   from {
@@ -61,17 +78,14 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="">EASY BOOKS</a>
+            <a class="navbar-brand" href="Principal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Pagina principal</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Libros</a>
+                  <a class="nav-link" href="#">Libros</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Autores</a>
@@ -96,72 +110,69 @@
 					  </ul>
 			</li>
               
-                
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cuenta</a>
                 </li>
               </ul>
               <form class="d-flex search-form" method="POST" action="Principal">
-			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busqueda">
-			  <button class="btn btn-outline-success" type="submit">Buscar</button>
+			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busqueda" automplete="off">
+			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
 			</form>
             </div>
           </div>
         </nav>
       </header>
       
-   <c:forEach var="libro" items="${categoriasMasPrestadas}">
+	<h1 class="mainh1 mt-5" style="margin-left: 620px;">Categorias Recomendadas</h1>
+
+<div class="sectionCategorias mt-5">
+<c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
     <div style="display: inline-block;">
-        <h2>${libro.categoria}</h2>
+        <h2>${categoria.categoria}</h2>
         <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <c:forEach var="i" begin="0" end="2">
-                        <c:choose>
-                            <c:when test="${i==0}">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i+1}"></button>
-                            </c:when>
-                            <c:otherwise>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
-                            </c:otherwise>
-                        </c:choose>
+                    <c:forEach var="i" begin="0" end="${fn:length(categoria.libros) - 1}">
+                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" <c:if test="${i==0}">class="active"</c:if> aria-label="Slide ${i+1}"></button>
                     </c:forEach>
                 </div>
                 <div class="carousel-inner">
-                    <c:forEach var="i" begin="0" end="2">
-                        <c:choose>
-                            <c:when test="${i==0}">
-                                <div class="carousel-item active">
-                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>${libro.titulo}</h5>
+                    <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
+                        <c:if test="${not empty libro.foto}">
+                            <c:choose>
+                                <c:when test="${libroStatus.index==0}">
+                                    <div class="carousel-item active">
+                                        <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="TituloEnFotos">${libro.titulo}</h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="carousel-item">
-                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>${libro.titulo}</h5>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="carousel-item">
+                                       <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
+                                       	 <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="TituloEnFotos">${libro.titulo}</h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </c:forEach>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
     </div>
-	</c:forEach>
-       
+</c:forEach>
+</div>
     <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
         <div class="container">
           <div class="row align-items-center">
