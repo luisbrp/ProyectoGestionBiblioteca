@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.CategoriaLibros;
 import modelo.Libro;
 import modelo.ModeloLibro;
 import modelo.ModeloUsuario;
@@ -44,12 +45,31 @@ public class PaginaPrincipalADMIN extends HttpServlet {
 				if (usuariologueado == null) {//no logeado
 					response.sendRedirect("Login");
 				} else {
+					ModeloLibro modeloLibro = new ModeloLibro();
+			        modeloLibro.conectar();
+
+			        ArrayList<CategoriaLibros> categoriasLibros = modeloLibro.categoriasRecomendadas();
+			        request.setAttribute("categoriasLibros", categoriasLibros);
+
+			        String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
+			        if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
+			            ArrayList<Libro> librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
+			            request.setAttribute("librosPorCategoria", librosPorCategoria);
+			            request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
+			        } else {
+			            request.getRequestDispatcher("/JSPFinal/VistaADMIN/PaginaPrincipalAdmin.jsp").forward(request, response);
+			        }
+
+			        modeloLibro.cerrar();
+			    	request.getRequestDispatcher("/JSPFinal/VistaADMIN/PaginaPrincipalAdmin.jsp").forward(request, response);
+			    }
+				
+
 					
-					
-					request.getRequestDispatcher("/JSPFinal/VistaADMIN/PaginaPrincipalAdmin.jsp").forward(request, response);
+				
 				}
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

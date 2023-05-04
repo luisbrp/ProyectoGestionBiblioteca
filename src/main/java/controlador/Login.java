@@ -67,17 +67,12 @@ public class Login extends HttpServlet {
 					
 					session.setAttribute("usuariologeado", usuariologeado);
 					String rol = "Cliente";
-					if (usuariologeado.getRol().equals(rol)) {
-					
-					response.sendRedirect("PaginaPrincipalCliente");
-					
-					} else {
-						response.sendRedirect("PaginaPrincipalADMIN");
-					}
+					response.sendRedirect("PaginaPrincipal");
 				} else {
 					request.getRequestDispatcher("/JSPFinal/Login.jsp").forward(request, response);
+					
 				}
-				
+			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

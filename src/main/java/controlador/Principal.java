@@ -65,14 +65,7 @@ public class Principal extends HttpServlet {
 			String busqueda = request.getParameter("busqueda");
 		    String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
 		   
-		    if (busqueda != null && !busqueda.isEmpty()) {
-		        modeloLibro.conectar();
-		        librosEncontrados = modeloLibro.buscarLibro(busqueda);
-		        modeloLibro.cerrar();
-		        request.setAttribute("librosEncontrados", librosEncontrados);
-		        request.getRequestDispatcher("ResultadoDeBusqueda.jsp").forward(request, response);
-		    } else if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
-		        modeloLibro.conectar();
+		
 		       
 		        if (categoriaSeleccionada.equals("Fantasia")) {
 		        	librosPorCategoria = modeloLibro.buscarPorCategoria(categoriaSeleccionada);
@@ -102,9 +95,8 @@ public class Principal extends HttpServlet {
 		        modeloLibro.cerrar();
 		       	request.setAttribute("librosPorCategoria", librosPorCategoria);
 		        request.getRequestDispatcher("librosPorCategoria.jsp").forward(request, response);
-		    } else {
-		        response.sendRedirect("paginaDeError.jsp");
-		    }
+		    } 
+		    
 	}
 
-}
+
