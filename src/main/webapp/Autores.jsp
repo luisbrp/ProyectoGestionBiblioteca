@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Inserteeee title here</title>
+<title>Inserte title here</title>
 </head>
 <body>
 <table>
