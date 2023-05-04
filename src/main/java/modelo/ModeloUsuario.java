@@ -140,4 +140,50 @@ public class ModeloUsuario extends Conector{
 		}
 		return usuarios;
 	}
+public String getContraseña(String Dni) throws SQLException {
+		
+		pst = conexion.prepareStatement("SELECT Contraseña FROM usuario WHERE Dni = ?; ");
+		
+		pst.setString(1, Dni);
+		
+		pst.executeQuery();
+
+		rs = pst.executeQuery();
+		
+		Usuario usuario = new Usuario();
+		
+		while(rs.next()) {	
+		usuario.setContraseña(rs.getString("Contraseña"));
+		}
+		
+		return usuario.getContraseña();
+	}
+public Usuario getUsuarioLogin(String Dni, String contraseña) throws SQLException {
+	
+	pst = conexion.prepareStatement("SELECT u.* FROM usuario u WHERE u.Dni = ? AND u.Contraseña = ?;");
+	
+	pst.setString(1, Dni);
+	pst.setString(2, contraseña);
+	
+	pst.executeQuery();
+
+	rs = pst.executeQuery();
+	
+	Usuario usuario = new Usuario();
+	
+	while(rs.next()) {	
+	
+	usuario.setId_usuario(rs.getInt("Id_usuario"));
+	usuario.setNombre(rs.getString("Nombre"));
+	usuario.setContraseña(rs.getString("Contraseña"));
+	usuario.setApellido(rs.getString("Apellido"));
+	usuario.setDni(rs.getString("Dni"));
+	usuario.setDireccion(rs.getString("Direccion"));
+	usuario.setTelefono(rs.getInt("Tlfno"));
+	usuario.setEmail(rs.getString("Email"));
+	usuario.setRol(rs.getString("Rol"));
+	}
+	
+	return usuario;
+}
 }
