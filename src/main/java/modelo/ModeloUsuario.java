@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ModeloUsuario extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
+	
 	public void registrarUsuario(Usuario usuario) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
@@ -42,13 +43,12 @@ public class ModeloUsuario extends Conector{
 			}
 			pst.setString(8, usuario.getRol());
 			
-			
 			pst.execute();
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}
 	}
+
 
 	
 	public void eliminarUsuario(int id_usuario) {

@@ -9,11 +9,12 @@
 <body>
 	<form method="post" action="InsertarUsuario">
   		<div class="form-group">
-    		<label>Dni</label>
-    			<input type="text" name="dni" required class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa un nombre válido')" 
-		           onchange="this.setCustomValidity('')" /><br/>
-  		</div>
+			  <label>Dni</label>
+			  <input type="text" name="dni" required class="form-control" 
+			    oninvalid="this.setCustomValidity('Por favor, ingresa un DNI válido de 9 caracteres')" 
+			    onchange="this.setCustomValidity('')"
+			    pattern="[0-9]{9}" /><br/>
+		</div>
   		
   		<div class="form-group">
     		<label>Nombre</label>

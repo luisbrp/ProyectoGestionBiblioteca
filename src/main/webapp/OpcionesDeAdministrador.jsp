@@ -92,14 +92,6 @@
                   </ul>
                 </li>
                 <li>
-                    <div class="sidebar">
-                        <ul>
-                          <li><a href="#">Libros</a></li>
-                          <li><a href="#">Autores</a></li>
-                          <li><a href="#">Editoriales</a></li>
-                          <li><a href="#">Usuarios</a></li>
-                        </ul>
-                      </div>
 
                 </li>
                 <li class="nav-item">
@@ -171,8 +163,8 @@
               </tr>
             </thead>
             <tbody>
-              <c:forEach items="${libros}" var="libro">
-              
+              <c:forEach items="${libros}" var="libro" varStatus="loop">
+              	<c:if test="${loop.index lt 5}">
                 <tr>
                     <td>${libro.id_libro}</td>
                     <td>${libro.titulo}</td>
@@ -182,7 +174,7 @@
                     <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
                     <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a></td> 
                 </tr>
-               
+               </c:if>
               </c:forEach>
             </tbody>
           </table>
@@ -206,7 +198,8 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach items="${autores}" var="autor">
+            <c:forEach items="${autores}" var="autor" varStatus="loop">
+            	<c:if test="${loop.index lt 5}">
               <tr>
                   <td>${autor.id_autor}</td>
                  <td>${autor.nombre}</td>
@@ -215,6 +208,7 @@
                   <a href="ModificarAutor?id_autor=${autor.id_autor}" class="btn btn-success ">Editar</a> 
                   <a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-danger">Eliminar</a></td>
               </tr>
+              </c:if>
             </c:forEach>
           </tbody>
         </table>
@@ -236,8 +230,8 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach items="${reservas}" var="reserva">
-          
+          <c:forEach items="${reservas}" var="reserva" varStatus="loop">
+          	<c:if test="${loop.index lt 5}">
             <tr>
                 <td>${reserva.id_libro}</td>
                 <td>${reserva.id_usuario}</td>
@@ -246,7 +240,7 @@
                <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Editar</a>
                <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a></td>
             </tr>
-      
+      		</c:if>
           </c:forEach>
         </tbody>
       </table>
@@ -268,8 +262,8 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach items="${prestamos}" var="prestamo">
-          
+          <c:forEach items="${prestamos}" var="prestamo" varStatus="loop">
+          	<c:if test="${loop.index lt 5}">
             <tr>
                 <td>${prestamo.id_libro}</td>
                 <td>${prestamo.id_usuario}</td>
@@ -278,7 +272,7 @@
                <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Editar</a>
                     <a href="AnularPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a></td>
             </tr>
-            
+            </c:if>
           </c:forEach>
         </tbody>
       </table>
@@ -300,8 +294,8 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach items="${editoriales}" var="editorial">
-            
+            <c:forEach items="${editoriales}" var="editorial" varStatus="loop">
+            <c:if test="${loop.index lt 5}">
               <tr>
                  <td>${editorial.id_editorial}</td>
                   <td>${editorial.nombre}</td>	
@@ -310,7 +304,7 @@
                <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Editar</a>
                <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a></td>
               </tr>
-           
+           	</c:if>
             </c:forEach>
           </tbody>
         </table>
