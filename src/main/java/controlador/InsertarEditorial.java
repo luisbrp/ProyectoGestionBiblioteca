@@ -43,10 +43,10 @@ public class InsertarEditorial extends HttpServlet {
 		Editorial editorial = new Editorial();
 		
 		String nombre = request.getParameter("nombre");
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		
 		
 		editorial.setNombre(nombre);
-		editorial.setId_libro(id_libro);
+	
 	
 		
 		modeloEditorial.conectar();

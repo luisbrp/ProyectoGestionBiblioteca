@@ -299,7 +299,6 @@
               <tr>
                  <td>${editorial.id_editorial}</td>
                   <td>${editorial.nombre}</td>	
-            <td>${editorial.id_libro}</td>
              <td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Ver</a>
                <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Editar</a>
                <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a></td>

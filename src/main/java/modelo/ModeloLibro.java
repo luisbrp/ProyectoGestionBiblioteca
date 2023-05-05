@@ -154,7 +154,7 @@ public class ModeloLibro extends Conector{
 	public ArrayList<Libro> buscarLibro(String busqueda) {
 		ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
 		try {
-			pst = conexion.prepareStatement("SELECT l.*, a.Nombre AS Autor_Nombre, a.Apellido AS Autor_Apellido, e.Nombre AS Editorial_Nombre FROM Libro l LEFT JOIN Libro_Info li ON l.Id_Libro = li.Id_Libro LEFT JOIN Autor a ON li.Id_Autor = a.Id_Autor LEFT JOIN Editorial e ON l.Id_Libro = e.Id_Libro WHERE l.Titulo LIKE ? OR l.Categoria LIKE ? OR a.Nombre LIKE ? OR a.Apellido LIKE ? OR l.ISBN LIKE ?");
+			pst = conexion.prepareStatement("SELECT l.*, a.Nombre AS Autor_Nombre, a.Apellido AS Autor_Apellido, e.Nombre AS Editorial_Nombre FROM Libro l LEFT JOIN Libro_Info li ON l.Id_Libro = li.Id_Libro LEFT JOIN Autor a ON li.Id_Autor = a.Id_Autor LEFT JOIN Editorial e ON l.Id_Editorial = e.Id_Editorial WHERE l.Titulo LIKE ? OR l.Categoria LIKE ? OR a.Nombre LIKE ? OR a.Apellido LIKE ? OR l.ISBN LIKE ?");
 			pst.setString(1, "%" + busqueda + "%");
 			pst.setString(2, "%" + busqueda + "%");
 			pst.setString(3, "%" + busqueda + "%");

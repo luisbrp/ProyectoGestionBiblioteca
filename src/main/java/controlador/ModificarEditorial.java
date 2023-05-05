@@ -51,10 +51,10 @@ public class ModificarEditorial extends HttpServlet {
 		
 		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
 		String nombre = request.getParameter("nombre");
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		
 		
 		editorial.setNombre(nombre);
-		editorial.setId_libro(id_libro);
+		
 	
 		
 		modeloEditorial.conectar();
