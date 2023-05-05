@@ -81,6 +81,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
@@ -223,52 +224,6 @@ public class ModeloLibro extends Conector{
 		return librosPorCategoria;
 	}	
 	
-	public ArrayList<Libro> categoriasMasPopulares() {
-	    ArrayList<Libro> categoriasMasPopulares = new ArrayList<Libro>();
-	    try {
-	        pst = conexion.prepareStatement(
-	            "SELECT PrestamosPorCategoria.Categoria, " +
-	            "Libro.Titulo, Libro.Foto, COUNT(*) AS Prestamos " +
-	            "FROM ( " +
-	            "    SELECT Libro.Categoria, Prestamo.Id_Libro, COUNT(*) AS Prestamos " +
-	            "    FROM Prestamo " +
-	            "    INNER JOIN Libro ON Prestamo.Id_Libro = Libro.Id_Libro " +
-	            "    GROUP BY Libro.Categoria, Prestamo.Id_Libro " +
-	            ") AS PrestamosPorCategoria " +
-	            "INNER JOIN Libro ON PrestamosPorCategoria.Id_Libro = Libro.Id_Libro " +
-	            "WHERE PrestamosPorCategoria.Categoria IN ( " +
-	            "    SELECT Categoria " +
-	            "    FROM ( " +
-	            "        SELECT Libro.Categoria, COUNT(*) AS Prestamos " +
-	            "        FROM Prestamo " +
-	            "        INNER JOIN Libro ON Prestamo.Id_Libro = Libro.Id_Libro " +
-	            "        GROUP BY Libro.Categoria " +
-	            "        ORDER BY Prestamos DESC " +
-	            "        LIMIT 3 " +
-	            "    ) AS TopCategorias " +
-	            ") " +
-	            "GROUP BY PrestamosPorCategoria.Categoria, PrestamosPorCategoria.Id_Libro " +
-	            "ORDER BY PrestamosPorCategoria.Categoria, Prestamos DESC " +
-	            "LIMIT 9"
-	        );
-
-	        rs = pst.executeQuery();
-
-	        while (rs.next()) {
-	            Libro libro = new Libro();
-	            libro.setTitulo(rs.getString("Titulo"));
-	            libro.setCategoria(rs.getString("Categoria"));
-	            libro.setFoto(rs.getString("Foto"));
-	            categoriasMasPopulares.add(libro);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        System.out.println(e.getMessage());
-	    }
-
-	    return categoriasMasPopulares;
-	}
-	
 	public ArrayList<CategoriaLibros> categoriasRecomendadas() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
@@ -325,5 +280,46 @@ public class ModeloLibro extends Conector{
 	    return categoriasLibros;
 	}
 
+	public ArrayList<CategoriaLibros> LibrosPorCategoria() {
+		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
+
+	    try {
+	    	pst = conexion.prepareStatement("SELECT Categoria, Id_Libro, ISBN, Titulo, Num_Pag, Fecha_Publicacion, Idioma, Stock, Foto, Descripcion\r\n"
+	    			+ "FROM libro\r\n"
+	    			+ "ORDER BY Categoria, Titulo\r\n"
+	    			);
+
+	        rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            Libro libro = new Libro();
+	            libro.setId_libro(rs.getInt("Id_Libro"));
+	            String categoria = rs.getString("Categoria");
+	            libro.setTitulo(rs.getString("Titulo"));
+	            libro.setFoto(rs.getString("Foto"));
+
+	            CategoriaLibros categoriaLibros = null;
+	            for (CategoriaLibros cl : categoriasLibros) {
+	                if (cl.getCategoria().equals(categoria)) {
+	                    categoriaLibros = cl;
+	                    break;
+	                }
+	            }
+
+	            if (categoriaLibros == null) {
+	                categoriaLibros = new CategoriaLibros();
+	                categoriaLibros.setCategoria(categoria);
+	                categoriaLibros.setLibros(new ArrayList<>());
+	                categoriasLibros.add(categoriaLibros);
+	            }
+
+	            categoriaLibros.getLibros().add(libro);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return categoriasLibros;
+	}
 
 }

@@ -11,6 +11,7 @@ public class Libro {
 	private String idioma;
 	private int stock;
 	private String categoria;
+	private String descripcion;
 	private String foto;
 	private Autor autor;
 	private Editorial editorial;
@@ -82,6 +83,12 @@ public class Libro {
 	}
 	public void setEditorial(Editorial editorial) {
 		this.editorial = editorial;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 }

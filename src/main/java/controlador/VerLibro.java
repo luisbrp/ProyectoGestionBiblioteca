@@ -39,7 +39,7 @@ public class VerLibro extends HttpServlet {
 		
 		request.setAttribute("libro", libro);
 		
-		request.getRequestDispatcher("VerLibro.jsp").forward(request, response);
+		request.getRequestDispatcher("/JSPFinal/VerLibro.jsp").forward(request, response);
 	}
 
 	/**

@@ -61,14 +61,55 @@
   to {
     transform: rotate(360deg);
   }
+
 }
+  .card {
+
+  width: 190px;
+  height: 254px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+.custom-card-style:hover h5.card-title {
+  opacity: 1;
+}
+.card-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+
+
 </style>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-          <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
+              <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
             <a class="navbar-brand" href="PaginaPrincipal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -76,13 +117,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="VerLibros">Libros</a>
+                  <a class="nav-link " href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="VerAutores">Autores</a>
+                  <a class="nav-link active" href="VerAutores">Autores</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,75 +175,31 @@
           </div>
         </nav>
       </header>
+ 
+<div>
+  
+    <h1 style="margin-left: 50px; margin-top: 20px">Lista de Autores</h1>
 
-      <div style="text-align: center;">
-        <br>
-                <br>
-                        <br>
-      <h1>Generos</h1>
-      <br>
-        <div class="sectionCategorias mt-5">
-<c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
-    <div style="display: inline-block;">
-        <h2>${categoria.categoria}</h2>
-        <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-            <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">   
-               	<div class="carousel-indicators">
-                    <c:forEach var="i" begin="0" end="${fn:length(categoria.libros) - 1}">
-                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" <c:if test="${i==0}">class="active"</c:if> aria-label="Slide ${i+1}"></button>
-                    </c:forEach>
+    <div style="margin-left: 50px; width: 95%; ">
+      <div style="display: flex; margin-left: 15px;margin-top: 20px;">
+        <c:forEach var="autor" items="${autores}" varStatus="autorStatus">
+          <div style="margin-right: 20px; scroll-snap-align: center;">
+            <div class="card-container">
+              <a href="VerAutor?id_autor= ${autor.id_autor}">
+                <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                  <div class="card-body"></div>
                 </div>
-                <div class="carousel-inner">
-                    <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
-                        <c:if test="${not empty libro.foto}">
-                            <c:choose>
-                                <c:when test="${libroStatus.index==0}">
-                                    <div class="carousel-item active">
-                                        <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
-                                        <div class="carousel-caption d-none d-md-block">
-                                     
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="carousel-item">
-                                       <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
-                                       	 <div class="carousel-caption d-none d-md-block">
-                           
-                                        </div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:if>
-                    </c:forEach>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</c:forEach>
-    <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <h2 class="fw-bold mb-4">¿Quiénes somos?</h2>
-              <p class="lead">Easy Books es una biblioteca física en la que podrás encontrar una amplia selección de libros para alquilar o prestar (desde nuestra pagina web o presencial).</p>
-              <p class="lead">Somos una empresa comprometida con la cultura y el fomento de la lectura en nuestra comunidad.</p>
-              <p class="lead">Nos enorgullece ofrecer un servicio de calidad y atención personalizada para cada uno de nuestros usuarios.</p>
-            </div>
-            <div class="col-md-6">
-              <img src="https://via.placeholder.com/500x400/007bff/ffffff?text=Imagen+de+Sobre+Nosotros" class="img-fluid" alt="Imagen de Sobre Nosotros">
+              </a>
+              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre}">${autor.nombre}</h5>
             </div>
           </div>
-        </div>
-    </section>
+        </c:forEach>
+      </div>
+    </div>
+ 
+</div>
+  
+
     <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
           <div class="row">
@@ -216,7 +213,7 @@
             </div>
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Síguenos</h4>
-              <div class="social-icons" style="margin-left: 150px">
+              <div class="social-icons">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png" alt="Instagram"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter"></a>

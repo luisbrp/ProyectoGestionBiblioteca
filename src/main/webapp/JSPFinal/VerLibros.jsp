@@ -64,14 +64,14 @@
 
 }
   .card {
-  box-sizing: border-box;
+
   width: 190px;
   height: 254px;
   background: rgba(217, 217, 217, 0.58);
   border: 1px solid white;
   box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(6px);
-  border-radius: 17px;
+
   text-align: center;
   cursor: pointer;
   transition: all 0.5s;
@@ -91,6 +91,16 @@
 .card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
+.custom-card-style:hover h5.card-title {
+  opacity: 1;
+}
+.card-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
 
 </style>
 
@@ -98,6 +108,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
+              <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
             <a class="navbar-brand" href="PaginaPrincipal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -105,13 +116,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="VerLibros">Libros</a>
+                  <a class="nav-link active" href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Autores</a>
+                  <a class="nav-link" href="VerAutores">Autores</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -163,13 +174,31 @@
           </div>
         </nav>
       </header>
-
- <div class="card custom-card-style">
  
-  <div class="card-body">
-    <h5 class="card-title">Título de la tarjeta</h5>
-  </div>
+  
+<div>
+  <c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
+    <h1 style="margin-left: 50px;">${categoria.categoria}</h1>
+
+    <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
+      <div style="display: flex; margin-left: 30px;margin-top: 20px;">
+        <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
+          <div style="margin-right: 20px; scroll-snap-align: center;">
+            <div class="card-container">
+              <a href="VerLibro?id_libro=${libro.id_libro}">
+                <div class="card custom-card-style" style="background-image: url('${libro.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                  <div class="card-body"></div>
+                </div>
+              </a>
+              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${libro.titulo}">${libro.titulo}</h5>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+    </div>
+  </c:forEach>
 </div>
+
     <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
           <div class="row">

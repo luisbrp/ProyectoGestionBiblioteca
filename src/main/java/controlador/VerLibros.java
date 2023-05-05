@@ -1,11 +1,16 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import modelo.CategoriaLibros;
+import modelo.ModeloLibro;
 
 /**
  * Servlet implementation class VerLibros
@@ -27,7 +32,13 @@ public class VerLibros extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("VerLibros.jsp").forward(request, response);
+		ModeloLibro modeloLibro = new ModeloLibro();
+		
+		modeloLibro.conectar();
+		ArrayList<CategoriaLibros> categoriasLibros = modeloLibro.LibrosPorCategoria();
+        request.setAttribute("categoriasLibros", categoriasLibros);
+    	modeloLibro.cerrar();
+		request.getRequestDispatcher("/JSPFinal/VerLibros.jsp").forward(request, response);
 	}
 
 	/**

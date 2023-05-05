@@ -113,6 +113,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
