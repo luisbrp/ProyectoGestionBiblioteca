@@ -105,4 +105,28 @@ public class ModeloPrestamo extends Conector{
 		}
 		return prestamos;
 	}
+
+	public Prestamo getReservaPorUsuario(int id_usuarioPrestamo) {
+		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+		Prestamo prestamo = new Prestamo();
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM Prestamo WHERE Id_Usuario = ?");
+			pst.setInt(1, id_usuarioPrestamo);
+					
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
+				prestamo.setId_libro(rs.getInt("Id_Libro"));
+				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
+				prestamos.add(prestamo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return prestamo;
+	}
 }

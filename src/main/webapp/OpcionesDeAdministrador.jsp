@@ -120,8 +120,9 @@
                 <th>Nombre</th>
                 <th>Rol</th>
                 <th>Lista de Usuarios<a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
-                <th><form class="d-flex search-form">
-                    <input class="form-control me-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro">
+                <th><form class="d-flex search-form" method="get">
+                	<button class="btn btn-outline-secondary" name="recargarUsuario">Recargar</button>
+                    <input class="form-control me-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro" name="dni">
                     <button class="btn btn-outline-success" type="submit">Buscar Usuario</button>
                   </form></th>
               </tr>
@@ -146,39 +147,46 @@
           </table>
       </section>
      
-      <section class="ms-5" id="VerLibros">
-        <h3 class="mt-5">Gestionar Libros</h3>
-        <table class="table table-striped table-dark mt-5">
-            <thead>
-              <tr>
+     
+   <section class="ms-5" id="VerLibros">
+    <h3 class="mt-5">Gestionar Libros</h3>
+    <table class="table table-striped table-dark mt-5">
+        <thead>
+            <tr>
                 <th>Id</th>
                 <th>Titulo</th>
                 <th>Isbn</th>
                 <th>Stock</th>
                 <th>Lista de libros<a href="InsertarLibro" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
-                <th><form class="d-flex search-form">
-                    <input class="form-control me-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro">
-                    <button class="btn btn-outline-success" type="submit">Libros</button>
-                  </form></th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach items="${libros}" var="libro" varStatus="loop">
-              	<c:if test="${loop.index lt 5}">
-                <tr>
-                    <td>${libro.id_libro}</td>
-                    <td>${libro.titulo}</td>
-                   <td>${libro.isbn}</td>
-                    <td>Stock</td>
-                   <td><a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary ">Ver</a>
-                    <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
-                    <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a></td> 
-                </tr>
-               </c:if>
-              </c:forEach>
-            </tbody>
-          </table>
-      </section>
+                <th>
+                    <form class="d-flex search-form" method="get">
+                        <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
+                        <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro" name="isbn">
+                        <button class="btn btn-outline-success" type="submit">Buscar Libro</button>
+                    </form>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${libros}" var="libro" varStatus="loop">
+                <c:if test="${loop.index lt 5}">
+                    <tr>
+                        <td>${libro.id_libro}</td>
+                        <td>${libro.titulo}</td>
+                        <td>${libro.isbn}</td>
+                        <td>Stock</td>
+                        <td>
+                            <a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary ">Ver</a>
+                            <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
+                            <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a>
+                        </td> 
+                   	</tr>
+                     </c:if>
+            	</c:forEach>
+        </tbody>
+    </table>
+</section>
+      
       
       
       
@@ -191,8 +199,9 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Lista de Autores<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
-              <th><form class="d-flex search-form">
-                  <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+              <th><form class="d-flex search-form" method="get">
+              	  <button class="btn btn-outline-secondary" name="recargarAutores">Recargar</button>
+                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor" name="id_autor">
                   <button class="btn btn-outline-success" type="submit">Buscar Autor</button>
                 </form></th>
             </tr>
@@ -223,8 +232,9 @@
             <th>Id_Usuario</th>
             <th>Fecha</th>
             <th>Reservas<a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
-            <th><form class="d-flex search-form">
-                <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+            <th><form class="d-flex search-form" method="get">
+            	<button class="btn btn-outline-secondary" name="recargarReservas">Recargar</button>
+                <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id_usuario)" aria-label="Buscar Autor" name="id_usuarioR">
                 <button class="btn btn-outline-success" type="submit">Buscar Reserva</button>
               </form></th>
           </tr>
@@ -283,12 +293,12 @@
       <table class="table table-striped table-dark mt-5">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>Id_Editorial</th>
               <th>Nombre</th>
-              <th>Id_Libro</th>
-              <th>Lista de Editoriales<a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
+              <th>Lista de Editoriales<a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarEditorial</a></th>
               <th><form class="d-flex search-form">
-                  <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Editorial">
+              	<button class="btn btn-outline-secondary" name="recargarEditoriales">Recargar</button>
+                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Editorial" name="id_editorial">
                   <button class="btn btn-outline-success" type="submit">Buscar Editorial</button>
                 </form></th>
             </tr>
@@ -299,7 +309,7 @@
               <tr>
                  <td>${editorial.id_editorial}</td>
                   <td>${editorial.nombre}</td>	
-             <td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Ver</a>
+             	<td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Ver</a>
                <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Editar</a>
                <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a></td>
               </tr>

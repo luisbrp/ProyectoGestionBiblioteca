@@ -13,7 +13,7 @@
 			  <input type="text" name="dni" required class="form-control" 
 			    oninvalid="this.setCustomValidity('Por favor, ingresa un DNI válido de 9 caracteres')" 
 			    onchange="this.setCustomValidity('')"
-			    pattern="[0-9]{9}" /><br/>
+				/><br/>
 		</div>
   		
   		<div class="form-group">

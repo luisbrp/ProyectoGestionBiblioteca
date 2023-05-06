@@ -103,4 +103,28 @@ public class ModeloReserva extends Conector{
 		}
 		return reservas;
 	}
+
+	public ArrayList<Reserva> getReservasPorUsuario(int id_usuarioR) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM Reserva WHERE Id_Usuario = ?");
+			pst.setInt(1, id_usuarioR);
+			
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				Reserva reserva = new Reserva();
+				reserva.setFecha_Reserva(rs.getDate("Fecha_Reserva"));
+				reserva.setId_libro(rs.getInt("Id_Libro"));
+				reserva.setId_usuario(rs.getInt("Id_Usuario"));
+				reservas.add(reserva);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return reservas;
+	}
 }

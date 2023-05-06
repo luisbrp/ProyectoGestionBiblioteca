@@ -324,6 +324,33 @@ public class ModeloLibro extends Conector{
 
 	    return categoriasLibros;
 	}
-
+	
+	public Libro buscarPorISBN(Long isbn) {
+		Libro libro = new Libro();
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM Libro WHERE isbn = ?");
+			pst.setLong(1, isbn);
+		
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				libro.setId_libro(rs.getInt("Id_Libro"));
+				libro.setIsbn(rs.getLong("ISBN"));
+				libro.setTitulo(rs.getString("Titulo"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
+				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+				libro.setIdioma(rs.getString("Idioma"));
+				libro.setStock(rs.getInt("Stock"));
+				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
+				
+			}
+		} catch (SQLException e) {
+			
+		e.printStackTrace();
+		
+		}
+		return libro;
+	}	
 
 }
