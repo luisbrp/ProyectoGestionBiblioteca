@@ -65,6 +65,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
@@ -73,7 +74,34 @@ public class ModeloAutor extends Conector {
 		}
 		return autor;
 	}
-	
+	public Autor getAutorDeLibro(int id_libro) {
+		ArrayList<Autor> autores = new ArrayList<Autor>();
+		Autor autor = new Autor();
+		try {
+			pst = conexion.prepareStatement("SELECT AUTOR.*\n"
+					+ "					FROM autor\n"
+					+ "					INNER JOIN Libro_Info ON Libro_Info.Id_Autor = autor.Id_Autor\n"
+					+ "					INNER JOIN libro ON Libro_Info.Id_Libro = libro.Id_Libro\n"
+					+ "					WHERE libro.Id_Libro = ?;");
+			pst.setInt(1, id_libro);
+			
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				autor.setId_autor(rs.getInt("Id_Autor"));
+				autor.setNombre(rs.getString("Nombre"));
+				autor.setApellido(rs.getString("Apellido"));
+				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
+				autores.add(autor);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return autor;
+	}
 	public Autor getAutorPorNombre(String nombre) {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();

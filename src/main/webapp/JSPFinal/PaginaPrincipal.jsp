@@ -17,6 +17,13 @@
 
 </head>
 <style>
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
     h1,h2{
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
@@ -32,9 +39,6 @@
   width: 300px;
   max-width: 100%;
 }
-
-
-
 
 .social-icons {
   display: flex;
@@ -65,7 +69,7 @@
 </style>
 
 <body>
-    <header>
+    <header >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
           <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
@@ -89,18 +93,18 @@
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Fantasía</a></li>
-                    <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Misterio</a></li>
-                    <li><a class="dropdown-item" href="#">Aventura</a></li>
-                    <li><a class="dropdown-item" href="#">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="#">Biografía</a></li>
-                    <li><a class="dropdown-item" href="#">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="#">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="#">Poesía</a></li>
-                    <li><a class="dropdown-item" href="#">Drama</a></li>
-                    <li><a class="dropdown-item" href="#">Comedia</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Fantasia">Fantasia</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ciencia%20Ficcion">Ciencia Ficción</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Romance">Romance</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Misterio">Misterio</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Aventura">Aventura</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Erotismo">Erotismo</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Biografía">Biografía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Autobiografía">Autobiografía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ensayo">Ensayo</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Poesía">Poesía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Drama">Drama</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Comedia">Comedia</a></li>
                   </ul>
                 </li>
                   <li class="nav-item">

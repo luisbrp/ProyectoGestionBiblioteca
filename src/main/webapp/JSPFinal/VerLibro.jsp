@@ -17,6 +17,13 @@
 
 </head>
 <style>
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
     h1,h2{
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
@@ -137,14 +144,18 @@
     border-bottom: none;
     padding-bottom: 0;
   }
-
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 </style>
 
 <body>
-    <header>
+     <header >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-           <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
+          <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
             <a class="navbar-brand" href="PaginaPrincipal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -152,31 +163,31 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Autores</a>
+                  <a class="nav-link" href="VerAutores">Autores</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Fantasía</a></li>
-                    <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Misterio</a></li>
-                    <li><a class="dropdown-item" href="#">Aventura</a></li>
-                    <li><a class="dropdown-item" href="#">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="#">Biografía</a></li>
-                    <li><a class="dropdown-item" href="#">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="#">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="#">Poesía</a></li>
-                    <li><a class="dropdown-item" href="#">Drama</a></li>
-                    <li><a class="dropdown-item" href="#">Comedia</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Fantasia">Fantasia</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ciencia%20Ficcion">Ciencia Ficción</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Romance">Romance</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Misterio">Misterio</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Aventura">Aventura</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Erotismo">Erotismo</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Biografía">Biografía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Autobiografía">Autobiografía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ensayo">Ensayo</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Poesía">Poesía</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Drama">Drama</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Comedia">Comedia</a></li>
                   </ul>
                 </li>
                   <li class="nav-item">
@@ -211,7 +222,7 @@
         </nav>
       </header>
       
-<div class="libro-info">
+<div class="libro-info"  style="margin-top: 100px;">
   <img src="${libro.foto}" alt="${libro.titulo}">
   <div>
     <h2>${libro.titulo}</h2>
@@ -223,6 +234,24 @@
     <p><strong>Categoría:</strong> ${libro.categoria}</p>
     <p><strong>Descripcion:</strong> ${libro.descripcion}</p>
   </div>
+
+   <div>
+     <h2 style="margin-left: 135px;">Autor</h2>
+    <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
+      <div style="display: flex; margin-left: 30px;margin-top: 20px;">
+          <div style="margin-right: 20px; scroll-snap-align: center;">
+            <div class="card-container">
+              <a href="VerAutor?id_autor=${autor.id_autor}">
+                <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                  <div class="card-body"></div>
+                </div>
+              </a>
+              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre}">${autor.nombre} ${autor.apellido}</h5>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
 </div>
 
 

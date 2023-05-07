@@ -125,7 +125,7 @@ public class ModeloLibro extends Conector{
 		try {
 			pst = conexion.prepareStatement("SELECT LIBRO.*\r\n"
 					+ "FROM Libro\r\n"
-					+ "INNER JOIN Libro_Info ON Libro.Id_Libro = Libro.Id_Libro\r\n"
+					+ "INNER JOIN Libro_Info ON Libro.Id_Libro = Libro_Info.Id_Libro\r\n"
 					+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\r\n"
 					+ "WHERE Autor.Nombre = ?");
 			pst.setString(1, nombre);
@@ -143,6 +143,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				librosDelAutor.add(libro);
 			}
 		} catch (SQLException e) {

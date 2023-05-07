@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.CategoriaLibros;
 import modelo.ModeloLibro;
+import modelo.Usuario;
 
 /**
  * Servlet implementation class VerLibros
@@ -31,6 +33,15 @@ public class VerLibros extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
+		Usuario usuariologueado = (Usuario) session.getAttribute("usuariologeado");
+		
+		if (usuariologueado == null) {//no logeado
+			response.sendRedirect("Login");
+		} else {		
+		
 		// TODO Auto-generated method stub
 		ModeloLibro modeloLibro = new ModeloLibro();
 		
@@ -39,6 +50,7 @@ public class VerLibros extends HttpServlet {
         request.setAttribute("categoriasLibros", categoriasLibros);
     	modeloLibro.cerrar();
 		request.getRequestDispatcher("/JSPFinal/VerLibros.jsp").forward(request, response);
+		}
 	}
 
 	/**

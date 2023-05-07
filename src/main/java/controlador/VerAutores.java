@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
 import modelo.Libro;
 import modelo.ModeloAutor;
 import modelo.ModeloLibro;
+import modelo.Usuario;
 
 /**
  * Servlet implementation class VerAutores
@@ -33,6 +35,15 @@ public class VerAutores extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		
+		Usuario usuariologueado = (Usuario) session.getAttribute("usuariologeado");
+		
+		if (usuariologueado == null) {//no logeado
+			response.sendRedirect("Login");
+		} else {
+		
 		ModeloAutor ModeloAutor = new ModeloAutor();
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		
@@ -44,6 +55,7 @@ public class VerAutores extends HttpServlet {
 		request.setAttribute("autores", autores);
 		
 		request.getRequestDispatcher("/JSPFinal/VerAutores.jsp").forward(request, response);
+		}
 	}
 
 	/**
