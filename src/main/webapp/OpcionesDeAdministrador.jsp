@@ -19,6 +19,10 @@
     }
     .search-form input {
       width: 150px;
+    } 
+    
+    .search-form2 input {
+      width: 300px;
     }
     .carousel-container {
      margin-top: 50px; /* ajusta según el espacio deseado */
@@ -162,7 +166,7 @@
                     <form class="d-flex search-form" method="get">
                         <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
                         <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro" name="isbn">
-                        <button class="btn btn-outline-success" type="submit">Buscar Libro</button>
+                        <button class="btn btn-outline-success" type="submit"  href="#VerLibros">Buscar Libro</button>
                     </form>
                 </th>
             </tr>
@@ -199,9 +203,9 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Lista de Autores<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
-              <th><form class="d-flex search-form" method="get">
+              <th><form class="d-flex search-form2" method="get">
               	  <button class="btn btn-outline-secondary" name="recargarAutores">Recargar</button>
-                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor" name="id_autor">
+                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (nombre)" aria-label="Buscar Autor" name="id_autor">
                   <button class="btn btn-outline-success" type="submit">Buscar Autor</button>
                 </form></th>
             </tr>
@@ -228,31 +232,52 @@
     <table class="table table-striped table-dark mt-5">
         <thead>
           <tr>
-            <th>Id_Libro</th>
-            <th>Id_Usuario</th>
             <th>Fecha</th>
+            <th>Id del libro</th>
+            <th>Id del usuario</th>
             <th>Reservas<a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
-            <th><form class="d-flex search-form" method="get">
-            	<button class="btn btn-outline-secondary" name="recargarReservas">Recargar</button>
-                <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id_usuario)" aria-label="Buscar Autor" name="id_usuarioR">
-                <button class="btn btn-outline-success" type="submit">Buscar Reserva</button>
-              </form></th>
+            <th><form class="d-flex search-form2" method="get" action="#">
+				    <button class="btn btn-outline-secondary" name="recargarReservas">Recargar</button>
+				    <input class="form-control me-2 ms-2" type="search" placeholder="Buscar Reserva (Dni Usuario)" aria-label="Buscar Reserva" name="dniReserva">
+				    <button class="btn btn-outline-success" type="submit">Buscar Reserva</button>
+				</form>
+            </th>
           </tr>
         </thead>
-        <tbody>
-          <c:forEach items="${reservas}" var="reserva" varStatus="loop">
-          	<c:if test="${loop.index lt 5}">
-            <tr>
-                <td>${reserva.id_libro}</td>
-                <td>${reserva.id_usuario}</td>
-                <td>${reserva.fecha_Reserva}</td>
-                <td><a href="VerReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Ver</a>
-               <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Editar</a>
-               <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a></td>
-            </tr>
-      		</c:if>
-          </c:forEach>
-        </tbody>
+		      <tbody>
+		    	<c:choose>
+				       <c:when test="${hayBusquedaReserva}">
+				            <c:forEach items="${reservasUsuario}" var="reserva">
+		                		<tr>
+		                    <td>${reserva.fecha_Reserva}</td>
+		                    <td>${reserva.id_libro}</td>
+		                    <td>${reserva.id_usuario}</td>
+		                    <td>
+		                        <a href="VerReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Ver</a>
+		                        <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Editar</a>
+		                        <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a>
+		                    </td>
+		                </tr>
+		            </c:forEach>
+		        </c:when>
+		        <c:otherwise>
+		            <c:forEach items="${reservas}" var="reserva" varStatus="loop">
+		                <c:if test="${loop.index lt 5}">
+		                    <tr>
+		                        <td>${reserva.fecha_Reserva}</td>
+		                        <td>${reserva.id_libro}</td>
+		                        <td>${reserva.id_usuario}</td>
+		                        <td>
+		                            <a href="VerReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Ver</a>
+		                            <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-primary">Editar</a>
+		                            <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a>
+		                        </td>
+		                    </tr>
+		                </c:if>
+		            </c:forEach>
+		        </c:otherwise>
+		    </c:choose>
+		</tbody>
       </table>
   </section>
     
@@ -265,26 +290,47 @@
             <th>Id_Usuario</th>
             <th>Fecha</th>
             <th>Devuelto<a href="RealizarPrestamo" class="btn btn-primary" style="margin-left: 100px;">RealizarPrestamo</a></th>
-            <th><form class="d-flex search-form">
-                <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+            <th><form class="d-flex search-form2">
+            	<button class="btn btn-outline-secondary" name="recargarReservas">Recargar</button>
+                <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (Dni Usuario)" aria-label="Buscar Autor" name="dniPrestamo">
                 <button class="btn btn-outline-success" type="submit">Buscar Prestamo</button>
               </form></th>
           </tr>
         </thead>
         <tbody>
-          <c:forEach items="${prestamos}" var="prestamo" varStatus="loop">
-          	<c:if test="${loop.index lt 5}">
-            <tr>
-                <td>${prestamo.id_libro}</td>
-                <td>${prestamo.id_usuario}</td>
-                <td>${prestamo.fecha_prestamo}</td>
-                <td><a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Ver</a>
-               <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Editar</a>
-                    <a href="AnularPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a></td>
-            </tr>
-            </c:if>
-          </c:forEach>
-        </tbody>
+		    	<c:choose>
+				       <c:when test="${hayBusquedaPrestamo}">
+				            <c:forEach items="${prestamosUsuario}" var="prestamo">
+		                		<tr>
+				                    <td>${prestamo.fecha_prestamo}</td>
+				                    <td>${prestamo.id_libro}</td>
+				                    <td>${prestamo.id_usuario}</td>
+				                    <td>${prestamo.devuelto}</td>
+				                    <td><a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Ver</a>
+		                        <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-primary">Editar</a>
+		                        <a href="EliminarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a>
+		                		</tr>
+		            </c:forEach>
+		        </c:when>
+		        <c:otherwise>
+		            <c:forEach items="${prestamos}" var="prestamo" varStatus="loop">
+		                <c:if test="${loop.index lt 5}">
+		                    <tr>
+		                        <td>${prestamo.fecha_prestamo}</td>
+				                <td>${prestamo.id_libro}</td>
+				                <td>${prestamo.id_usuario}</td>
+				                <td>${prestamo.devuelto}</td>
+		                        <td>
+		                        <a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Ver</a>
+		                        <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-primary">Editar</a>
+		                        <a href="EliminarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a>
+		                    </td>
+		                    </tr>
+		                </c:if>
+		            </c:forEach>
+		        </c:otherwise>
+		    </c:choose>
+		</tbody>
       </table>
   </section>
     
@@ -298,8 +344,8 @@
               <th>Lista de Editoriales<a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarEditorial</a></th>
               <th><form class="d-flex search-form">
               	<button class="btn btn-outline-secondary" name="recargarEditoriales">Recargar</button>
-                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Editorial" name="id_editorial">
-                  <button class="btn btn-outline-success" type="submit">Buscar Editorial</button>
+                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar nombre" aria-label="Buscar Editorial" name="id_editorial">
+                 <button class="btn btn-outline-success" type="submit">Buscar Editorial</button>
                 </form></th>
             </tr>
           </thead>
@@ -309,7 +355,7 @@
               <tr>
                  <td>${editorial.id_editorial}</td>
                   <td>${editorial.nombre}</td>	
-             	<td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Ver</a>
+             	<td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-success ">Ver</a>
                <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Editar</a>
                <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a></td>
               </tr>

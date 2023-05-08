@@ -12,7 +12,6 @@
   		<div class="form-group">
         <label for="nombre">Id:</label>
         <input type="hidden" value="${libro.id_libro}" id="id_libro" name="id_libro">
-        <span class="form-control" id="id-display">${libro.id_libro}</span>
     	</div>
   		
   		<div class="form-group">

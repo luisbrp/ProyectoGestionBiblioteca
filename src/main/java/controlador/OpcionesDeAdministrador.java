@@ -124,32 +124,39 @@ public class OpcionesDeAdministrador extends HttpServlet {
 		}
 		modeloAutor.cerrar();
 		
+		
 		//Gestionar Reservas
 		ModeloReserva modeloReserva = new ModeloReserva();
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
-		
 		modeloReserva.conectar();
 
 		// Verificar si se debe recargar la lista de Reservas
 		 String recargarReservasString = request.getParameter("recargarReservas");
 		 boolean recargarReservas = (recargarReservasString != null && recargarReservasString.equals("true"));
-
+		 
 		 if (recargarReservas) {
-			 reservas = modeloReserva.getReservas();
-		    } else {
-		        String idReservaString = request.getParameter("id_usuarioR");
-		        if (idReservaString != null && !idReservaString.isEmpty()) {
-		            int id_usuarioR = Integer.parseInt(idReservaString);
-		            reservas = modeloReserva.getReservasPorUsuario(id_usuarioR);
-		            request.setAttribute("reservas", reservas);
-		        } else {
-		            reservas = modeloReserva.getReservas();
-		        }
-		    }        
-		
-		 
-		 
+			    reservas = modeloReserva.getReservas();
+			    request.setAttribute("hayBusquedaReserva", false);
+			} else {
+			    String dniReserva = request.getParameter("dniReserva");
+			    
+			    //comprobar si el dni es no nulo (buscador)
+			     if (dniReserva != null && !dniReserva.isEmpty()) {     
+			        ArrayList<Reserva> reservasUsuario = modeloReserva.getReservasPorDni(dniReserva);
+			        
+			      //comprobar si el arraylist de reservasPorDni no esta vacia
+			        if (!reservasUsuario.isEmpty()) { 				
+			            request.setAttribute("hayBusquedaReserva", true);
+			            request.setAttribute("reservasUsuario", reservasUsuario);    
+			        } else {
+			            request.setAttribute("hayBusquedaReserva", false);
+			        }
+			    } else {
+			        reservas = modeloReserva.getReservas();
+			        request.setAttribute("hayBusquedaReserva", false);
+			    }
+			}	 
 		 
 		//Gestionar Prestamos
 		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();		
@@ -161,23 +168,29 @@ public class OpcionesDeAdministrador extends HttpServlet {
 		String recargarPrestamoString = request.getParameter("recargarPrestamos");
 		boolean recargarPrestamo = (recargarPrestamoString != null && recargarPrestamoString.equals("true"));
 		
+		
 		if (recargarPrestamo) {
 			prestamos = modeloPrestamo.getPrestamos();
+			request.setAttribute("hayBusquedaPrestamo", false);
 			} else {
-				String idPrestamoString = request.getParameter("id_usuarioP");
-			    if (idPrestamoString != null && !idPrestamoString.isEmpty()) {
-			       int id_usuarioPrestamo = Integer.parseInt(idPrestamoString);
-			       Prestamo prestamo = modeloPrestamo.getReservaPorUsuario(id_usuarioPrestamo);;
-			        if (prestamo != null) {
-			            prestamos.add(prestamo);
-			        } else {
-			           
+				String dniPrestamo = request.getParameter("dniPrestamo");
+				
+				//comprobar si el dni es no nulo (buscador)
+			    if (dniPrestamo != null && !dniPrestamo.isEmpty()) {
+			       ArrayList<Prestamo> prestamosUsuario = modeloPrestamo.getPrestamoPorDni(dniPrestamo);
+			        
+			       //comprobar si el arraylist de prestamosUsuario no esta vacia
+			       if (!prestamosUsuario.isEmpty()){
+			        	request.setAttribute("hayBusquedaPrestamo", true);
+			            request.setAttribute("prestamosUsuario", prestamosUsuario);
 			        }
+			       	  
 			    } else {
-			    	reservas = modeloReserva.getReservas();
+			    	prestamos = modeloPrestamo.getPrestamos();
+			    	request.setAttribute("HayBusquedaPrestamo", false);
 			    }
 			}
-		modeloPrestamo.cerrar();
+			modeloPrestamo.cerrar();
 		
 		
 		
@@ -194,7 +207,7 @@ public class OpcionesDeAdministrador extends HttpServlet {
 		if (recargarEditorial) {
 			editoriales  = modeloEditorial.getEditoriales();
 			} else {
-			    String id_editorialString = request.getParameter("id_editorial");
+			    String id_editorialString = request.getParameter("id_editorial"); 
 			    if (id_editorialString != null && !id_editorialString.isEmpty()) {
 			       int id_editorial = Integer.parseInt(id_editorialString);
 			        Editorial editorial = modeloEditorial.getEditorial(id_editorial);

@@ -25,6 +25,13 @@ public class Reserva {
 	public void setId_libro(int id_libro) {
 		this.id_libro = id_libro;
 	}
+	@Override
+	public String toString() {
+		return "Reserva [fecha_Reserva=" + fecha_Reserva + ", id_usuario=" + id_usuario + ", id_libro=" + id_libro
+				+ ", getFecha_Reserva()=" + getFecha_Reserva() + ", getId_usuario()=" + getId_usuario()
+				+ ", getId_libro()=" + getId_libro() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
 	
 	
 }
