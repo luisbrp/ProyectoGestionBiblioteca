@@ -207,10 +207,13 @@ public class OpcionesDeAdministrador extends HttpServlet {
 		if (recargarEditorial) {
 			editoriales  = modeloEditorial.getEditoriales();
 			} else {
-			    String id_editorialString = request.getParameter("id_editorial"); 
-			    if (id_editorialString != null && !id_editorialString.isEmpty()) {
-			       int id_editorial = Integer.parseInt(id_editorialString);
-			        Editorial editorial = modeloEditorial.getEditorial(id_editorial);
+			    String nombre = request.getParameter("nombre"); 
+			    
+			    //comprobar que el nombre de la editorial no sea nulo
+			    if (nombre != null && !nombre.isEmpty()) {
+			        Editorial editorial = modeloEditorial.getEditorialPorNombre(nombre);
+			        
+			        //comprobar que la editorial que viene de la bbdd, no sea nulo
 			        if (editorial != null) {
 			        	editoriales.add(editorial);
 			        } else {
