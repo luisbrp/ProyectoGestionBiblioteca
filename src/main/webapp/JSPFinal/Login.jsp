@@ -27,7 +27,9 @@
 			padding-top: 20px;
 			padding-bottom: 20px;
 		}
-
+html, body {
+    height: 100%;
+}
 		.card-body {
 			padding: 50px;
 		}
@@ -76,7 +78,7 @@
 		}
 	</style>
 </head>
-<body>
+<body style="background-image: url('https://www.elplural.com/uploads/s1/86/21/24/dia-del-libro.jpeg'); background-repeat: no-repeat; background-size: cover; height: 100vh;">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-5 col-md-8">
@@ -99,7 +101,7 @@
                             </div>
                           
                             </form>
-                            <a href="Registrar" style="display: block; text-align: center; color: black;">Aun no te has registrado? Registrate.</a>							
+                            <a href="Registrarse" style="display: block; text-align: center; color: black;">Aun no te has registrado? Registrate.</a>							
                         </div>
                     </div>
                     

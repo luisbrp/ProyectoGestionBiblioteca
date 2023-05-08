@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
+import modelo.CategoriaLibros;
 import modelo.Libro;
 import modelo.ModeloAutor;
 import modelo.ModeloLibro;
@@ -53,6 +54,15 @@ public class VerAutores extends HttpServlet {
 		ModeloAutor.cerrar();
 		
 		request.setAttribute("autores", autores);
+		
+		/*Cargar las categorias para el header*/
+		ModeloLibro modeloLibro = new ModeloLibro();
+		modeloLibro.conectar();
+		
+		ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
+      
+        request.setAttribute("Todascategorias", Todascategorias);
+        modeloLibro.cerrar();
 		
 		request.getRequestDispatcher("/JSPFinal/VerAutores.jsp").forward(request, response);
 		}

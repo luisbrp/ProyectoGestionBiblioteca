@@ -138,25 +138,16 @@ header {
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Fantasia">Fantasia</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ciencia%20Ficcion">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Romance">Romance</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Misterio">Misterio</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Aventura">Aventura</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Erotismo">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Biografía">Biografía</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Autobiografía">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Ensayo">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Poesía">Poesía</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Drama">Drama</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#Comedia">Comedia</a></li>
+                    <c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#${categoria.categoria}">${categoria.categoria}</a></li>
+                      </c:forEach>
                   </ul>
                 </li>
                   <li class="nav-item">
 					<a class="nav-link" href="CerrarSession">Cerrar Sesión</a>
 				</li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Cuenta</a>
+                   <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
               <form class="d-flex search-form" method="POST" action="Principal">

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
+import modelo.CategoriaLibros;
 import modelo.Libro;
 import modelo.ModeloAutor;
 import modelo.ModeloLibro;
@@ -63,6 +64,14 @@ public class VerLibro extends HttpServlet {
 		request.setAttribute("autor", autor);
 		request.setAttribute("libro", libro);
 		
+		/*Cargar las categorias para el header*/
+
+		modeloLibro.conectar();
+		
+		ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
+      
+        request.setAttribute("Todascategorias", Todascategorias);
+        modeloLibro.cerrar();
 		request.getRequestDispatcher("/JSPFinal/VerLibro.jsp").forward(request, response);
 		}
 	}

@@ -63,6 +63,15 @@ public class VerAutor extends HttpServlet {
 		request.setAttribute("librosDelAutor", librosDelAutor);
 		request.setAttribute("autor", autor);
 		
+		/*Cargar las categorias para el header*/
+
+		modeloLibro.conectar();
+		
+		ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
+      
+        request.setAttribute("Todascategorias", Todascategorias);
+        modeloLibro.cerrar();
+		
 		request.getRequestDispatcher("/JSPFinal/VerAutor.jsp").forward(request, response);
 		}
 	}

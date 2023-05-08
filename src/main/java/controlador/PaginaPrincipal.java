@@ -47,12 +47,13 @@ public class PaginaPrincipal extends HttpServlet {
 			
 			modeloLibro.conectar();
 			ArrayList<CategoriaLibros> categoriasLibros = modeloLibro.categoriasRecomendadas();
+			ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
 	        request.setAttribute("categoriasLibros", categoriasLibros);
-	    	modeloLibro.cerrar();
+	        request.setAttribute("Todascategorias", Todascategorias);
+	        modeloLibro.cerrar();
 			//TODO EL CODIGO PARA CARGAR DATOS
 			request.getRequestDispatcher("/JSPFinal/PaginaPrincipal.jsp").forward(request, response);
 		}
-		
 		
 	}
 	/**

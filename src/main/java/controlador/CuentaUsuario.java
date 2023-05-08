@@ -15,16 +15,16 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class VerUsuario
+ * Servlet implementation class CuentaUsuario
  */
-@WebServlet("/VerUsuario")
-public class VerUsuario extends HttpServlet {
+@WebServlet("/CuentaUsuario")
+public class CuentaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VerUsuario() {
+    public CuentaUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,11 +37,13 @@ public class VerUsuario extends HttpServlet {
 		Usuario usuario = new Usuario();
 		
 		modeloUsuario.conectar();
+		
 		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+		
 		usuario = modeloUsuario.getUsuario(id_usuario);
+		request.setAttribute("usuario", usuario);
 		modeloUsuario.cerrar();
 		
-		request.setAttribute("usuario", usuario);
 		
 		/*Cargar las categorias para el header*/
 		ModeloLibro modeloLibro = new ModeloLibro();
@@ -52,15 +54,41 @@ public class VerUsuario extends HttpServlet {
         request.setAttribute("Todascategorias", Todascategorias);
         modeloLibro.cerrar();
         
-		request.getRequestDispatcher("VerUsuario.jsp").forward(request, response);
+		request.getRequestDispatcher("/JSPFinal/CuentaUsuario.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ModeloUsuario modeloUsuario = new ModeloUsuario();
+		Usuario usuario = new Usuario();
+		
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+		String dni = request.getParameter("dni");
+		String nombre = request.getParameter("nombre");
+		String apellido = request.getParameter("apellido");
+		String direccion = request.getParameter("direccion");
+		String contraseña = request.getParameter("contraseña");
+		int telefono = Integer.parseInt(request.getParameter("telefono"));
+		String email = request.getParameter("email");
+		String rol = request.getParameter("rol");
+		
+		usuario.setId_usuario(id_usuario);
+		usuario.setDni(dni);
+		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setDireccion(direccion);
+		usuario.setContraseña(contraseña);
+		usuario.setTelefono(telefono);
+		usuario.setEmail(email);
+		usuario.setRol(rol);
+		
+		
+		modeloUsuario.conectar();
+		modeloUsuario.modificarUsuario(id_usuario, usuario);
+		modeloUsuario.cerrar();
+		response.sendRedirect("PaginaPrincipal");
 	}
 
 }

@@ -40,9 +40,6 @@ header {
   max-width: 100%;
 }
 
-
-
-
 .social-icons {
   display: flex;
 }
@@ -68,47 +65,10 @@ header {
   to {
     transform: rotate(360deg);
   }
-
 }
-  .card {
-
-  width: 190px;
-  height: 254px;
-  background: rgba(217, 217, 217, 0.58);
-  border: 1px solid white;
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(6px);
-
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  font-weight: bolder;
-  color: black;
+.hidden {
+    display: none;
 }
-
-.card:hover {
-  border: 1px solid black;
-  transform: scale(1.05);
-}
-
-.card:active {
-  transform: scale(0.95) rotateZ(1.7deg);
-}
-.custom-card-style:hover h5.card-title {
-  opacity: 1;
-}
-.card-title {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: center;
-}
-
-
 
 </style>
 
@@ -124,20 +84,20 @@ header {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="VerAutores">Autores</a>
+                  <a class="nav-link" href="VerAutores">Autores</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
+                    <c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
                     <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#${categoria.categoria}">${categoria.categoria}</a></li>
                       </c:forEach>
                   </ul>
@@ -146,7 +106,7 @@ header {
 					<a class="nav-link" href="CerrarSession">Cerrar Sesión</a>
 				</li>
                 <li class="nav-item">
-               <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
+                  <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
               <form class="d-flex search-form" method="POST" action="Principal">
@@ -174,27 +134,59 @@ header {
         </nav>
       </header>
 
-<div style="margin-top: 60px;">
-  
-    <h1 style="margin-left: 50px; margin-top: 20px">Lista de Autores</h1>
-<div style="margin-left: 50px; width: 95%; display: flex; flex-wrap: wrap; justify-content: center;">
-  <c:forEach var="autor" items="${autores}" varStatus="autorStatus">
-    <div style="margin-right: 20px; margin-top: 20px; max-width: 300px;">
-      <div class="card-container">
-        <a href="VerAutor?id_autor= ${autor.id_autor}">
-          <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="card-body"></div>
+<div class="usuario-info" style="margin-top: 100px;">
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h2 class="card-title mb-0">Hola ${usuario.nombre} ${usuario.apellido}</h2>
           </div>
-        </a>
-        <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre} ${autor.apellido}">${autor.nombre} ${autor.apellido}</h5>
+          <div class="card-body">
+            <form method="post" action="CuentaUsuario">
+              <input type="hidden" name="id_usuario" value="${usuario.id_usuario}">
+              <div class="form-group">
+                <label for="nombre"><strong>Nombre:</strong></label>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="${usuario.nombre}"required disabled>
+              </div>
+              <div class="form-group">
+                <label for="apellido"><strong>Apellido:</strong></label>
+                <input type="text" class="form-control" name="apellido" id="apellido" value="${usuario.apellido}"required disabled>
+              </div>
+              <div class="form-group">
+                <label for="dni"><strong>DNI:</strong></label>
+                <input type="text" class="form-control" name="dni" id="dni" value="${usuario.dni}" required disabled pattern="[0-9]{8}[a-zA-Z]{1}" title="El DNI debe tener 8 números y una letra.">
+              </div>
+              <div class="form-group">
+                <label for="direccion"><strong>Dirección:</strong></label>
+                <input type="text" class="form-control" name="direccion" id="direccion" value="${usuario.direccion}"required disabled>
+              </div>
+              <div class="form-group">
+                <label for="email"><strong>Email:</strong></label>
+                <input type="email" class="form-control" name="email" id="email" value="${usuario.email}" disabled required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Introduce una dirección de correo electrónico válida" >
+              </div>
+               <div class="form-group">
+                <label for="contraseña"><strong>Contraseña:</strong></label>
+                <input type="password" class="form-control" name="contraseña" id="contraseña" value="${usuario.contraseña}" required disabled pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" title="La Contraseña debe tener al menos 8 caracteres y estar formado por una combinación de letras y números.">
+              </div>
+              <div class="form-group">
+                <label for="telefono"><strong>Telefono:</strong></label>
+                <input type="text" class="form-control" name="telefono" id="telefono" value="${usuario.telefono}" required disabled pattern="[0-9]{9}" title="El teléfono debe tener 9 números.">
+              </div>
+              <input type="hidden" name="rol" value="${usuario.rol}">
+              <div class="d-flex justify-content-end" style="margin-top: 20px;">
+                <button type="button" class="btn btn-dark mr-2" style="margin-right: 10px;">Editar</button>
+                <button type="submit" class="btn btn-success mr-2" id="guardar-btn" style="margin-right: 10px;">Guardar</button>
+                <button type="button" class="btn btn-secondary" id="cancelar-btn" style="margin-right: 10px;">Cancelar</button>
+              </div>
+          </form>
+        </div>
       </div>
     </div>
-  </c:forEach>
+  </div>
 </div>
 
-</div>
-  
-
+   
     <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
           <div class="row">
@@ -208,7 +200,7 @@ header {
             </div>
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Síguenos</h4>
-              <div class="social-icons">
+              <div class="social-icons" style="margin-left: 150px">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png" alt="Instagram"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter"></a>
@@ -232,6 +224,76 @@ header {
       
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
-    
+    <script>
+    const editButton = document.querySelector(".btn-dark");
+    const saveButton = document.querySelector(".btn-success");
+    const cancelButton = document.querySelector(".btn-secondary");
+
+    saveButton.classList.add("d-none");
+    cancelButton.classList.add("d-none");
+    // Selecciona los campos de entrada de datos
+    const dniInput = document.querySelector("#dni");
+    const direccionInput = document.querySelector("#direccion");
+    const emailInput = document.querySelector("#email");
+    const contraseñaInput = document.querySelector("#contraseña");
+    const telefonoInput = document.querySelector("#telefono");
+    const nombreInput = document.querySelector("#nombre");
+    const apellidoInput = document.querySelector("#apellido");
+    // Guarda los valores originales de los campos de entrada de datos
+    const originalDni = dniInput.value;
+    const originalDireccion = direccionInput.value;
+    const originalEmail = emailInput.value;
+    const originalContraseña = contraseñaInput.value;
+    const originalTelefono = telefonoInput.value;
+    const originalNombre = nombreInput.value;
+    const originalApellido = apellidoInput.value;
+    // Maneja el evento "click" del botón "Editar"
+    editButton.addEventListener("click", () => {
+      // Oculta el botón "Editar"
+      editButton.classList.add("d-none");
+
+      // Muestra los botones "Guardar" y "Cancelar"
+      saveButton.classList.remove("d-none");
+      cancelButton.classList.remove("d-none");
+
+      // Habilita los campos de entrada de datos para la edición
+      dniInput.disabled = false;
+      direccionInput.disabled = false;
+      emailInput.disabled = false;
+      contraseñaInput.disabled = false;
+      telefonoInput.disabled = false;
+      nombreInput.disabled = false;
+      apellidoInput.disabled = false;
+    });
+
+    // Maneja el evento "click" del botón "Cancelar"
+    cancelButton.addEventListener("click", () => {
+      // Restaura los valores originales de los campos de entrada de datos
+      dniInput.value = originalDni;
+      direccionInput.value = originalDireccion;
+      emailInput.value = originalEmail;
+      contraseñaInput.value = originalContraseña;
+      telefonoInput.value = originalTelefono;
+      nombreInput.value = originalNombre;
+      apellidoInput.value = originalApellido;
+      // Oculta los botones "Guardar" y "Cancelar"
+      saveButton.classList.add("d-none");
+      cancelButton.classList.add("d-none");
+
+      // Muestra el botón "Editar"
+      editButton.classList.remove("d-none");
+
+      // Deshabilita los campos de entrada de datos
+      dniInput.disabled = true;
+      direccionInput.disabled = true;
+      emailInput.disabled = true;
+      contraseñaInput.disabled = true;
+      telefonoInput.disabled = true;
+      nombreInput.disabled = true;
+      apellidoInput.disabled = true;
+    });
+
+
+  </script>
 </body>
 </html>

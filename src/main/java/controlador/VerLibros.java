@@ -49,6 +49,15 @@ public class VerLibros extends HttpServlet {
 		ArrayList<CategoriaLibros> categoriasLibros = modeloLibro.LibrosPorCategoria();
         request.setAttribute("categoriasLibros", categoriasLibros);
     	modeloLibro.cerrar();
+    	
+    	/*Cargar las categorias para el header*/
+	
+		modeloLibro.conectar();
+		
+		ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
+      
+        request.setAttribute("Todascategorias", Todascategorias);
+        modeloLibro.cerrar();
 		request.getRequestDispatcher("/JSPFinal/VerLibros.jsp").forward(request, response);
 		}
 	}

@@ -225,6 +225,10 @@ public class ModeloLibro extends Conector{
 		return librosPorCategoria;
 	}	
 	
+	/**
+	 * devuleve 3
+	 * @return
+	 */
 	public ArrayList<CategoriaLibros> categoriasRecomendadas() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
@@ -280,7 +284,47 @@ public class ModeloLibro extends Conector{
 
 	    return categoriasLibros;
 	}
+	
+	
+	public ArrayList<CategoriaLibros> TodasLasCategorias() {
+		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
+	    try {
+	    	pst = conexion.prepareStatement("SELECT categoria\r\n"
+	    			+ "	FROM libro GROUP BY categoria;"
+	    			);
+
+	        rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            Libro libro = new Libro();
+	       
+	            String categoria = rs.getString("Categoria");
+	           
+
+	            CategoriaLibros categoriaLibros = null;
+	            for (CategoriaLibros cl : categoriasLibros) {
+	                if (cl.getCategoria().equals(categoria)) {
+	                    categoriaLibros = cl;
+	                    break;
+	                }
+	            }
+
+	            if (categoriaLibros == null) {
+	                categoriaLibros = new CategoriaLibros();
+	                categoriaLibros.setCategoria(categoria);
+	                categoriaLibros.setLibros(new ArrayList<>());
+	                categoriasLibros.add(categoriaLibros);
+	            }
+
+	            categoriaLibros.getLibros().add(libro);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return categoriasLibros;
+	}
 	public ArrayList<CategoriaLibros> LibrosPorCategoria() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 

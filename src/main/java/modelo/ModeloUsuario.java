@@ -102,6 +102,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
 				usuario.setContraseña(rs.getString("Contraseña"));
+				usuario.setEmail(rs.getString("Email"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
