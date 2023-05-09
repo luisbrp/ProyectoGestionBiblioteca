@@ -9,11 +9,25 @@ public class ModeloLibro_Info extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
-	public void insertarLibro_Info(Libro_Info libro_info) {
+	public void insertarLibroInfo(Libro_Info libroInfo) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Libro_Info (Id_Libro, Id_Autor) VALUES (?,?)");
-			pst.setInt(1, libro_info.getId_libro());
-			pst.setInt(2, libro_info.getId_autor());
+			pst.setInt(1, libroInfo.getId_libro());
+			pst.setInt(2, libroInfo.getId_autor());
+			
+			pst.execute();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void insertarLibro_Info(Autor autor, Libro libro) {
+		try {
+			pst = conexion.prepareStatement("INSERT INTO Libro_Info (Id_Libro, Id_Autor) VALUES (?,?)");
+			pst.setInt(1, libro.getId_libro());
+			pst.setInt(2, autor.getId_autor());
 			
 			pst.execute();
 		} catch (SQLException e) {

@@ -161,7 +161,7 @@
                 <th>Titulo</th>
                 <th>Isbn</th>
                 <th>Stock</th>
-                <th>Lista de libros<a href="InsertarLibro" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
+                <th>Lista de libros<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
                 <th>
                     <form class="d-flex search-form" method="get">
                         <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>

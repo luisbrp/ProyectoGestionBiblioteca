@@ -3,6 +3,10 @@ package modelo;
 import java.util.Date;
 
 public class Libro {
+	@Override
+	public String toString() {
+		return "Libro [id_libro=" + id_libro + ", titulo=" + titulo + "]";
+	}
 	private int id_libro;
 	private long isbn;
 	private String titulo;

@@ -38,23 +38,22 @@ public class ModeloReserva extends Conector{
 		}
 	}
 	
-	public void modificarReserva(java.util.Date fecha, int id_libro, int id_usuario, Reserva reserva) {
-		try {
-			pst = conexion.prepareStatement("UPDATE Reserva SET Fecha_Reserva = ?, Id_Libro = ?, Id_Usuario = ? WHERE Fecha_Reserva = ? AND Id_Libro = ? AND Id_Usuario = ?");
-			 pst.setDate(1, new Date(reserva.getFecha_Reserva().getTime()));
-		        pst.setInt(2, reserva.getId_libro());
-		        pst.setInt(3, reserva.getId_usuario());
-		        pst.setDate(4, new Date(fecha.getTime()));
-		        pst.setInt(5, id_libro);
-		        pst.setInt(6, id_usuario);
-		        
-			
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void modificarReserva(java.util.Date fechaVieja, int id_libroViejo, int id_usuarioViejo, Reserva reserva) {
+	    try {
+	        PreparedStatement pst = conexion.prepareStatement("UPDATE reserva SET Fecha_Reserva = ?, Id_Libro = ?, Id_Usuario = ? WHERE Fecha_Reserva = ? AND Id_Libro = ? AND Id_Usuario = ?");
+	        pst.setDate(1, new java.sql.Date(reserva.getFecha_Reserva().getTime()));
+	        pst.setInt(2, reserva.getId_libro());
+	        pst.setInt(3, reserva.getId_usuario());
+	        pst.setDate(4, new java.sql.Date(fechaVieja.getTime()));
+	        pst.setInt(5, id_libroViejo);
+	        pst.setInt(6, id_usuarioViejo);
+	        pst.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
+
 	
 	public Reserva getReserva(java.util.Date fecha, int id_libro, int id_usuario) {
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();

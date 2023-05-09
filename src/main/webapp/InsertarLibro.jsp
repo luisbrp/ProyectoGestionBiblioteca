@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 
 </head>
-<body>
-	<form method="post" action="InsertarLibro">
+<body>	
+<h2>Ahora inserta la informacion del libro...</h2>
+	<form method="post" action="InsertarLibro" class="mt-5">
   		<div class="form-group">
     		<label>ISBN:</label>
     			<input type="text" name="isbn" required class="form-control" 
@@ -75,9 +76,6 @@
 		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
 		           onchange="this.setCustomValidity('')" /><br/>  
   		</div>
-  		
-  		<img alt="" src=" ${libro.getFoto}">
- 	  
   <input type="submit" value="Guardar" class="btn btn-primary mt-4"/>
   </form>
 </body>

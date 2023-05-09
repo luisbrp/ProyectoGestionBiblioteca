@@ -37,6 +37,7 @@ public class Autor extends HttpServlet {
 		
 		modeloAutor.conectar();
 		String nombre = request.getParameter("nombre");
+		
 		modeloAutor.getAutorPorNombre(nombre);
 		modeloAutor.cerrar();
 		

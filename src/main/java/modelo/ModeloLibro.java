@@ -90,6 +90,35 @@ public class ModeloLibro extends Conector{
 		return libro;
 	}
 	
+	public Libro getLibroPorTitulo(Libro libro) {
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			pst = conexion.prepareStatement("SELECT * FROM Libro WHERE Titulo = ?");
+			
+			pst.setString(1, libro.getTitulo());
+			
+			pst.executeQuery();
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				libro.setId_libro(rs.getInt("Id_Libro"));
+				libro.setIsbn(rs.getLong("ISBN"));
+				libro.setTitulo(rs.getString("Titulo"));
+				libro.setNum_paginas(rs.getInt("Num_Pag"));
+				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+				libro.setIdioma(rs.getString("Idioma"));
+				libro.setStock(rs.getInt("Stock"));
+				libro.setCategoria(rs.getString("Categoria"));
+				libro.setFoto(rs.getString("Foto"));
+				libros.add(libro);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libro;
+	}
+	
 	public ArrayList<Libro> getLibros() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		

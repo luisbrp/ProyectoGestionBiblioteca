@@ -115,7 +115,8 @@
                 </li>
               </ul>
               <form class="d-flex search-form" method="POST" action="Principal">
-			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busqueda" automplete="off">
+			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busq
+			  ueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
 			</form>
             </div>

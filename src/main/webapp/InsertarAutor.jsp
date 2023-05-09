@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="InsertarAutor">
+<h2>Inserta la informacion del autor</h2>
+	<form method="post" action="InsertarAutor" class="mt-5">
   		<div class="form-group">
     		<div class="form-group">
 		    <label>Nombre:</label>
@@ -37,7 +38,7 @@
   		</div>
  
   		</div>
-  		<input type="submit" value="Guardar" class="btn btn-primary mt-4"/>
+  		<input type="submit" value="Continuar" class="btn btn-primary mt-4" href="InsertarLibro"/>
   		</form>
 </body>
 </html>

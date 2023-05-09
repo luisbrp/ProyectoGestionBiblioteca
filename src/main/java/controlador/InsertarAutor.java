@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
 import modelo.ModeloAutor;
@@ -49,7 +50,15 @@ public class InsertarAutor extends HttpServlet {
 		
 		modeloAutor.conectar();
 		modeloAutor.registrarAutor(autor);
+		if (autor != null) {
+		    HttpSession session = request.getSession();
+		    session.setAttribute("autor", autor);
+		    response.sendRedirect("InsertarLibro");
+		}
+
 		modeloAutor.cerrar();
+		
+		
 	}
 
 }

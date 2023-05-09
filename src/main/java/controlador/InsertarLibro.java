@@ -9,9 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Libro;
-import modelo.ModeloLibro;
+import javax.servlet.http.HttpSession;
 
+import modelo.Libro;
+import modelo.ModeloAutor;
+import modelo.ModeloLibro;
+import modelo.ModeloLibro_Info;
+import modelo.Autor;
 
 /**
  * Servlet implementation class InsertarLibro
@@ -40,6 +44,11 @@ public class InsertarLibro extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ModeloLibro_Info  modeloLibroInfo = new ModeloLibro_Info(); 
+		ModeloAutor modeloAutor = new ModeloAutor();
+		HttpSession session = request.getSession();
+		Autor autor = (Autor) session.getAttribute("autor");
+		
 		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
 		Libro libro = new Libro();
 		ModeloLibro modeloLibro = new ModeloLibro();
@@ -69,6 +78,28 @@ public class InsertarLibro extends HttpServlet {
 		}
 		modeloLibro.conectar();
 		modeloLibro.registrarLibro(libro);
+		
+		if (libro != null) {
+			
+			//Sacar el libro completo para conseguir el id_libro 
+			modeloLibro.conectar();
+			Libro libroCompleto = modeloLibro.getLibroPorTitulo(libro);
+			modeloLibro.cerrar();
+			
+			//Sacar el autor completo para conseguir el id
+			modeloAutor.conectar();
+			Autor autorCompleto = modeloAutor.AutorPorNombre(autor);
+			modeloAutor.cerrar();
+			
+			//Insertar los parametros previamente consultados a la base de datos, en libro_info
+			/*
+			 *Para poder insertar en libro_info, necesitamos los id de ambos campos
+			 */
+			
+			modeloLibroInfo.conectar();
+			modeloLibroInfo.insertarLibro_Info(autorCompleto, libroCompleto);
+			modeloLibroInfo.cerrar();
+		}
 		modeloLibro.cerrar();
 	}
 

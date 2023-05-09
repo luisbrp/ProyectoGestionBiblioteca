@@ -1,6 +1,11 @@
 package modelo;
 
 public class Autor {
+	@Override
+	public String toString() {
+		return "Autor [id_autor=" + id_autor + ", nombre=" + nombre + ", apellido=" + apellido + ", descripcion="
+				+ descripcion + "]";
+	}
 	private int id_autor;
 	private String nombre;
 	private String apellido;
