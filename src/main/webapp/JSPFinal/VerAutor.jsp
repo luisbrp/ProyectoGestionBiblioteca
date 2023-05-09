@@ -117,6 +117,7 @@ header {
     background-color: #F5F5F5;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    position: relative;
   }
   
   .autor-info img {
@@ -217,12 +218,10 @@ header {
     <p><strong>Descripcion:</strong> ${autor.descripcion}</p>
      <h2>Libros relacionados: </h2>
 
-  <c:forEach var="categoria" items="${librosDelAutor}" varStatus="status">
-
-
-    <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
+    <div style="margin-left: 50px; width: 1100px; overflow-x: auto; scroll-snap-type: x mandatory;">
       <div style="display: flex; margin-left: 30px;margin-top: 20px;">
-        <c:forEach var="libro" items="${librosDelAutor}" varStatus="libroStatus">
+
+        <c:forEach var="libro" items="${librosDelAutor}">
           <div style="margin-right: 20px; scroll-snap-align: center;">
             <div class="card-container">
               <a href="VerLibro?id_libro=${libro.id_libro}">
@@ -234,9 +233,9 @@ header {
             </div>
           </div>
         </c:forEach>
+
       </div>
     </div>
-  </c:forEach>
 
   </div>
 </div>

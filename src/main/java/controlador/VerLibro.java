@@ -43,7 +43,7 @@ public class VerLibro extends HttpServlet {
 		if (usuariologueado == null) {//no logeado
 			response.sendRedirect("Login");
 		} else {
-			
+		
 		
 		ModeloLibro modeloLibro = new ModeloLibro();
 		Libro libro = new Libro();

@@ -103,4 +103,58 @@ public class ModeloReserva extends Conector{
 		}
 		return reservas;
 	}
+	
+	
+	public int getCantidadReservasPorLibro(int id_libro) {
+	    int CantidadReservasPorLibro = 0;
+	    try {
+	        pst = conexion.prepareStatement("SELECT COUNT(*) AS cantidad FROM Reserva WHERE Id_Libro = ?");
+	        pst.setInt(1, id_libro);
+	        rs = pst.executeQuery(); 
+	        if (rs.next()) {
+	            CantidadReservasPorLibro = rs.getInt("cantidad");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return CantidadReservasPorLibro;
+	}
+
+	
+	public int getCantidadReservasPorUsuarioEnFecha(int id_usuario, java.util.Date fechaReserva) {
+	    int CantidadReservasPorFecha = 0;
+	    try {
+	        pst = conexion.prepareStatement("SELECT COUNT(*) AS cantidad FROM Reserva WHERE Id_Usuario = ? AND Fecha_Reserva = ?");
+	        pst.setInt(1, id_usuario);
+	        pst.setDate(2, new Date(fechaReserva.getTime()));
+	        rs = pst.executeQuery(); 
+	        if (rs.next()) {
+	            CantidadReservasPorFecha = rs.getInt("cantidad");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return CantidadReservasPorFecha;
+	}
+	
+	public int getCantidadReservasPorUsuarioYlibroEnFecha(int id_usuario,int id_libro, java.util.Date fechaReserva) {
+	    int CantidadReservasPorFechayLibro = 0;
+	    try {
+	        pst = conexion.prepareStatement("SELECT COUNT(*) AS cantidad FROM Reserva WHERE Id_Usuario = ? AND Id_Libro = ? AND Fecha_Reserva = ?");
+	        pst.setInt(1, id_usuario);
+	        pst.setInt(2, id_libro);
+	        pst.setDate(3, new Date(fechaReserva.getTime()));
+	        rs = pst.executeQuery(); 
+	        if (rs.next()) {
+	            CantidadReservasPorFechayLibro = rs.getInt("cantidad");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return CantidadReservasPorFechayLibro;
+	}
+	
+
+
+
 }

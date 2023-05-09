@@ -134,7 +134,7 @@ public class ModeloLibro extends Conector{
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				Libro libro = new Libro();
-				libro.setId_libro(rs.getInt(1));
+				libro.setId_libro(rs.getInt("Id_Libro"));
 				libro.setIsbn(rs.getLong("ISBN"));
 				libro.setTitulo(rs.getString("Titulo"));
 				libro.setNum_paginas(rs.getInt("Num_Pag"));

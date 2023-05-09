@@ -149,6 +149,13 @@ footer {
     bottom: 0;
     width: 100%;
   }
+  
+  .btn-custom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
 </style>
 
 <body>
@@ -214,8 +221,14 @@ footer {
       </header>
       
 <div class="libro-info"  style="margin-top: 100px;">
+<div>
   <img src="${libro.foto}" alt="${libro.titulo}">
-  <div>
+  <a href="ReservarLibro?id_libro=${libro.id_libro}&id_usuario=${usuariologeado.id_usuario}" class="btn btn-outline-success" style="display: block;margin-top: 10px;">Reservar</a>
+</div>
+
+  
+   
+  <div style="margin-left: 50px;">
     <h2>${libro.titulo}</h2>
     <p><strong>ISBN:</strong> ${libro.isbn}</p>
     <p><strong>Número de páginas:</strong> ${libro.num_paginas}</p>
