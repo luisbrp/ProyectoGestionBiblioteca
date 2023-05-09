@@ -43,6 +43,10 @@ public class InsertarLibro extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	/**
+	 * @param: Inserta un libro y realiza un insert automatico a la tabla Libro_Info
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloLibro_Info  modeloLibroInfo = new ModeloLibro_Info(); 
 		ModeloAutor modeloAutor = new ModeloAutor();

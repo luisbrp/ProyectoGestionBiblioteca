@@ -36,22 +36,27 @@ public class ModificarPrestamo extends HttpServlet {
 		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();
 		Prestamo prestamo = new Prestamo();
 		
-		String fechaR = request.getParameter("fecha_prestamo");
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+		String fechaVieja = request.getParameter("fecha_prestamo");
+		int id_libroViejo = Integer.parseInt(request.getParameter("id_libro"));
+		int id_usuarioViejo = Integer.parseInt(request.getParameter("id_usuario"));
 
 		
-		Date fecha;
+		
 		try {
-			fecha = fechaFormato.parse(fechaR);
+			Date fecha = fechaFormato.parse(fechaVieja);
 			prestamo.setFecha_prestamo(fecha);
-			prestamo.setId_libro(id_libro);
-			prestamo.setId_usuario(id_usuario);
+			prestamo.setId_libro(id_libroViejo);
+			prestamo.setId_usuario(id_usuarioViejo);
 			
 			modeloPrestamo.conectar();
-			modeloPrestamo.getPrestamo(fecha, id_libro, id_usuario);
-			request.setAttribute("prestamo", prestamo);
+			prestamo = modeloPrestamo.getPrestamo(fecha, id_libroViejo, id_usuarioViejo);
 			modeloPrestamo.cerrar();
+			
+			request.setAttribute("prestamo", prestamo);
+			request.setAttribute("fecha", fecha);
+	        request.setAttribute("id_usuario", id_usuarioViejo);
+	        request.setAttribute("id_libro", id_libroViejo);
+			
 			request.getRequestDispatcher("ModificarPrestamo.jsp").forward(request, response);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -74,20 +79,19 @@ public class ModificarPrestamo extends HttpServlet {
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
 		String devuelto = request.getParameter("devuelto");
 		
-		String nueva_fechaP = request.getParameter("nueva_fecha_prestamo");
-		int nuevo_id_usuario = Integer.parseInt(request.getParameter("nuevo_id_usuario"));
-		int nuevo_id_libro = Integer.parseInt(request.getParameter("nuevo_id_libro"));
-		String nuevo_devuelto = request.getParameter("nuevo_devuelto");
+		String fechaPVieja = request.getParameter("fecha");
+        int id_usuario_viejo = Integer.parseInt(request.getParameter("id_usuario_viejo"));
+        int id_libro_viejo = Integer.parseInt(request.getParameter("id_libro_viejo"));
 		
 		try {
-		Date fecha = fechaFormato.parse(fechaP);
-		Date nuevaFecha = fechaFormato.parse(nueva_fechaP);
-		prestamo.setFecha_prestamo(nuevaFecha);
-		prestamo.setId_usuario(nuevo_id_usuario);
-		prestamo.setId_libro(nuevo_id_libro);
-		prestamo.setDevuelto(nuevo_devuelto);
+			 Date fechaVieja = new java.sql.Date(fechaFormato.parse(fechaPVieja).getTime());
+	         Date fechaNueva = new java.sql.Date(fechaFormato.parse(fechaP).getTime());
+		prestamo.setFecha_prestamo(fechaNueva);
+		prestamo.setId_usuario(id_usuario);
+		prestamo.setId_libro(id_libro);
+		prestamo.setDevuelto(devuelto);
 		modeloPrestamo.conectar();
-		modeloPrestamo.modificarPrestamo(fecha, id_libro, id_usuario, prestamo, devuelto);
+		modeloPrestamo.modificarPrestamo(fechaVieja, id_libro_viejo, id_usuario_viejo, prestamo);
 		modeloPrestamo.cerrar();
 		} catch (ParseException e) {
 			

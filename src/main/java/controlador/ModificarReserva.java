@@ -33,70 +33,68 @@ public class ModificarReserva extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
-		Reserva reserva = new Reserva();
-		ModeloReserva modeloReserva = new ModeloReserva();
-		
-		String fechaRVieja = request.getParameter("fecha_Reserva");
-		int id_usuarioViejo = Integer.parseInt(request.getParameter("id_usuario"));
-		int id_libroViejo = Integer.parseInt(request.getParameter("id_libro"));
-		
-		
-		try {
-		Date fecha = fechaFormato.parse(fechaRVieja);
-		reserva.setFecha_Reserva(fecha);
-		reserva.setId_usuario(id_usuarioViejo);
-		reserva.setId_libro(id_libroViejo);
-		modeloReserva.conectar();
-		modeloReserva.getReserva(fecha, id_libroViejo, id_usuarioViejo);
-		request.setAttribute("reserva", reserva);
-		request.getRequestDispatcher("ModificarReserva.jsp").forward(request, response);
-		modeloReserva.cerrar();
-		
-		request.setAttribute("fecha_Reserva", fechaRVieja);
-		request.setAttribute("id_usuario", id_usuarioViejo);
-		request.setAttribute("id_libro", id_libroViejo);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
+        Reserva reserva = new Reserva();
+        ModeloReserva modeloReserva = new ModeloReserva();
+        
+        String fechaVieja = request.getParameter("fecha_Reserva");
+        int id_usuarioViejo = Integer.parseInt(request.getParameter("id_usuario"));
+        int id_libroViejo = Integer.parseInt(request.getParameter("id_libro"));
+        
+        try {
+            Date fecha = fechaFormato.parse(fechaVieja);
+            reserva.setFecha_Reserva(fecha);
+            reserva.setId_usuario(id_usuarioViejo);
+            reserva.setId_libro(id_libroViejo);
+            
+            modeloReserva.conectar();
+            reserva = modeloReserva.getReserva(fecha, id_libroViejo, id_usuarioViejo);
+            modeloReserva.cerrar();
+            
+            request.setAttribute("reserva", reserva);
+            request.setAttribute("fecha", fecha);
+            request.setAttribute("id_usuario", id_usuarioViejo);
+            request.setAttribute("id_libro", id_libroViejo);
+            
+            request.getRequestDispatcher("ModificarReserva.jsp").forward(request, response);
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
-		
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-		
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
-	    Reserva reserva = new Reserva();
-	    ModeloReserva modeloReserva = new ModeloReserva();
-	    
-	    String fechaRVieja = request.getParameter("fechaRVieja");
-	    int id_usuarioViejo = Integer.parseInt(request.getParameter("id_usuarioViejo"));
-	    int id_libroViejo = Integer.parseInt(request.getParameter("id_libroViejo"));
-	    
-	    String fechaR = request.getParameter("fecha_Reserva");
-	    int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
-	    int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-	    
-	    try {
-	    	SimpleDateFormat fechaFormatoBD = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-	    	Date fechaVieja = fechaFormatoBD.parse(fechaRVieja);
-	        Date fecha = new java.sql.Date(fechaFormato.parse(fechaR).getTime());
-	        reserva.setFecha_Reserva(fecha);
-	        reserva.setId_usuario(id_usuario);
-	        reserva.setId_libro(id_libro);
-	        modeloReserva.conectar();
-	        modeloReserva.modificarReserva(fechaVieja, id_libroViejo, id_usuarioViejo, reserva);
-	        modeloReserva.cerrar();
-	    } catch (ParseException e) {
-	        e.printStackTrace();
-	    }
-	}
-
-	    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
+        Reserva reserva = new Reserva();
+        ModeloReserva modeloReserva = new ModeloReserva();
+        
+        //recibimos los paramtros nuevos
+        int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+        int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+        
+        //y aqui los viejos
+        String fechaRVieja = request.getParameter("fecha");
+        int id_usuario_viejo = Integer.parseInt(request.getParameter("id_usuario_viejo"));
+        int id_libro_viejo = Integer.parseInt(request.getParameter("id_libro_viejo"));
+        
+        try {
+            Date fechaVieja = new java.sql.Date(fechaFormato.parse(fechaRVieja).getTime());
+            Date fechaNueva = new java.sql.Date(fechaFormato.parse(request.getParameter("fechaNueva")).getTime());
+            
+            reserva.setFecha_Reserva(fechaNueva);
+            reserva.setId_usuario(id_usuario);
+            reserva.setId_libro(id_libro);
+            
+            modeloReserva.conectar();
+            modeloReserva.modificarReserva(fechaVieja, id_libro_viejo, id_usuario_viejo, reserva);
+            modeloReserva.cerrar();
+            
+            response.sendRedirect("OpcionesDeAdministrador");
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
