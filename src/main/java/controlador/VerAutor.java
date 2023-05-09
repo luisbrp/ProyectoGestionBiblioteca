@@ -17,6 +17,7 @@ import modelo.ModeloAutor;
 import modelo.ModeloLibro;
 import modelo.ModeloUsuario;
 import modelo.Usuario;
+import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
  * Servlet implementation class VerAutor
@@ -80,8 +81,23 @@ public class VerAutor extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		/*Busqueda*/
+		
+		 String nombreBusqueda = request.getParameter("nombreBusqueda");
+		    
+		    ModeloLibro modeloLibro = new ModeloLibro();
+		    modeloLibro.conectar();
+		    ResultadoBusqueda resultado = modeloLibro.BuscarTituloLibroNombreAutor(nombreBusqueda);
+		    ArrayList<Libro> librosRelacionados = resultado.getLibrosRelacionados();
+		    ArrayList<Autor> autoresRelacionados = resultado.getAutoresRelacionados();
+		   
+		    modeloLibro.cerrar();
+			    
+		    request.setAttribute("librosRelacionados", librosRelacionados);
+		    request.setAttribute("autoresRelacionados", autoresRelacionados);
+		   
+		 
+		    response.sendRedirect(request.getContextPath() + "/Busqueda?nombreBusqueda=" + nombreBusqueda);
 	}
 
 }

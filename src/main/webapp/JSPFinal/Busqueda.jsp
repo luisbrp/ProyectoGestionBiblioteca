@@ -40,9 +40,6 @@ header {
   max-width: 100%;
 }
 
-
-
-
 .social-icons {
   display: flex;
 }
@@ -68,8 +65,8 @@ header {
   to {
     transform: rotate(360deg);
   }
-
 }
+
   .card {
 
   width: 190px;
@@ -107,59 +104,10 @@ header {
   overflow: hidden;
   text-align: center;
 }
- .libro-info {
- 	margin: auto;
- 	align-items: center;
- 	width: 1500px;
-    display: flex;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #F5F5F5;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-  }
-  
-  .libro-info img {
-    margin-right: 30px;
-    max-width: 200px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-  }
-
-  .libro-info h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .libro-info p {
-    margin: 10px 0;
-    font-size: 16px;
-    line-height: 1.5;
-    border-bottom: 1px solid #D3D3D3;
-    padding-bottom: 10px;
-  }
-
-  .libro-info p:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  .btn-custom {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
 </style>
 
 <body>
-     <header >
+    <header >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
           <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
@@ -170,7 +118,7 @@ footer {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="VerLibros">Libros</a>
@@ -183,7 +131,7 @@ footer {
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
+ 			<c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
                     <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#${categoria.categoria}">${categoria.categoria}</a></li>
                       </c:forEach>
                   </ul>
@@ -192,10 +140,10 @@ footer {
 					<a class="nav-link" href="CerrarSession">Cerrar Sesión</a>
 				</li>
                 <li class="nav-item">
-                    <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
+                  <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
-             <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
+              <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
    				 <li class="nav-item dropdown">
 		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -220,55 +168,53 @@ footer {
         </nav>
       </header>
       
-      
-   
-<div class="libro-info"  style="margin-top: 100px;">
-<div>
-  <img src="${libro.foto}" alt="${libro.titulo}">
-  <a href="ReservarLibro?id_libro=${libro.id_libro}&id_usuario=${usuariologeado.id_usuario}" class="btn btn-outline-success" style="display: block;margin-top: 10px;">Reservar</a>
-</div>
+<div style="margin-top: 110px;">
 
-
-  
-   
-  <div style="margin-left: 50px;">
-    <h2>${libro.titulo}</h2>
-    <p><strong>ISBN:</strong> ${libro.isbn}</p>
-    <p><strong>Número de páginas:</strong> ${libro.num_paginas}</p>
-    <p><strong>Fecha de publicación:</strong> ${libro.fecha_publicacion}</p>
-    <p><strong>Idioma:</strong> ${libro.idioma}</p>
-    <p><strong>Stock:</strong> ${libro.stock}</p>
-    <p><strong>Categoría:</strong> ${libro.categoria}</p>
-    <p><strong>Descripcion:</strong> ${libro.descripcion}</p>
-  </div>
-
-   <div>
-     <h2 style="margin-left: 135px;">Autor</h2>
-    <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
-      <div style="display: flex; margin-left: 30px;margin-top: 20px;">
+    <c:choose>
+      <c:when test="${not empty librosRelacionados}">
+        <h2>Resultados de la búsqueda :</h2>
+        <c:forEach var="libro" items="${librosRelacionados}">
           <div style="margin-right: 20px; scroll-snap-align: center;">
+            <div class="card-container">
+              <a href="VerLibro?id_libro=${libro.id_libro}">
+                <div class="card custom-card-style" style="background-image: url('${libro.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                  <div class="card-body"></div>
+                </div>
+              </a>
+              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${libro.titulo}">${libro.titulo}</h5>
+            </div>
+          </div>
+        </c:forEach>
+      </c:when>
+      <c:when test="${not empty autoresRelacionados}">
+        <h2>Resultados de la búsqueda :</h2>
+        <c:forEach var="autor" items="${autoresRelacionados}">
+          <div style="margin-right: 20px; margin-top: 20px; max-width: 300px;">
             <div class="card-container">
               <a href="VerAutor?id_autor=${autor.id_autor}">
                 <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
                   <div class="card-body"></div>
                 </div>
               </a>
-              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre}">${autor.nombre} ${autor.apellido}</h5>
+              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre} ${autor.apellido}">${autor.nombre} ${autor.apellido}</h5>
             </div>
           </div>
-      </div>
-    </div>
-</div>
-</div>
-<br>
+        </c:forEach>
+      </c:when>
+      <c:otherwise>
+        <p>No se encontraron resultados para su búsqueda.</p>
+      </c:otherwise>
+    </c:choose>
 
-  <c:if test="${not empty mensaje}">
-    <div class="alert alert-danger">${mensaje}</div>
-</c:if> 
-  <c:if test="${not empty mensajeReservaRealizada}">
-    <div class="alert alert-success">${mensajeReservaRealizada}</div>
-</c:if> 
+</div>
 
+      
+
+     
+
+
+
+   
     <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
           <div class="row">
@@ -282,7 +228,7 @@ footer {
             </div>
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Síguenos</h4>
-              <div class="social-icons">
+              <div class="social-icons" style="margin-left: 150px">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png" alt="Instagram"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter"></a>

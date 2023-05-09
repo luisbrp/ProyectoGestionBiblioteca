@@ -137,24 +137,22 @@ public class ModeloReserva extends Conector{
 	    return CantidadReservasPorFecha;
 	}
 	
-	public int getCantidadReservasPorUsuarioYlibroEnFecha(int id_usuario,int id_libro, java.util.Date fechaReserva) {
-	    int CantidadReservasPorFechayLibro = 0;
+	
+	public int getCantidadReservasPorUsuarioEnLibro(int id_usuario, int id_libro) {
+	    int CantidadReservasPorLibro = 0;
 	    try {
-	        pst = conexion.prepareStatement("SELECT COUNT(*) AS cantidad FROM Reserva WHERE Id_Usuario = ? AND Id_Libro = ? AND Fecha_Reserva = ?");
+	        pst = conexion.prepareStatement("SELECT COUNT(*) AS cantidad FROM Reserva WHERE Id_Usuario = ? AND Id_Libro = ?");
 	        pst.setInt(1, id_usuario);
-	        pst.setInt(2, id_libro);
-	        pst.setDate(3, new Date(fechaReserva.getTime()));
+	        pst.setInt(2, id_libro);	      
 	        rs = pst.executeQuery(); 
 	        if (rs.next()) {
-	            CantidadReservasPorFechayLibro = rs.getInt("cantidad");
+	        	CantidadReservasPorLibro = rs.getInt("cantidad");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return CantidadReservasPorFechayLibro;
+	    return CantidadReservasPorLibro;
 	}
-	
-
 
 
 }

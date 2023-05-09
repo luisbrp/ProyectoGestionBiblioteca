@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.Autor;
 import modelo.CategoriaLibros;
+import modelo.Libro;
 import modelo.ModeloLibro;
 import modelo.ModeloUsuario;
 import modelo.Usuario;
+import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
  * Servlet implementation class CuentaUsuario
@@ -88,6 +91,25 @@ public class CuentaUsuario extends HttpServlet {
 		modeloUsuario.conectar();
 		modeloUsuario.modificarUsuario(id_usuario, usuario);
 		modeloUsuario.cerrar();
+		
+		/*Busqueda*/
+		
+		 String nombreBusqueda = request.getParameter("nombreBusqueda");
+		    
+		    ModeloLibro modeloLibro = new ModeloLibro();
+		    modeloLibro.conectar();
+		    ResultadoBusqueda resultado = modeloLibro.BuscarTituloLibroNombreAutor(nombreBusqueda);
+		    ArrayList<Libro> librosRelacionados = resultado.getLibrosRelacionados();
+		    ArrayList<Autor> autoresRelacionados = resultado.getAutoresRelacionados();
+		   
+		    modeloLibro.cerrar();
+			    
+		    request.setAttribute("librosRelacionados", librosRelacionados);
+		    request.setAttribute("autoresRelacionados", autoresRelacionados);
+		   
+		 
+		    response.sendRedirect(request.getContextPath() + "/Busqueda?nombreBusqueda=" + nombreBusqueda);
+		    
 		response.sendRedirect("PaginaPrincipal");
 	}
 

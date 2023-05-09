@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import modelo.CategoriaLibros;
 import modelo.Libro;
+import modelo.ModeloAutor;
 import modelo.ModeloLibro;
+import modelo.ModeloLibro.ResultadoBusqueda;
 import modelo.Usuario;
+import modelo.Autor;
 
 /**
  * Servlet implementation class PaginaPrincipal
@@ -51,7 +55,7 @@ public class PaginaPrincipal extends HttpServlet {
 	        request.setAttribute("categoriasLibros", categoriasLibros);
 	        request.setAttribute("Todascategorias", Todascategorias);
 	        modeloLibro.cerrar();
-			//TODO EL CODIGO PARA CARGAR DATOS
+	        
 			request.getRequestDispatcher("/JSPFinal/PaginaPrincipal.jsp").forward(request, response);
 		}
 		
@@ -60,7 +64,23 @@ public class PaginaPrincipal extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	    String nombreBusqueda = request.getParameter("nombreBusqueda");
+	    
+	    ModeloLibro modeloLibro = new ModeloLibro();
+	    modeloLibro.conectar();
+	    ResultadoBusqueda resultado = modeloLibro.BuscarTituloLibroNombreAutor(nombreBusqueda);
+	    ArrayList<Libro> librosRelacionados = resultado.getLibrosRelacionados();
+	    ArrayList<Autor> autoresRelacionados = resultado.getAutoresRelacionados();
+	   
+	    modeloLibro.cerrar();
+		    
+	    request.setAttribute("librosRelacionados", librosRelacionados);
+	    request.setAttribute("autoresRelacionados", autoresRelacionados);
+	   
+	 
+	    response.sendRedirect(request.getContextPath() + "/Busqueda?nombreBusqueda=" + nombreBusqueda);
+	
+		   
 	}
 
 }

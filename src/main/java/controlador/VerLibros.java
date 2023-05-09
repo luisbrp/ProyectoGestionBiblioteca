@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Autor;
 import modelo.CategoriaLibros;
+import modelo.Libro;
 import modelo.ModeloLibro;
 import modelo.Usuario;
+import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
  * Servlet implementation class VerLibros
@@ -66,8 +69,23 @@ public class VerLibros extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		/*Busqueda*/
+		
+		 String nombreBusqueda = request.getParameter("nombreBusqueda");
+		    
+		    ModeloLibro modeloLibro = new ModeloLibro();
+		    modeloLibro.conectar();
+		    ResultadoBusqueda resultado = modeloLibro.BuscarTituloLibroNombreAutor(nombreBusqueda);
+		    ArrayList<Libro> librosRelacionados = resultado.getLibrosRelacionados();
+		    ArrayList<Autor> autoresRelacionados = resultado.getAutoresRelacionados();
+		   
+		    modeloLibro.cerrar();
+			    
+		    request.setAttribute("librosRelacionados", librosRelacionados);
+		    request.setAttribute("autoresRelacionados", autoresRelacionados);
+		   
+		 
+		    response.sendRedirect(request.getContextPath() + "/Busqueda?nombreBusqueda=" + nombreBusqueda);
 	}
 
 }

@@ -149,7 +149,7 @@ header {
                <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
-              <form class="d-flex search-form" method="POST" action="Principal">
+            <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
    				 <li class="nav-item dropdown">
 		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -165,7 +165,7 @@ header {
 				        </ul>
 				    </li>
 			</c:if>
-			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busqueda" automplete="off">
+			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
 			</form>
              

@@ -366,5 +366,82 @@ public class ModeloLibro extends Conector{
 
 	    return categoriasLibros;
 	}
+	
+	public class ResultadoBusqueda {
+	    private ArrayList<Libro> librosRelacionados;
+	    private ArrayList<Autor> autoresRelacionados;
 
+	    public ResultadoBusqueda(ArrayList<Libro> librosRelacionados, ArrayList<Autor> autoresRelacionados) {
+	        this.librosRelacionados = librosRelacionados;
+	        this.autoresRelacionados = autoresRelacionados;
+	    }
+
+	    public ArrayList<Libro> getLibrosRelacionados() {
+	        return librosRelacionados;
+	    }
+
+	    public ArrayList<Autor> getAutoresRelacionados() {
+	        return autoresRelacionados;
+	    }
+	}
+
+	public ResultadoBusqueda BuscarTituloLibroNombreAutor(String nombre) {
+	    ArrayList<Libro> librosRelacionados = new ArrayList<Libro>();
+	    ArrayList<Autor> autoresRelacionados = new ArrayList<Autor>();
+	    try {
+	        // Consulta para buscar libros relacionados con el titulo
+	        PreparedStatement pstLibros = conexion.prepareStatement("SELECT libro.*\n" +
+	                "FROM libro\n" +
+	                "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\n" +
+	                "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\n" +
+	                "WHERE LOWER(REPLACE(libro.titulo, ' ', '')) = LOWER(REPLACE(?, ' ', ''))");
+
+	        pstLibros.setString(1, nombre);
+
+	        ResultSet rsLibros = pstLibros.executeQuery();
+	        while (rsLibros.next()) {
+	            Libro libro = new Libro();
+	            libro.setId_libro(rsLibros.getInt("Id_Libro"));
+	            libro.setIsbn(rsLibros.getLong("ISBN"));
+	            libro.setTitulo(rsLibros.getString("Titulo"));
+	            libro.setNum_paginas(rsLibros.getInt("Num_Pag"));
+	            libro.setFecha_publicacion(rsLibros.getDate("Fecha_Publicacion"));
+	            libro.setIdioma(rsLibros.getString("Idioma"));
+	            libro.setStock(rsLibros.getInt("Stock"));
+	            libro.setCategoria(rsLibros.getString("Categoria"));
+	            libro.setFoto(rsLibros.getString("Foto"));
+	            libro.setDescripcion(rsLibros.getString("Descripcion"));
+	            librosRelacionados.add(libro);
+	        }
+
+	        // Consulta para buscar autores relacionados con el nombre
+	        PreparedStatement pstAutores = conexion.prepareStatement("SELECT autor.*\n"
+	        		+ "FROM libro\n"
+	        		+ "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\n"
+	        		+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\n"
+	        		+ "WHERE LOWER(REPLACE(autor.nombre, ' ', '')) = LOWER(REPLACE(?, ' ', ''))\n"
+	        		+ "GROUP BY Autor.Id_Autor\n"
+	        		+ "");
+
+	        pstAutores.setString(1, nombre);
+
+	        ResultSet rsAutores = pstAutores.executeQuery();
+	        while (rsAutores.next()) {
+	            Autor autor = new Autor();
+	            autor.setId_autor(rsAutores.getInt("Id_Autor"));
+	            autor.setNombre(rsAutores.getString("Nombre"));
+	            autor.setApellido(rsAutores.getString("Apellido"));
+	            autor.setDescripcion(rsAutores.getString("Descripcion"));
+	            autor.setFoto(rsAutores.getString("Foto"));
+	            autoresRelacionados.add(autor);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return new ResultadoBusqueda(librosRelacionados, autoresRelacionados);
+	}
+
+
+	
 }

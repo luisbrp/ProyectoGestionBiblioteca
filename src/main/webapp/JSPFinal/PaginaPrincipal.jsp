@@ -66,6 +66,44 @@ header {
     transform: rotate(360deg);
   }
 }
+
+  .card {
+
+  width: 190px;
+  height: 254px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+.card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+.custom-card-style:hover h5.card-title {
+  opacity: 1;
+}
+.card-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
 </style>
 
 <body>
@@ -105,7 +143,7 @@ header {
                   <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
-              <form class="d-flex search-form" method="POST" action="Principal">
+              <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
    				 <li class="nav-item dropdown">
 		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -121,7 +159,7 @@ header {
 				        </ul>
 				    </li>
 			</c:if>
-			  <input class="form-control me-2" type="search" placeholder="Titulo, Autor, Categoria, ISBN..." aria-label="Buscar" name="busqueda" automplete="off">
+			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
 			</form>
              
@@ -129,7 +167,7 @@ header {
           </div>
         </nav>
       </header>
-
+      
       <div style="text-align: center;">
         <br>
                 <br>
@@ -183,6 +221,9 @@ header {
         </div>
     </div>
 </c:forEach>
+
+
+
     <section id="about" class="py-5" style="margin-top: 50px; color: rgb(0, 0, 0);background-color: rgb(206, 204, 204);">
         <div class="container">
           <div class="row align-items-center">
