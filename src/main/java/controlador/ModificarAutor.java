@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Autor;
 import modelo.ModeloAutor;
-import modelo.ModeloUsuario;
-import modelo.Usuario;
+
 
 /**
  * Servlet implementation class ModificarAutor

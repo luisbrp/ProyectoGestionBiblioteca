@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Autor;
+
 import modelo.Editorial;
-import modelo.ModeloAutor;
+
 import modelo.ModeloEditorial;
 
 /**

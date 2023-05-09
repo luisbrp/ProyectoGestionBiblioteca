@@ -1,6 +1,7 @@
 package controlador;
 
-import java.io.IOException;
+import java.io.IOException
+;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Autor;
 import modelo.ModeloAutor;
-import modelo.ModeloUsuario;
-import modelo.Usuario;
+
 
 /**
  * Servlet implementation class VerAutor
