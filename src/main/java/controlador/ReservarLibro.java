@@ -12,17 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Libro;
 import modelo.ModeloLibro;
 import modelo.ModeloReserva;
 import modelo.Reserva;
+import modelo.Usuario;
 
 /**
  * Servlet implementation class ReservarLibro
  */
 @WebServlet("/ReservarLibro")
 public class ReservarLibro extends HttpServlet {
+	public static final int MAX_RESERVAS = 5;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -37,7 +40,13 @@ public class ReservarLibro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+HttpSession session = request.getSession();
 		
+		Usuario usuariologueado = (Usuario) session.getAttribute("usuariologeado");
+		
+		if (usuariologueado == null) {//no logeado
+			response.sendRedirect("Login");
+		} else {
 		/*Consigue la cantidad de stock del libro*/
 		
 		/*recoje el parametro id_libro*/
@@ -106,7 +115,7 @@ public class ReservarLibro extends HttpServlet {
 			int cantidadReservasTotales = modeloReserva.getCantidadReservasPorUsuarioEnFecha(id_usuario, fechaReserva);
 		
 			modeloReserva.cerrar();
-			if (cantidadReservasTotales < 5) {
+			if (cantidadReservasTotales < MAX_RESERVAS) {
 				
 			
 					modeloReserva.conectar();
@@ -114,7 +123,7 @@ public class ReservarLibro extends HttpServlet {
 					int reservamismolibroydia = modeloReserva.getCantidadReservasPorUsuarioEnLibro(id_usuario, id_libro);
 					modeloReserva.cerrar();
 					if (reservamismolibroydia > 0) {
-						request.setAttribute("mensaje", "ya has reservado este libro");
+						request.setAttribute("mensaje", "ya has reservado este libro.");
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/VerLibro?id_libro=" + id_libro);
 						dispatcher.forward(request, response);
 					   
@@ -125,7 +134,7 @@ public class ReservarLibro extends HttpServlet {
 				       
 				       ModeloReserva.cerrar();
 				       
-				       request.setAttribute("mensajeReservaRealizada", "Reserva realizada correctamente");
+				       request.setAttribute("mensajeReservaRealizada", "Reserva realizada correctamente, Tienes 5 dias habiles para prestarlo.");
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/VerLibro?id_libro=" + id_libro);
 						dispatcher.forward(request, response);
 				}
@@ -139,7 +148,7 @@ public class ReservarLibro extends HttpServlet {
 	       
 			}
 
-		
+		}
 	}
 
 	/**

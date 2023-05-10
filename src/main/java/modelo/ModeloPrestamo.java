@@ -105,4 +105,29 @@ public class ModeloPrestamo extends Conector{
 		}
 		return prestamos;
 	}
+	public ArrayList<Prestamo> getPrestamoPorDni(String dniPrestamo) {
+        ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+        try {
+            pst = conexion.prepareStatement("SELECT * FROM prestamo JOIN usuario on usuario.Id_Usuario = prestamo.Id_Usuario  \r\n"
+                    + "    JOIN libro on libro.Id_Libro = prestamo.Id_Libro\r\n"
+                    + "    WHERE Dni = ?");
+            pst.setString(1, dniPrestamo);
+            
+            pst.executeQuery();
+            
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                Prestamo prestamo = new Prestamo();
+                prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
+                prestamo.setId_libro(rs.getInt("Id_Libro"));
+                prestamo.setId_usuario(rs.getInt("Id_Usuario"));
+                prestamo.setDevuelto(rs.getString("Devuelto"));
+                prestamos.add(prestamo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return prestamos;
+    }
 }

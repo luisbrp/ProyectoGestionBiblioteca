@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,6 +82,7 @@
 		.container {
   max-width: 100%;
 }
+
 	</style>
 </head>
 <body style="background-image: url('https://www.elplural.com/uploads/s1/86/21/24/dia-del-libro.jpeg'); background-repeat: no-repeat; background-size: cover; height: 100vh;">
@@ -89,6 +94,10 @@
 					<div class="card-header">
 						Registro
 					</div>
+							<div style=""><c:if test="${not empty mensaje}">
+  <div class="alert alert-danger">${mensaje}</div>
+</c:if></div>
+					 
 					<div class="card-body">
 						<form method="post" action="Registrarse">
 						  <div class="form-group">

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
 import modelo.CategoriaLibros;
@@ -36,6 +37,14 @@ public class CuentaUsuario extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+HttpSession session = request.getSession();
+		
+		Usuario usuariologueado = (Usuario) session.getAttribute("usuariologeado");
+		
+		if (usuariologueado == null) {//no logeado
+			response.sendRedirect("Login");
+		} else {
+		
 		ModeloUsuario modeloUsuario = new ModeloUsuario();
 		Usuario usuario = new Usuario();
 		
@@ -59,7 +68,7 @@ public class CuentaUsuario extends HttpServlet {
         
 		request.getRequestDispatcher("/JSPFinal/CuentaUsuario.jsp").forward(request, response);
 	}
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

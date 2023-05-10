@@ -51,75 +51,103 @@
     transform: rotate(360deg);
   }
 }
+.btn-vista-admin {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #f44336;
+  background-color: #000;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
+
+.btn-vista-admin:hover {
+  background-color: #f44336;
+  color: #000;
+  box-shadow: 0px 15px 20px rgba(244, 67, 54, 0.4);
+  transform: translateY(-3px);
+}
+
+.btn-vista-admin:active {
+  transform: translateY(1px);
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  max-width: 90%; /* Puedes ajustar este valor según tus necesidades */
+  margin: 0 auto;
+}
 </style>
 
 <body>
-    <header>
+    <body>
+    <header >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">EASY BOOKS</a>
+          <a class="navbar-brand" href="PaginaPrincipal" style="background-image: url(https://www.innovagogia.es/wp-content/uploads/2021/08/study.png); background-size: contain; background-repeat: no-repeat; display: inline-block; width: 50px; height: 50px; padding-left: 60px;"></a>
+            <a class="navbar-brand" href="PaginaPrincipal">EASY BOOKS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Pagina principal</a>
+                  <a class="nav-link" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Libros</a>
+                  <a class="nav-link" href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Autores</a>
+                  <a class="nav-link" href="VerAutores">Autores</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Categorias
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Fantasía</a></li>
-                    <li><a class="dropdown-item" href="#">Ciencia Ficción</a></li>
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Misterio</a></li>
-                    <li><a class="dropdown-item" href="#">Aventura</a></li>
-                    <li><a class="dropdown-item" href="#">Erotismo</a></li>
-                    <li><a class="dropdown-item" href="#">Biografía</a></li>
-                    <li><a class="dropdown-item" href="#">Autobiografía</a></li>
-                    <li><a class="dropdown-item" href="#">Ensayo</a></li>
-                    <li><a class="dropdown-item" href="#">Poesía</a></li>
-                    <li><a class="dropdown-item" href="#">Drama</a></li>
-                    <li><a class="dropdown-item" href="#">Comedia</a></li>
+ 			<c:forEach var="categoria" items="${Todascategorias}" varStatus="status">
+                    <li><a class="dropdown-item" href="http://localhost:8080/ProyectoGestionBiblioteca/VerLibros#${categoria.categoria}">${categoria.categoria}</a></li>
+                      </c:forEach>
                   </ul>
                 </li>
-                <li>
-                    <div class="sidebar">
-                        <ul>
-                          <li><a href="#">Libros</a></li>
-                          <li><a href="#">Autores</a></li>
-                          <li><a href="#">Editoriales</a></li>
-                          <li><a href="#">Usuarios</a></li>
-                        </ul>
-                      </div>
-
-                </li>
+                  <li class="nav-item">
+					<a class="nav-link" href="CerrarSession">Cerrar Sesión</a>
+				</li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Cuenta</a>
+                  <a class="nav-link" href="CuentaUsuario?id_usuario=${usuariologeado.id_usuario}">Cuenta</a>
                 </li>
               </ul>
-              <form class="d-flex search-form">
-                <input class="form-control me-2" type="search" placeholder="Nombre del libro" aria-label="Buscar Libro">
-                <button class="btn btn-outline-success" type="submit">Buscar Libro</button>
-              </form>
+              <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
+              <c:if test="${usuariologeado.rol == 'Administrador'}">
+   				<a href="PaginaPrincipal" class="btn-vista-admin">Salir</a>
+
+			</c:if>
+			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
+			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
+			</form>
+             
             </div>
           </div>
         </nav>
       </header>
+      
       
       <section class="ms-5" id="VerUsuarios">
         <div class="mt-5" style="text-align: center;">
             <h1>Opciones de Administrador</h1>
         </div>
         <h3 class="mt-5">Gestionar Usuarios</h3>
+        <div class="table-container mt-5">
         <table class="table table-striped table-dark mt-5">
             <thead>
               <tr>
@@ -128,8 +156,9 @@
                 <th>Nombre</th>
                 <th>Rol</th>
                 <th>Lista de Usuarios<a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
-                <th><form class="d-flex search-form">
-                    <input class="form-control me-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro">
+                <th><form class="d-flex search-form" method="get">
+                    <button class="btn btn-outline-secondary" name="recargarUsuario">Recargar</button>
+                    <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro" name="dni">
                     <button class="btn btn-outline-success" type="submit">Buscar Usuario</button>
                   </form></th>
               </tr>
@@ -147,11 +176,13 @@
 					        <a href="ModificarUsuario?id_usuario=${usuario.id_usuario}" class="btn btn-success ">Editar</a> 
 					        <a href="EliminarUsuario?id_usuario=${usuario.id_usuario}" class="btn btn-danger">Eliminar</a>
 					      </td> 
+					      <td></td>
 					    </tr>
 					  </c:if>
 			</c:forEach>  
             </tbody>
           </table>
+          </div>
       </section>
      
       <section class="ms-5" id="VerLibros">
@@ -164,10 +195,11 @@
                 <th>Isbn</th>
                 <th>Stock</th>
                 <th>Lista de libros<a href="InsertarLibro" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
-                <th><form class="d-flex search-form">
-                    <input class="form-control me-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro">
-                    <button class="btn btn-outline-success" type="submit">Libros</button>
-                  </form></th>
+                <th><form class="d-flex search-form" method="get">
+                        <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
+                        <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro" name="isbn">
+                        <button class="btn btn-outline-success" type="submit"  href="#VerLibros">Buscar Libro</button>
+                    </form></th>
               </tr>
             </thead>
             <tbody>
@@ -177,10 +209,11 @@
                     <td>${libro.id_libro}</td>
                     <td>${libro.titulo}</td>
                    <td>${libro.isbn}</td>
-                    <td>Stock</td>
+                    <td>${libro.stock}</td>
                    <td><a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary ">Ver</a>
                     <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
                     <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a></td> 
+                    <td></td>
                 </tr>
                
               </c:forEach>

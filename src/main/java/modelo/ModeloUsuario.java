@@ -187,4 +187,32 @@ public Usuario getUsuarioLogin(String Dni, String contraseña) throws SQLExcepti
 	
 	return usuario;
 }
+public Usuario getUsuarioPorDni(String dni) {
+    ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    Usuario usuario = new Usuario();
+    try {
+        pst = conexion.prepareStatement("SELECT * FROM Usuario WHERE Dni = ?");
+        
+        pst.setString(1, dni);
+        
+        pst.executeQuery();
+        
+        rs = pst.executeQuery();
+        while(rs.next()) {
+            usuario.setId_usuario(rs.getInt("Id_Usuario"));
+            usuario.setDni(rs.getString("Dni"));
+            usuario.setNombre(rs.getString("Nombre"));
+            usuario.setApellido(rs.getString("Apellido"));
+            usuario.setDireccion(rs.getString("Direccion"));
+            usuario.setContraseña(rs.getString("Contrasena"));
+            usuario.setTelefono(rs.getInt("Tlfno"));
+            usuario.setRol(rs.getString("Rol"));
+            usuarios.add(usuario);
+        }
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+        return usuario;
+}
 }

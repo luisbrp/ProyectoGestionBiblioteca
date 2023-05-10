@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -35,7 +36,6 @@ public class Registrarse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/JSPFinal/Registrarse.jsp").forward(request, response);
 	}
 
@@ -54,6 +54,24 @@ public class Registrarse extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 	
+		ModeloUsuario modeloUsuario = new ModeloUsuario();
+		
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
+		modeloUsuario.conectar();
+		usuarios = modeloUsuario.getUsuarios();
+		modeloUsuario.cerrar();
+		
+		boolean dniExistente = false;
+
+		for (Usuario u : usuarios) {
+		    if (u.getDni().equals(dni)) {
+		        dniExistente = true;
+		        break;
+		    }
+		}
+		
+		if(!dniExistente) {
 		ModeloUsuario.conectar();
 		usuario.setDni(dni);
 		usuario.setNombre(nombre);
@@ -104,6 +122,9 @@ public class Registrarse extends HttpServlet {
 		ModeloUsuario.cerrar();
 		
 	
+	}else {
+		request.setAttribute("mensaje", "Dni Ya registrado");
+		request.getRequestDispatcher("/JSPFinal/Registrarse.jsp").forward(request, response);
 	}
-
+	} 
 }

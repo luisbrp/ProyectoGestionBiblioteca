@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,9 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
+
 		request.getRequestDispatcher("/JSPFinal/Login.jsp").forward(request, response);
 	}
 
@@ -69,8 +72,9 @@ public class Login extends HttpServlet {
 					String rol = "Cliente";
 					response.sendRedirect("PaginaPrincipal");
 				} else {
-					request.getRequestDispatcher("/JSPFinal/Login.jsp").forward(request, response);
 					
+					request.setAttribute("mensaje", "Login Incorrecto, Verifica todos los campos.");
+					request.getRequestDispatcher("/JSPFinal/Login.jsp").forward(request, response);
 				}
 			
 			} catch (SQLException e) {

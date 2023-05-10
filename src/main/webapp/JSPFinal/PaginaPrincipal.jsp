@@ -104,6 +104,35 @@ header {
   overflow: hidden;
   text-align: center;
 }
+.btn-vista-admin {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-size: 16px;
+  text-transform: uppercase;
+	text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #ff5722;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
+
+.btn-vista-admin:hover {
+  background-color: #fff;
+  color: #ff5722;
+  box-shadow: 0px 8px 15px rgba(255, 87, 34, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-vista-admin:active {
+  transform: translateY(1px);
+}
+
 </style>
 
 <body>
@@ -145,19 +174,8 @@ header {
               </ul>
               <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
-   				 <li class="nav-item dropdown">
-		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		        	    ADMIN
-		      		  </a>
-				        <ul class="dropdown-menu admin-option" aria-labelledby="navbarDropdown">
-				            <li><a class="dropdown-item" href="#">Gestionar usuarios</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Autores</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Libros</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar editoriales</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar reservas</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar prestamos</a></li>
-				        </ul>
-				    </li>
+   				<a href="OpcionesDeAdministrador" class="btn-vista-admin">Vista Admin</a>
+
 			</c:if>
 			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
@@ -168,59 +186,68 @@ header {
         </nav>
       </header>
       
-      <div style="text-align: center;">
-        <br>
-                <br>
-                        <br>
-      <h1>Generos</h1>
+ <div style="text-align: center;">
+    <br>
+    <br>
+    <br>
       <br>
-        <div class="sectionCategorias mt-5">
-<c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
-    <div style="display: inline-block;">
-        <h2>${categoria.categoria}</h2>
-        <div class="container-fluid carousel-container d-inline-block" style="margin-top: 0px;">
-            <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">   
-               	<div class="carousel-indicators">
-                    <c:forEach var="i" begin="0" end="${fn:length(categoria.libros) - 1}">
-                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" <c:if test="${i==0}">class="active"</c:if> aria-label="Slide ${i+1}"></button>
-                    </c:forEach>
-                </div>
-                <div class="carousel-inner">
-                    <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
-                        <c:if test="${not empty libro.foto}">
-                            <c:choose>
-                                <c:when test="${libroStatus.index==0}">
-                                    <div class="carousel-item active">
-                                        <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
-                                        <div class="carousel-caption d-none d-md-block">
-                                     
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="carousel-item">
-                                       <a href="VerLibro?id_libro=${libro.id_libro}"><img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}"></a>
-                                       	 <div class="carousel-caption d-none d-md-block">
-                           
-                                        </div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:if>
-                    </c:forEach>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
+    <h1>Generos</h1>
+    <br>
+    <div class="sectionCategorias mt-1">
+        <c:forEach var="categoria" items="${categoriasLibros}" varStatus="status">
+            <div style="display: inline-block;">
+                <h2>${categoria.categoria}</h2>
+                <div class="container-fluid carousel-container d-inline-block" style="margin-top: 10px;">
+                    <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel">   
+                        <div class="carousel-indicators">
+                            <c:forEach var="i" begin="0" end="${fn:length(categoria.libros) - 1}">
+                                <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="${i}" <c:if test="${i==0}">class="active"</c:if> aria-label="Slide ${i+1}"></button>
+                            </c:forEach>
+                        </div>
+                        <div class="carousel-inner">
+                            <c:forEach var="libro" items="${categoria.libros}" varStatus="libroStatus">
+                                <c:if test="${not empty libro.foto}">
+                                    <c:choose>
+                                        <c:when test="${libroStatus.index==0}">
+                                            <div class="carousel-item active">
+                                                <a href="VerLibro?id_libro=${libro.id_libro}">
+                                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                                </a>
+                                                <div class="carousel-caption d-none d-md-block">
+                                             
+                                                </div>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="carousel-item">
+                                                <a href="VerLibro?id_libro=${libro.id_libro}">
+                                                    <img src="${libro.foto}" class="d-block w-100" alt="${libro.titulo}">
+                                                </a>
+                                                <div class="carousel-caption d-none d-md-block">
+                                               
+                                                </div>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+                            </c:forEach>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators${status.index}" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
-</c:forEach>
+</div>
+
+
 
 
 
@@ -239,20 +266,20 @@ header {
           </div>
         </div>
     </section>
-    <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
+   <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
           <div class="row">
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Navegación</h4>
               <ul class="list-unstyled">
-                <li><a class="text-light" href="#">Inicio</a></li>
-                <li><a class="text-light" href="#">Libros</a></li>
-                <li><a class="text-light" href="#">Autores</a></li>
+              <li><a class="text-light" href="PaginaPrincipal">Inicio</a></li>
+                <li><a class="text-light" href="VerLibros">Libros</a></li>
+                <li><a class="text-light" href="VerAutores">Autores</a></li>
               </ul>
             </div>
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Síguenos</h4>
-              <div class="social-icons" style="margin-left: 150px">
+              <div class="social-icons">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png" alt="Instagram"></a>
                 <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter"></a>

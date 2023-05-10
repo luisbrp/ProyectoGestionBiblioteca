@@ -95,4 +95,23 @@ public class ModeloEditorial extends Conector {
 		}
 		return editoriales;
 	}
+	public Editorial getEditorialPorNombre(String nombre) {
+        ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
+        Editorial editorial = new Editorial();
+        try {
+            pst = conexion.prepareStatement("SELECT * FROM editorial WHERE Nombre = ?");
+            pst.setString(1, nombre);
+            
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                editorial.setId_editorial(rs.getInt("Id_Editorial"));
+                editorial.setNombre(rs.getString("Nombre"));
+                editoriales.add(editorial);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return editorial;
+    }
 }

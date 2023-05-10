@@ -110,7 +110,34 @@ header {
 :target {
   scroll-margin-top: 70px;
 }
+.btn-vista-admin {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-size: 16px;
+  text-transform: uppercase;
+	text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #ff5722;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
 
+.btn-vista-admin:hover {
+  background-color: #fff;
+  color: #ff5722;
+  box-shadow: 0px 8px 15px rgba(255, 87, 34, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-vista-admin:active {
+  transform: translateY(1px);
+}
 </style>
 
 <body>
@@ -152,19 +179,7 @@ header {
               </ul>
             <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
-   				 <li class="nav-item dropdown">
-		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		        	    ADMIN
-		      		  </a>
-				        <ul class="dropdown-menu admin-option" aria-labelledby="navbarDropdown">
-				            <li><a class="dropdown-item" href="#">Gestionar usuarios</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Autores</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Libros</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar editoriales</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar reservas</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar prestamos</a></li>
-				        </ul>
-				    </li>
+   				 <a href="OpcionesDeAdministrador" class="btn-vista-admin">Vista Admin</a>
 			</c:if>
 			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
@@ -207,9 +222,9 @@ header {
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Navegación</h4>
               <ul class="list-unstyled">
-                <li><a class="text-light" href="#">Inicio</a></li>
-                <li><a class="text-light" href="#">Libros</a></li>
-                <li><a class="text-light" href="#">Autores</a></li>
+      <li><a class="text-light" href="PaginaPrincipal">Inicio</a></li>
+                <li><a class="text-light" href="VerLibros">Libros</a></li>
+                <li><a class="text-light" href="VerAutores">Autores</a></li>
               </ul>
             </div>
             <div class="col-md-4 mb-3">

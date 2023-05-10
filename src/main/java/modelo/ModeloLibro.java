@@ -64,7 +64,10 @@ public class ModeloLibro extends Conector{
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		Libro libro = new Libro();
 		try {
-			pst = conexion.prepareStatement("SELECT * FROM Libro WHERE Id_Libro = ?");
+			pst = conexion.prepareStatement("SELECT l.*, e.Nombre AS editorial\r\n"
+					+ "FROM Libro l\r\n"
+					+ "INNER JOIN Editorial e ON l.Id_Editorial = e.Id_Editorial\r\n"
+					+ "WHERE l.Id_Libro = ?;");
 			
 			pst.setInt(1, id_libro);
 			
@@ -82,6 +85,7 @@ public class ModeloLibro extends Conector{
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
 				libro.setDescripcion(rs.getString("Descripcion"));
+				libro.setEditorial(rs.getString("editorial"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
@@ -153,48 +157,6 @@ public class ModeloLibro extends Conector{
 		return librosDelAutor;
 	}
 	
-	public ArrayList<Libro> buscarLibro(String busqueda) {
-		ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
-		try {
-			pst = conexion.prepareStatement("SELECT l.*, a.Nombre AS Autor_Nombre, a.Apellido AS Autor_Apellido, e.Nombre AS Editorial_Nombre FROM Libro l LEFT JOIN Libro_Info li ON l.Id_Libro = li.Id_Libro LEFT JOIN Autor a ON li.Id_Autor = a.Id_Autor LEFT JOIN Editorial e ON l.Id_Libro = e.Id_Libro WHERE l.Titulo LIKE ? OR l.Categoria LIKE ? OR a.Nombre LIKE ? OR a.Apellido LIKE ? OR l.ISBN LIKE ?");
-			pst.setString(1, "%" + busqueda + "%");
-			pst.setString(2, "%" + busqueda + "%");
-			pst.setString(3, "%" + busqueda + "%");
-			pst.setString(4, "%" + busqueda + "%");
-			pst.setString(5, "%" + busqueda + "%");
-			
-			rs = pst.executeQuery();
-			
-			while (rs.next()) {
-				Libro libro = new Libro();
-				libro.setId_libro(rs.getInt("Id_Libro"));
-				libro.setIsbn(rs.getLong("ISBN"));
-				libro.setTitulo(rs.getString("Titulo"));
-				libro.setNum_paginas(rs.getInt("Num_Pag"));
-				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
-				libro.setIdioma(rs.getString("Idioma"));
-				libro.setStock(rs.getInt("Stock"));
-				libro.setCategoria(rs.getString("Categoria"));
-				libro.setFoto(rs.getString("Foto"));
-				
-				Autor autor = new Autor();
-				autor.setNombre(rs.getString("Autor_Nombre"));
-				autor.setApellido(rs.getString("Autor_Apellido"));
-				libro.setAutor(autor);
-				
-				Editorial editorial = new Editorial();
-				editorial.setNombre(rs.getString("Editorial_Nombre"));
-				libro.setEditorial(editorial);
-				
-				librosEncontrados.add(libro);
-			}
-		} catch (SQLException e) {
-			
-		e.printStackTrace();
-		
-		}
-		return librosEncontrados;
-	}
 
 	public ArrayList<Libro> buscarPorCategoria(String categoriaSeleccionada) {
 		ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
@@ -390,49 +352,52 @@ public class ModeloLibro extends Conector{
 	    ArrayList<Autor> autoresRelacionados = new ArrayList<Autor>();
 	    try {
 	        // Consulta para buscar libros relacionados con el titulo
-	        PreparedStatement pstLibros = conexion.prepareStatement("SELECT libro.*\n" +
-	                "FROM libro\n" +
-	                "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\n" +
-	                "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\n" +
-	                "WHERE LOWER(REPLACE(libro.titulo, ' ', '')) = LOWER(REPLACE(?, ' ', ''))");
+	        pst = conexion.prepareStatement("SELECT libro.*\r\n"
+	        		+ "FROM libro\r\n"
+	        		+ "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\r\n"
+	        		+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\r\n"
+	        		+ "WHERE LOWER(REPLACE(libro.titulo, ' ', '')) = LOWER(REPLACE(?, ' ', '')) OR LOWER(libro.titulo) LIKE LOWER(CONCAT('%', ?, '%'))\r\n"
+	        		+ "");
 
-	        pstLibros.setString(1, nombre);
-
-	        ResultSet rsLibros = pstLibros.executeQuery();
-	        while (rsLibros.next()) {
+	        pst.setString(1, nombre);
+	        pst.setString(2, nombre);
+	        
+	        rs = pst.executeQuery();
+	        while (rs.next()) {
 	            Libro libro = new Libro();
-	            libro.setId_libro(rsLibros.getInt("Id_Libro"));
-	            libro.setIsbn(rsLibros.getLong("ISBN"));
-	            libro.setTitulo(rsLibros.getString("Titulo"));
-	            libro.setNum_paginas(rsLibros.getInt("Num_Pag"));
-	            libro.setFecha_publicacion(rsLibros.getDate("Fecha_Publicacion"));
-	            libro.setIdioma(rsLibros.getString("Idioma"));
-	            libro.setStock(rsLibros.getInt("Stock"));
-	            libro.setCategoria(rsLibros.getString("Categoria"));
-	            libro.setFoto(rsLibros.getString("Foto"));
-	            libro.setDescripcion(rsLibros.getString("Descripcion"));
+	            libro.setId_libro(rs.getInt("Id_Libro"));
+	            libro.setIsbn(rs.getLong("ISBN"));
+	            libro.setTitulo(rs.getString("Titulo"));
+	            libro.setNum_paginas(rs.getInt("Num_Pag"));
+	            libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+	            libro.setIdioma(rs.getString("Idioma"));
+	            libro.setStock(rs.getInt("Stock"));
+	            libro.setCategoria(rs.getString("Categoria"));
+	            libro.setFoto(rs.getString("Foto"));
+	            libro.setDescripcion(rs.getString("Descripcion"));
 	            librosRelacionados.add(libro);
 	        }
 
 	        // Consulta para buscar autores relacionados con el nombre
-	        PreparedStatement pstAutores = conexion.prepareStatement("SELECT autor.*\n"
-	        		+ "FROM libro\n"
-	        		+ "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\n"
-	        		+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\n"
-	        		+ "WHERE LOWER(REPLACE(autor.nombre, ' ', '')) = LOWER(REPLACE(?, ' ', ''))\n"
-	        		+ "GROUP BY Autor.Id_Autor\n"
+	        pst = conexion.prepareStatement("SELECT autor.*\r\n"
+	        		+ "FROM libro\r\n"
+	        		+ "INNER JOIN Libro_Info ON libro.Id_Libro = Libro_Info.Id_Libro\r\n"
+	        		+ "INNER JOIN Autor ON Libro_Info.Id_Autor = Autor.Id_Autor\r\n"
+	        		+ "WHERE LOWER(REPLACE(autor.nombre, ' ', '')) = LOWER(REPLACE(?, ' ', '')) OR LOWER(autor.nombre) LIKE LOWER(CONCAT('%', ?, '%'))\r\n"
+	        		+ "GROUP BY Autor.Id_Autor\r\n"
 	        		+ "");
 
-	        pstAutores.setString(1, nombre);
-
-	        ResultSet rsAutores = pstAutores.executeQuery();
-	        while (rsAutores.next()) {
+	        pst.setString(1, nombre);
+	        pst.setString(2, nombre);
+	        
+	        rs  = pst.executeQuery();
+	        while (rs.next()) {
 	            Autor autor = new Autor();
-	            autor.setId_autor(rsAutores.getInt("Id_Autor"));
-	            autor.setNombre(rsAutores.getString("Nombre"));
-	            autor.setApellido(rsAutores.getString("Apellido"));
-	            autor.setDescripcion(rsAutores.getString("Descripcion"));
-	            autor.setFoto(rsAutores.getString("Foto"));
+	            autor.setId_autor(rs.getInt("Id_Autor"));
+	            autor.setNombre(rs.getString("Nombre"));
+	            autor.setApellido(rs.getString("Apellido"));
+	            autor.setDescripcion(rs.getString("Descripcion"));
+	            autor.setFoto(rs.getString("Foto"));
 	            autoresRelacionados.add(autor);
 	        }
 	    } catch (SQLException e) {
@@ -442,6 +407,32 @@ public class ModeloLibro extends Conector{
 	    return new ResultadoBusqueda(librosRelacionados, autoresRelacionados);
 	}
 
-
+	public Libro buscarPorISBN(Long isbn) {
+        Libro libro = new Libro();
+        try {
+            pst = conexion.prepareStatement("SELECT * FROM Libro WHERE isbn = ?");
+            pst.setLong(1, isbn);
+        
+            rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                libro.setId_libro(rs.getInt("Id_Libro"));
+                libro.setIsbn(rs.getLong("ISBN"));
+                libro.setTitulo(rs.getString("Titulo"));
+                libro.setNum_paginas(rs.getInt("Num_Pag"));
+                libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
+                libro.setIdioma(rs.getString("Idioma"));
+                libro.setStock(rs.getInt("Stock"));
+                libro.setCategoria(rs.getString("Categoria"));
+                libro.setFoto(rs.getString("Foto"));
+                
+            }
+        } catch (SQLException e) {
+            
+        e.printStackTrace();
+        
+        }
+        return libro;
+    }
 	
 }

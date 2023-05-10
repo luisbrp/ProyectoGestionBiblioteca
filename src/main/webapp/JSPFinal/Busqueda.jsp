@@ -104,6 +104,34 @@ header {
   overflow: hidden;
   text-align: center;
 }
+.btn-vista-admin {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-size: 16px;
+  text-transform: uppercase;
+	text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #ff5722;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
+
+.btn-vista-admin:hover {
+  background-color: #fff;
+  color: #ff5722;
+  box-shadow: 0px 8px 15px rgba(255, 87, 34, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-vista-admin:active {
+  transform: translateY(1px);
+}
 </style>
 
 <body>
@@ -145,20 +173,7 @@ header {
               </ul>
               <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
-   				 <li class="nav-item dropdown">
-		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		        	    ADMIN
-		      		  </a>
-				        <ul class="dropdown-menu admin-option" aria-labelledby="navbarDropdown">
-				            <li><a class="dropdown-item" href="#">Gestionar usuarios</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Autores</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Libros</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar editoriales</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar reservas</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar prestamos</a></li>
-				        </ul>
-				    </li>
-			</c:if>
+   			<a href="OpcionesDeAdministrador" class="btn-vista-admin">Vista Admin</a>			</c:if>
 			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
 			</form>
@@ -168,45 +183,48 @@ header {
         </nav>
       </header>
       
-<div style="margin-top: 110px;">
+<div style="margin-top: 110px;margin-left: 50px;">
+<div style="margin-bottom: 110px;">
+  <c:if test="${not empty librosRelacionados}">
+    <h1>Libros relacionados con la busqueda:</h1>
+    <c:forEach var="libro" items="${librosRelacionados}">
+      <div style="display:inline-flex;margin-right: 20px; scroll-snap-align: center;margin-top: 20px;">
+        <div class="card-container">
+          <a href="VerLibro?id_libro=${libro.id_libro}">
+            <div class="card custom-card-style" style="background-image: url('${libro.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+              <div class="card-body"></div>
+            </div>
+          </a>
+          <h5 class="card-title" style="margin-bottom: 20px;margin-top: 10px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${libro.titulo}">${libro.titulo}</h5>
+        </div>
+      </div>
+    </c:forEach>
+  </c:if>
+  </div>
+<div style="margin-bottom: 111px;">
+  <c:if test="${not empty autoresRelacionados}">
+    <h1>Autores relacionados con la busqueda:</h1>
+    <c:forEach var="autor" items="${autoresRelacionados}">
+      <div style="display:inline-flex;margin-right: 20px; margin-top: 20px; max-width: 300px;">
+        <div class="card-container">
+          <a href="VerAutor?id_autor=${autor.id_autor}">
+            <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+              <div class="card-body"></div>
+            </div>
+          </a>
+          <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre} ${autor.apellido}">${autor.nombre} ${autor.apellido}</h5>
+        </div>
+      </div>
+    </c:forEach>
+  </c:if>
+    </div>
 
-    <c:choose>
-      <c:when test="${not empty librosRelacionados}">
-        <h2>Resultados de la búsqueda :</h2>
-        <c:forEach var="libro" items="${librosRelacionados}">
-          <div style="margin-right: 20px; scroll-snap-align: center;">
-            <div class="card-container">
-              <a href="VerLibro?id_libro=${libro.id_libro}">
-                <div class="card custom-card-style" style="background-image: url('${libro.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                  <div class="card-body"></div>
-                </div>
-              </a>
-              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${libro.titulo}">${libro.titulo}</h5>
-            </div>
-          </div>
-        </c:forEach>
-      </c:when>
-      <c:when test="${not empty autoresRelacionados}">
-        <h2>Resultados de la búsqueda :</h2>
-        <c:forEach var="autor" items="${autoresRelacionados}">
-          <div style="margin-right: 20px; margin-top: 20px; max-width: 300px;">
-            <div class="card-container">
-              <a href="VerAutor?id_autor=${autor.id_autor}">
-                <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                  <div class="card-body"></div>
-                </div>
-              </a>
-              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre} ${autor.apellido}">${autor.nombre} ${autor.apellido}</h5>
-            </div>
-          </div>
-        </c:forEach>
-      </c:when>
-      <c:otherwise>
-        <p>No se encontraron resultados para su búsqueda.</p>
-      </c:otherwise>
-    </c:choose>
+  
 
 </div>
+<c:if test="${empty librosRelacionados && empty autoresRelacionados}">
+    <div class="alert alert-danger" style="margin-bottom: 480px;">No se han encontrado resultados</div>
+  </c:if>
 
       
 
@@ -221,9 +239,9 @@ header {
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Navegación</h4>
               <ul class="list-unstyled">
-                <li><a class="text-light" href="#">Inicio</a></li>
-                <li><a class="text-light" href="#">Libros</a></li>
-                <li><a class="text-light" href="#">Autores</a></li>
+                <li><a class="text-light" href="PaginaPrincipal">Inicio</a></li>
+                <li><a class="text-light" href="VerLibros">Libros</a></li>
+                <li><a class="text-light" href="VerAutores">Autores</a></li>
               </ul>
             </div>
             <div class="col-md-4 mb-3">

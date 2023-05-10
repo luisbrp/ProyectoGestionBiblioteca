@@ -144,17 +144,43 @@ header {
     border-bottom: none;
     padding-bottom: 0;
   }
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
+.libro-image {
+  max-width: 300px; /* Establece el tamaño medio deseado */
+}
   
   .btn-custom {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+.btn-vista-admin {
+  display: inline-block;
+  padding: 0.65em 1.5em;
+  font-size: 16px;
+  text-transform: uppercase;
+	text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #ff5722;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
+
+.btn-vista-admin:hover {
+  background-color: #fff;
+  color: #ff5722;
+  box-shadow: 0px 8px 15px rgba(255, 87, 34, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-vista-admin:active {
+  transform: translateY(1px);
 }
 </style>
 
@@ -170,10 +196,10 @@ footer {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="PaginaPrincipal">Pagina principal</a>
+                  <a class="nav-link " aria-current="page" href="PaginaPrincipal">Pagina principal</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="VerLibros">Libros</a>
+                  <a class="nav-link active" href="VerLibros">Libros</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="VerAutores">Autores</a>
@@ -197,19 +223,7 @@ footer {
               </ul>
              <form class="d-flex search-form" method="POST" action="PaginaPrincipal">
               <c:if test="${usuariologeado.rol == 'Administrador'}">
-   				 <li class="nav-item dropdown">
-		       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		        	    ADMIN
-		      		  </a>
-				        <ul class="dropdown-menu admin-option" aria-labelledby="navbarDropdown">
-				            <li><a class="dropdown-item" href="#">Gestionar usuarios</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Autores</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar Libros</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar editoriales</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar reservas</a></li>
-				            <li><a class="dropdown-item" href="#">Gestionar prestamos</a></li>
-				        </ul>
-				    </li>
+   				 <a href="OpcionesDeAdministrador" class="btn-vista-admin">Vista Admin</a>
 			</c:if>
 			  <input class="form-control me-2" type="search" placeholder="Introduce Titulo o Autor" aria-label="nombreBusqueda" name="nombreBusqueda" automplete="off">
 			  <button class="btn btn-outline-success" type="submit" >Buscar</button>
@@ -218,33 +232,37 @@ footer {
             </div>
           </div>
         </nav>
-      </header>
-      
-      
-   
-<div class="libro-info"  style="margin-top: 100px;">
-<div>
-  <img src="${libro.foto}" alt="${libro.titulo}">
-  <a href="ReservarLibro?id_libro=${libro.id_libro}&id_usuario=${usuariologeado.id_usuario}" class="btn btn-outline-success" style="display: block;margin-top: 10px;">Reservar</a>
-</div>
+         <c:if test="${not empty mensaje}">
+  <div class="alert alert-danger">${mensaje}</div>
+</c:if>
 
+<c:if test="${not empty mensajeReservaRealizada}">
+  <div class="alert alert-success">${mensajeReservaRealizada}</div>
+</c:if>
+      </header>
+ 
 
   
-   
-  <div style="margin-left: 50px;">
-    <h2>${libro.titulo}</h2>
-    <p><strong>ISBN:</strong> ${libro.isbn}</p>
-    <p><strong>Número de páginas:</strong> ${libro.num_paginas}</p>
-    <p><strong>Fecha de publicación:</strong> ${libro.fecha_publicacion}</p>
-    <p><strong>Idioma:</strong> ${libro.idioma}</p>
-    <p><strong>Stock:</strong> ${libro.stock}</p>
-    <p><strong>Categoría:</strong> ${libro.categoria}</p>
-    <p><strong>Descripcion:</strong> ${libro.descripcion}</p>
-  </div>
 
-   <div>
-     <h2 style="margin-left: 135px;">Autor</h2>
-    <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
+   
+<div class="container" style="margin-top: 150px;">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <img src="${libro.foto}" alt="${libro.titulo}" class="img-fluid libro-image">
+      <a href="ReservarLibro?id_libro=${libro.id_libro}&id_usuario=${usuariologeado.id_usuario}" class="btn btn-outline-success mt-3" style=" width: 300px;">Reservar</a>
+    </div>
+    <div class="col-12 col-md-8">
+      <h2>${libro.titulo}</h2>
+      <p><strong>ISBN:</strong> ${libro.isbn}</p>
+      <p><strong>Número de páginas:</strong> ${libro.num_paginas}</p>
+      <p><strong>Fecha de publicación:</strong> ${libro.fecha_publicacion}</p>
+      <p><strong>Idioma:</strong> ${libro.idioma}</p>
+      <p><strong>Stock:</strong> ${libro.stock}</p>
+      <p><strong>Categoría:</strong> ${libro.categoria}</p>
+      <p><strong>Descripción:</strong> ${libro.descripcion}</p>
+      <p><strong>Editorial:</strong> ${libro.editorial}</p>
+      <h2 class="mt-3">Autor</h2>
+        <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
       <div style="display: flex; margin-left: 30px;margin-top: 20px;">
           <div style="margin-right: 20px; scroll-snap-align: center;">
             <div class="card-container">
@@ -258,16 +276,13 @@ footer {
           </div>
       </div>
     </div>
+    </div>
+  </div>
 </div>
-</div>
+
 <br>
 
-  <c:if test="${not empty mensaje}">
-    <div class="alert alert-danger">${mensaje}</div>
-</c:if> 
-  <c:if test="${not empty mensajeReservaRealizada}">
-    <div class="alert alert-success">${mensajeReservaRealizada}</div>
-</c:if> 
+
 
     <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">
@@ -275,9 +290,9 @@ footer {
             <div class="col-md-4 mb-3">
               <h4 class="mb-4">Navegación</h4>
               <ul class="list-unstyled">
-                <li><a class="text-light" href="#">Inicio</a></li>
-                <li><a class="text-light" href="#">Libros</a></li>
-                <li><a class="text-light" href="#">Autores</a></li>
+           <li><a class="text-light" href="PaginaPrincipal">Inicio</a></li>
+                <li><a class="text-light" href="VerLibros">Libros</a></li>
+                <li><a class="text-light" href="VerAutores">Autores</a></li>
               </ul>
             </div>
             <div class="col-md-4 mb-3">

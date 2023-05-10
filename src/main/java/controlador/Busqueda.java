@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
 import modelo.CategoriaLibros;
 import modelo.Libro;
 import modelo.ModeloLibro;
+import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
@@ -34,7 +36,15 @@ public class Busqueda extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 /*busqueda*/
+HttpSession session = request.getSession();
+		
+		Usuario usuariologueado = (Usuario) session.getAttribute("usuariologeado");
+		
+		if (usuariologueado == null) {//no logeado
+			response.sendRedirect("Login");
+		} else {
+		
+		/*busqueda*/
 		ModeloLibro modeloLibro = new ModeloLibro();
 		
         String nombreBusqueda = request.getParameter("nombreBusqueda");
@@ -57,13 +67,14 @@ public class Busqueda extends HttpServlet {
         request.setAttribute("autoresRelacionados", autoresRelacionados);
         
         request.getRequestDispatcher("/JSPFinal/Busqueda.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String nombreBusqueda = request.getParameter("nombreBusqueda");
+		 	String nombreBusqueda = request.getParameter("nombreBusqueda");
 		    
 		    ModeloLibro modeloLibro = new ModeloLibro();
 		    modeloLibro.conectar();
