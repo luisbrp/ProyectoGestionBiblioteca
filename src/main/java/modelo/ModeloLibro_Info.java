@@ -9,11 +9,11 @@ public class ModeloLibro_Info extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
-	public void insertarLibroInfo(Libro_Info libroInfo) {
+	public void insertarLibroInfo(Libro libro, int id_autor) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Libro_Info (Id_Libro, Id_Autor) VALUES (?,?)");
-			pst.setInt(1, libroInfo.getId_libro());
-			pst.setInt(2, libroInfo.getId_autor());
+			pst.setInt(1, libro.getId_libro());
+			pst.setInt(2, id_autor);
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -36,7 +36,7 @@ public class ModeloLibro_Info extends Conector{
 		}
 	}
 	
-	public void EliminarLibro_Info(int id_libro, int id_autor) {
+	public void EliminarLibro_Info( int id_libro, int id_autor) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Libro_Info WHERE Id_Libro = ? AND Id_Autor = ?");
 			pst.setInt(1, id_libro);

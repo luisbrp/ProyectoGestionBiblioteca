@@ -16,8 +16,7 @@ public class Libro {
 	private int stock;
 	private String categoria;
 	private String foto;
-	private Autor autor;
-	private Editorial editorial;
+	private int id_editorial;
 	
 	
 	public String getFoto() {
@@ -75,17 +74,14 @@ public class Libro {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	public Autor getAutor() {
-		return autor;
+	public int getId_editorial() {
+		return id_editorial;
 	}
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+	public void setId_editorial(int id_editorial) {
+		this.id_editorial = id_editorial;
 	}
-	public Editorial getEditorial() {
-		return editorial;
-	}
-	public void setEditorial(Editorial editorial) {
-		this.editorial = editorial;
-	}
+	
+	
+	
 	
 }

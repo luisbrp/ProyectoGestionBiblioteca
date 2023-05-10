@@ -11,7 +11,7 @@ public class ModeloLibro extends Conector{
 	
 	public void registrarLibro(Libro libro) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto) VALUES (?,?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto, Id_Editorial) VALUES (?,?,?,?,?,?,?,?,?)");
 			pst.setLong(1, libro.getIsbn());
 			pst.setString(2, libro.getTitulo());
 			pst.setInt(3, libro.getNum_paginas());
@@ -20,6 +20,7 @@ public class ModeloLibro extends Conector{
 			pst.setInt(6, libro.getStock());
 			pst.setString(7, libro.getCategoria());
 			pst.setString(8, libro.getFoto());
+			pst.setInt(9, libro.getId_editorial());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -42,7 +43,7 @@ public class ModeloLibro extends Conector{
 	
 	public void modificarLibro(int id_libro, Libro libro) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ? WHERE Id_Libro = ?");
+			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ?, Id_Editorial = ? WHERE Id_Libro = ?");
 			pst.setInt(9, libro.getId_libro());
 			pst.setLong(1, libro.getIsbn());
 			pst.setString(2, libro.getTitulo());
@@ -52,6 +53,7 @@ public class ModeloLibro extends Conector{
 			pst.setInt(6, libro.getStock());
 			pst.setString(7, libro.getCategoria());
 			pst.setString(8, libro.getFoto());
+			pst.setInt(9, libro.getId_editorial());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -81,6 +83,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
@@ -110,6 +113,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
@@ -139,6 +143,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
 		} catch (SQLException e) {
@@ -171,6 +176,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				librosDelAutor.add(libro);
 			}
 		} catch (SQLException e) {
@@ -180,48 +186,7 @@ public class ModeloLibro extends Conector{
 		return librosDelAutor;
 	}
 	
-	public ArrayList<Libro> buscarLibro(String busqueda) {
-		ArrayList<Libro> librosEncontrados = new ArrayList<Libro>();
-		try {
-			pst = conexion.prepareStatement("SELECT l.*, a.Nombre AS Autor_Nombre, a.Apellido AS Autor_Apellido, e.Nombre AS Editorial_Nombre FROM Libro l LEFT JOIN Libro_Info li ON l.Id_Libro = li.Id_Libro LEFT JOIN Autor a ON li.Id_Autor = a.Id_Autor LEFT JOIN Editorial e ON l.Id_Editorial = e.Id_Editorial WHERE l.Titulo LIKE ? OR l.Categoria LIKE ? OR a.Nombre LIKE ? OR a.Apellido LIKE ? OR l.ISBN LIKE ?");
-			pst.setString(1, "%" + busqueda + "%");
-			pst.setString(2, "%" + busqueda + "%");
-			pst.setString(3, "%" + busqueda + "%");
-			pst.setString(4, "%" + busqueda + "%");
-			pst.setString(5, "%" + busqueda + "%");
-			
-			rs = pst.executeQuery();
-			
-			while (rs.next()) {
-				Libro libro = new Libro();
-				libro.setId_libro(rs.getInt("Id_Libro"));
-				libro.setIsbn(rs.getLong("ISBN"));
-				libro.setTitulo(rs.getString("Titulo"));
-				libro.setNum_paginas(rs.getInt("Num_Pag"));
-				libro.setFecha_publicacion(rs.getDate("Fecha_Publicacion"));
-				libro.setIdioma(rs.getString("Idioma"));
-				libro.setStock(rs.getInt("Stock"));
-				libro.setCategoria(rs.getString("Categoria"));
-				libro.setFoto(rs.getString("Foto"));
-				
-				Autor autor = new Autor();
-				autor.setNombre(rs.getString("Autor_Nombre"));
-				autor.setApellido(rs.getString("Autor_Apellido"));
-				libro.setAutor(autor);
-				
-				Editorial editorial = new Editorial();
-				editorial.setNombre(rs.getString("Editorial_Nombre"));
-				libro.setEditorial(editorial);
-				
-				librosEncontrados.add(libro);
-			}
-		} catch (SQLException e) {
-			
-		e.printStackTrace();
-		
-		}
-		return librosEncontrados;
-	}
+	
 
 	public ArrayList<Libro> buscarPorCategoria(String categoriaSeleccionada) {
 		ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
@@ -242,6 +207,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				librosPorCategoria.add(libro);
 			}
 		} catch (SQLException e) {
@@ -372,6 +338,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				
 			}
 		} catch (SQLException e) {

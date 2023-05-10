@@ -67,7 +67,7 @@ public class Principal extends HttpServlet {
 		   
 		    if (busqueda != null && !busqueda.isEmpty()) {
 		        modeloLibro.conectar();
-		        librosEncontrados = modeloLibro.buscarLibro(busqueda);
+		      
 		        modeloLibro.cerrar();
 		        request.setAttribute("librosEncontrados", librosEncontrados);
 		        request.getRequestDispatcher("ResultadoDeBusqueda.jsp").forward(request, response);

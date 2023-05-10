@@ -15,6 +15,8 @@ import modelo.Libro;
 import modelo.ModeloAutor;
 import modelo.ModeloLibro;
 import modelo.ModeloLibro_Info;
+import modelo.Editorial;
+
 import modelo.Autor;
 
 /**
@@ -35,10 +37,20 @@ public class InsertarLibro extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Editorial editorialCompleta = (Editorial) session.getAttribute("editorial");
+        int id_editorial = (Integer) session.getAttribute("id_editorial");
+
+        if (editorialCompleta != null) {
+            request.setAttribute("editorialCompleta", editorialCompleta);
+            request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
+        } else if (id_editorial != 0) {
+            request.setAttribute("id_editorial", id_editorial);
+            request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
+        }
+    }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,6 +64,8 @@ public class InsertarLibro extends HttpServlet {
 		ModeloAutor modeloAutor = new ModeloAutor();
 		HttpSession session = request.getSession();
 		Autor autor = (Autor) session.getAttribute("autor");
+		Autor autor2 = (Autor) session.getAttribute("autorId");
+
 		
 		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
 		Libro libro = new Libro();
@@ -65,21 +79,26 @@ public class InsertarLibro extends HttpServlet {
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		String categoria = request.getParameter("categoria");
 		String foto = request.getParameter("foto");
+		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
+		System.out.println(fechaR);
 		
-		try {
-			libro.setTitulo(titulo);
-			libro.setIsbn(isbn);
-			libro.setNum_paginas(num_pag);
-			Date fecha = fechaFormato.parse(fechaR);
-			libro.setFecha_publicacion(fecha);
-			libro.setIdioma(idioma);
-			libro.setStock(stock);
-			libro.setCategoria(categoria);
-			libro.setFoto(foto);
-		} catch (ParseException e) {
+
+		    try {
+		        Date fecha = fechaFormato.parse(fechaR);
+		        libro.setFecha_publicacion(fecha);
+		        libro.setTitulo(titulo);
+				libro.setIsbn(isbn);
+				libro.setNum_paginas(num_pag);
+				libro.setIdioma(idioma);
+				libro.setStock(stock);
+				libro.setCategoria(categoria);
+				libro.setFoto(foto);
+				libro.setId_editorial(id_editorial);
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		    }
 		
-			e.printStackTrace();
-		}
+			
 		modeloLibro.conectar();
 		modeloLibro.registrarLibro(libro);
 		
@@ -90,20 +109,19 @@ public class InsertarLibro extends HttpServlet {
 			Libro libroCompleto = modeloLibro.getLibroPorTitulo(libro);
 			modeloLibro.cerrar();
 			
-			//Sacar el autor completo para conseguir el id
-			modeloAutor.conectar();
-			Autor autorCompleto = modeloAutor.AutorPorNombre(autor);
-			modeloAutor.cerrar();
+			modeloLibroInfo.conectar();
+			modeloLibroInfo.insertarLibro_Info(autor2, libroCompleto);
+			modeloLibroInfo.cerrar();
+				
+			
 			
 			//Insertar los parametros previamente consultados a la base de datos, en libro_info
 			/*
 			 *Para poder insertar en libro_info, necesitamos los id de ambos campos
 			 */
 			
-			modeloLibroInfo.conectar();
-			modeloLibroInfo.insertarLibro_Info(autorCompleto, libroCompleto);
-			modeloLibroInfo.cerrar();
-		}
+
+		} 
 		modeloLibro.cerrar();
 	}
 

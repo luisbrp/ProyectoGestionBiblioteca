@@ -205,7 +205,7 @@
               <th>Lista de Autores<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
               <th><form class="d-flex search-form2" method="get">
               	  <button class="btn btn-outline-secondary" name="recargarAutores">Recargar</button>
-                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (nombre)" aria-label="Buscar Autor" name="id_autor">
+                  <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (nombre)" aria-label="Buscar Autor" name="nombre">
                   <button class="btn btn-outline-success" type="submit">Buscar Autor</button>
                 </form></th>
             </tr>

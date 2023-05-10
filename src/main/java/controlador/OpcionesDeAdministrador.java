@@ -108,10 +108,9 @@ public class OpcionesDeAdministrador extends HttpServlet {
 		if (recargarAutores) {
 		autores = modeloAutor.getAutores();
 		} else {
-		    String id_autorString = request.getParameter("id_autor");
-		    if (id_autorString != null && !id_autorString.isEmpty()) {
-		       int id_autor = Integer.parseInt(id_autorString);
-		        Autor autor = modeloAutor.getAutor(id_autor);
+		    String nombre = request.getParameter("nombre");
+		    if (nombre!= null && !nombre.isEmpty()) {
+		        Autor autor = modeloAutor.getAutorPorNombre(nombre);
 		        if (autor != null) {
 		            autores.add(autor);
 		        } else {
