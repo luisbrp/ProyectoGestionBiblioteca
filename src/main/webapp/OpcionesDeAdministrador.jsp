@@ -155,7 +155,7 @@
                 <th>Dni</th>
                 <th>Nombre</th>
                 <th>Rol</th>
-                <th>Lista de Usuarios<a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
+                <th><a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
                 <th><form class="d-flex search-form" method="get">
                     <button class="btn btn-outline-secondary" name="recargarUsuario">Recargar</button>
                     <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro" name="dni">
@@ -185,169 +185,209 @@
           </div>
       </section>
      
-      <section class="ms-5" id="VerLibros">
-        <h3 class="mt-5">Gestionar Libros</h3>
+     <section class="ms-5" id="VerLibros">
+    <h3 class="mt-5">Gestionar Libros</h3>
+    <div class="table-container mt-5">
         <table class="table table-striped table-dark mt-5">
             <thead>
-              <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Isbn</th>
-                <th>Stock</th>
-                <th>Lista de libros<a href="InsertarLibro" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
-                <th><form class="d-flex search-form" method="get">
-                        <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
-                        <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro" name="isbn">
-                        <button class="btn btn-outline-success" type="submit"  href="#VerLibros">Buscar Libro</button>
-                    </form></th>
-              </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Isbn</th>
+                    <th>Stock</th>
+                    <th><a href="InsertarLibro" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
+                    <th>
+                        <form class="d-flex search-form" method="get">
+                            <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
+                            <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (isbn)" aria-label="Buscar Libro" name="isbn">
+                            <button class="btn btn-outline-success" type="submit" href="#VerLibros">Buscar Libro</button>
+                        </form>
+                    </th>
+                </tr>
             </thead>
             <tbody>
-              <c:forEach items="${libros}" var="libro">
-              
-                <tr>
-                    <td>${libro.id_libro}</td>
-                    <td>${libro.titulo}</td>
-                   <td>${libro.isbn}</td>
-                    <td>${libro.stock}</td>
-                   <td><a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary ">Ver</a>
-                    <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success ">Editar</a> 
-                    <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a></td> 
-                    <td></td>
-                </tr>
-               
-              </c:forEach>
+                <c:forEach items="${libros}" var="libro" varStatus="loop">
+                    <c:if test="${loop.index lt 5}">
+                        <tr>
+                            <td>${libro.id_libro}</td>
+                            <td>${libro.titulo}</td>
+                            <td>${libro.isbn}</td>
+                            <td>${libro.stock}</td>
+                            <td>
+                                <a href="VerLibro?id_libro=${libro.id_libro}" class="btn btn-primary">Ver</a>
+                                <a href="ModificarLibro?id_libro=${libro.id_libro}" class="btn btn-success">Editar</a>
+                                <a href="EliminarLibro?id_libro=${libro.id_libro}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
             </tbody>
-          </table>
-      </section>
-      
-      
-      
-      <section class="ms-5"  id="VerAutores">
-      <h3 class="mt-5">Gestionar Autores</h3>
-      <table class="table table-striped table-dark mt-5">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Lista de Autores<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
-              <th><form class="d-flex search-form">
-                  <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
-                  <button class="btn btn-outline-success" type="submit">Buscar Autor</button>
-                </form></th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach items="${autores}" var="autor">
-              <tr>
-                  <td>${autor.id_autor}</td>
-                 <td>${autor.nombre}</td>
-                  <td>${autor.apellido}</td>
-                <td><a href="Autor?nombre=${autor.nombre}" class="btn btn-primary ">Ver</a>
-                  <a href="ModificarAutor?id_autor=${autor.id_autor}" class="btn btn-success ">Editar</a> 
-                  <a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-danger">Eliminar</a></td>
-              </tr>
-            </c:forEach>
-          </tbody>
         </table>
-    </section>
+    </div>
+</section>
+
+   
+   
+      
+      
+     <section class="ms-5" id="VerAutores">
+    <h3 class="mt-5">Gestionar Autores</h3>
+    <div class="table-container mt-5">
+        <table class="table table-striped table-dark mt-5">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th><a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
+                    <th>
+                        <form class="d-flex search-form">
+                            <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+                            <button class="btn btn-outline-success" type="submit">Buscar Autor</button>
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${autores}" var="autor" varStatus="loop">
+                    <c:if test="${loop.index lt 5}">
+                        <tr>
+                            <td>${autor.id_autor}</td>
+                            <td>${autor.nombre}</td>
+                            <td>${autor.apellido}</td>
+                            <td>
+                                <a href="Autor?nombre=${autor.nombre}" class="btn btn-primary">Ver</a>
+                                <a href="ModificarAutor?id_autor=${autor.id_autor}" class="btn btn-success">Editar</a>
+                                <a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</section>
     
-   <section class="ms-5"  id="VerReservas">
+ <section class="ms-5" id="VerReservas">
     <h3 class="mt-5">Gestionar Reservas</h3>
-    <table class="table table-striped table-dark mt-5">
-        <thead>
-          <tr>
-            <th>Id_Libro</th>
-            <th>Id_Usuario</th>
-            <th>Fecha</th>
-            <th>Reservas<a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
-            <th><form class="d-flex search-form">
-                <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
-                <button class="btn btn-outline-success" type="submit">Buscar Reserva</button>
-              </form></th>
-          </tr>
-        </thead>
-        <tbody>
-          <c:forEach items="${reservas}" var="reserva">
-          
-            <tr>
-                <td>${reserva.id_libro}</td>
-                <td>${reserva.id_usuario}</td>
-                <td>${reserva.fecha_Reserva}</td>
-                <td><a href="VerReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Ver</a>
-               <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Editar</a>
-               <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a></td>
-            </tr>
-      
-          </c:forEach>
-        </tbody>
-      </table>
-  </section>
-    
-    <section class="ms-5"  id="VerPrestamos">
-    <h3 class="mt-5">Gestionar Prestamos</h3>
-    <table class="table table-striped table-dark mt-5">
-        <thead>
-          <tr>
-            <th>Id_Libro</th>
-            <th>Id_Usuario</th>
-            <th>Fecha</th>
-            <th>Devuelto<a href="RealizarPrestamo" class="btn btn-primary" style="margin-left: 100px;">RealizarPrestamo</a></th>
-            <th><form class="d-flex search-form">
-                <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
-                <button class="btn btn-outline-success" type="submit">Buscar Prestamo</button>
-              </form></th>
-          </tr>
-        </thead>
-        <tbody>
-          <c:forEach items="${prestamos}" var="prestamo">
-          
-            <tr>
-                <td>${prestamo.id_libro}</td>
-                <td>${prestamo.id_usuario}</td>
-                <td>${prestamo.fecha_prestamo}</td>
-                <td><a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Ver</a>
-               <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Editar</a>
-                    <a href="AnularPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a></td>
-            </tr>
-            
-          </c:forEach>
-        </tbody>
-      </table>
-  </section>
-    
-     <section class="ms-5"  id="VerEditoriales">
-      <h3 class="mt-5">Gestionar Editoriales</h3>
-      <table class="table table-striped table-dark mt-5">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nombre</th>
-              <th>Id_Libro</th>
-              <th>Lista de Editoriales<a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
-              <th><form class="d-flex search-form">
-                  <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Editorial">
-                  <button class="btn btn-outline-success" type="submit">Buscar Editorial</button>
-                </form></th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach items="${editoriales}" var="editorial">
-            
-              <tr>
-                 <td>${editorial.id_editorial}</td>
-                  <td>${editorial.nombre}</td>	
-            <td>${editorial.id_libro}</td>
-             <td><a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Ver</a>
-               <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary ">Editar</a>
-               <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a></td>
-              </tr>
-           
-            </c:forEach>
-          </tbody>
+    <div class="table-container mt-5">
+        <table class="table table-striped table-dark mt-5">
+            <thead>
+                <tr>
+                    <th>Id_Libro</th>
+                    <th>Id_Usuario</th>
+                    <th>Fecha</th>
+                    <th><a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
+                    <th>
+                        <form class="d-flex search-form">
+                            <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+                            <button class="btn btn-outline-success" type="submit">Buscar Reserva</button>
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${reservas}" var="reserva" varStatus="loop">
+                    <c:if test="${loop.index lt 5}">
+                        <tr>
+                            <td>${reserva.id_libro}</td>
+                            <td>${reserva.id_usuario}</td>
+                            <td>${reserva.fecha_Reserva}</td>
+                            <td>
+                                <a href="VerReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Ver</a>
+                                <a href="ModificarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-success">Editar</a>
+                                <a href="EliminarReserva?fecha_Reserva=${reserva.fecha_Reserva}&id_libro=${reserva.id_libro}&id_usuario=${reserva.id_usuario}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </tbody>
         </table>
-    </section>
+    </div>
+</section>
+
+   <section class="ms-5" id="VerPrestamos">
+    <h3 class="mt-5">Gestionar Prestamos</h3>
+    <div class="table-container mt-5">
+        <table class="table table-striped table-dark mt-5">
+            <thead>
+                <tr>
+                    <th>Id_Libro</th>
+                    <th>Id_Usuario</th>
+                    <th>Fecha</th>
+                    <th>Devuelto</th>
+                    <th><a href="RealizarPrestamo" class="btn btn-primary" style="margin-left: 100px;">RealizarPrestamo</a></th>
+                    <th>
+                        <form class="d-flex search-form">
+                            <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Autor">
+                            <button class="btn btn-outline-success" type="submit">Buscar Prestamo</button>
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${prestamos}" var="prestamo" varStatus="loop">
+                    <c:if test="${loop.index lt 5}">
+                        <tr>
+                            <td>${prestamo.id_libro}</td>
+                            <td>${prestamo.id_usuario}</td>
+                            <td>${prestamo.fecha_prestamo}</td>
+                            <td>${prestamo.devuelto}</td>
+                            <td>
+                                <a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Ver</a>
+                                <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-success">Editar</a>
+                                <a href="AnularPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="ms-5" id="VerEditoriales">
+    <h3 class="mt-5">Gestionar Editoriales</h3>
+    <div class="table-container mt-5">
+        <table class="table table-striped table-dark mt-5">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th><a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
+                    <th>
+                        <form class="d-flex search-form">
+                            <input class="form-control me-2" type="search" placeholder="Buscar (id)" aria-label="Buscar Editorial">
+                            <button class="btn btn-outline-success" type="submit">Buscar Editorial</button>
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${editoriales}" var="editorial" varStatus="loop">
+                    <c:if test="${loop.index lt 5}">
+                        <tr>
+                            <td>${editorial.id_editorial}</td>
+                            <td>${editorial.nombre}</td>	
+                            <td>
+                                <a href="VerEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary">Ver</a>
+                                <a href="ModificarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-primary">Editar</a>
+                                <a href="EliminarEditorial?id_editorial=${editorial.id_editorial}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+ 
     
       <footer class="bg-dark text-light py-5" style="margin-top: 50px;">
         <div class="container">

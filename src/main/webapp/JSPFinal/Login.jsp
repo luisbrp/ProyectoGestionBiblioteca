@@ -89,7 +89,7 @@ html, body {
 			<div class="col-lg-5 col-md-8">
 				<div class="card">
 					<div class="card-header">
-						Iniciar sesión
+						Inicar sesión
 					</div>
 					<div style=""><c:if test="${not empty mensaje}">
   <div class="alert alert-danger">${mensaje}</div>

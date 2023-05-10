@@ -55,14 +55,13 @@ public class VerLibro extends HttpServlet {
 		
 		ModeloAutor modeloAutor = new ModeloAutor();
 		modeloAutor.conectar();
-		Autor autor = new Autor();
+		ArrayList<Autor> AutoresdelLibro = new ArrayList<Autor>();
 		
-		autor = modeloAutor.getAutorDeLibro(libro.getId_libro());
+		AutoresdelLibro = modeloAutor.getAutoresDeLibro(libro.getId_libro());
 		modeloAutor.cerrar();
 		modeloLibro.cerrar();
 		
-		
-		request.setAttribute("autor", autor);
+		request.setAttribute("AutoresdelLibro", AutoresdelLibro);
 		request.setAttribute("libro", libro);
 		
 		/*Cargar las categorias para el header*/

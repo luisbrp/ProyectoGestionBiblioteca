@@ -261,21 +261,22 @@ header {
       <p><strong>Categoría:</strong> ${libro.categoria}</p>
       <p><strong>Descripción:</strong> ${libro.descripcion}</p>
       <p><strong>Editorial:</strong> ${libro.editorial}</p>
-      <h2 class="mt-3">Autor</h2>
-        <div style="margin-left: 50px; width: 95%; overflow-x: auto; scroll-snap-type: x mandatory;">
-      <div style="display: flex; margin-left: 30px;margin-top: 20px;">
-          <div style="margin-right: 20px; scroll-snap-align: center;">
+      <h2>Autores del libro:</h2>
+<div class="d-flex flex-nowrap overflow-auto" style="margin-top: 20px;">
+    <c:forEach var="autor" items="${AutoresdelLibro}">
+        <div style="margin-right: 20px; scroll-snap-align: center;">
             <div class="card-container">
-              <a href="VerAutor?id_autor=${autor.id_autor}">
-                <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                  <div class="card-body"></div>
-                </div>
-              </a>
-              <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre}">${autor.nombre} ${autor.apellido}</h5>
+                <a href="VerAutor?id_autor=${autor.id_autor}">
+                    <div class="card custom-card-style" style="background-image: url('${autor.foto}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                        <div class="card-body"></div>
+                    </div>
+                </a>
+                <h5 class="card-title" style="margin-top: 20px; margin-left: 10px; max-width: 100%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;" title="${autor.nombre}">${autor.nombre} ${autor.apellido}</h5>
             </div>
-          </div>
-      </div>
-    </div>
+        </div>
+    </c:forEach>
+</div>
+
     </div>
   </div>
 </div>

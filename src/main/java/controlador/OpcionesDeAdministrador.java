@@ -237,7 +237,6 @@ HttpSession session = request.getSession();
 					    }
 					}
 				modeloEditorial.cerrar();
-					
 				request.setAttribute("editoriales", editoriales);
 				request.setAttribute("prestamos", prestamos);
 				request.setAttribute("reservas", reservas);
@@ -245,10 +244,12 @@ HttpSession session = request.getSession();
 				request.setAttribute("libros", libros);
 				request.setAttribute("usuarios", usuarios);
 
-		ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
-      
-        request.setAttribute("Todascategorias", Todascategorias);
-        modeloLibro.cerrar();
+				
+				
+				ArrayList<CategoriaLibros> Todascategorias= modeloLibro.TodasLasCategorias();
+		      
+		        request.setAttribute("Todascategorias", Todascategorias);
+		        modeloLibro.cerrar();
 		
 		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
 		}

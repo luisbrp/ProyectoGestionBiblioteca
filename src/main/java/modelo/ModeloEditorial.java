@@ -86,7 +86,6 @@ public class ModeloEditorial extends Conector {
 				Editorial editorial = new Editorial();
 				editorial.setId_editorial(rs.getInt("Id_Editorial"));
 				editorial.setNombre(rs.getString("Nombre"));
-				editorial.setId_libro(rs.getInt("Id_Libro"));
 				editoriales.add(editorial);
 			}
 		} catch (SQLException e) {
