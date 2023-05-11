@@ -16,15 +16,16 @@
 <h1>Insertar Autor</h1>
   <div class="container mt-5">
   <form method="post" action="InsertarAutor" id="form_seleccion_autor">
-    <div class="form-group">
-      <label for="autor">Selecciona un autor:</label>
-      <select class="form-control" id="autor" name="id_autor" size="5">
-        <option value="">--Selecciona un autor--</option>
-        <c:forEach items="${autores}" var="autor">
-          <option value="${autor.id_autor}">${autor.nombre} ${autor.apellido}</option>
-        </c:forEach>
-      </select>
-    </div>
+   <div class="form-group">
+  <label for="autor">Selecciona un autor:</label>
+  <select class="form-control" id="autor" name="id_autor" size="5" required>
+    <option value="">--Selecciona un autor--</option>
+    <c:forEach items="${autores}" var="autor">
+      <option value="${autor.id_autor}">${autor.nombre} ${autor.apellido}</option>
+    </c:forEach>
+  </select>
+</div>
+
     <input type="submit" value="Continuar" class="btn btn-primary mt-3" name="continuar_autor_existente"/>
     <input type="hidden" name="id_autor" value="${autor.id_autor}" />
     

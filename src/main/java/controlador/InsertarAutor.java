@@ -59,6 +59,7 @@ public class InsertarAutor extends HttpServlet {
 		autor.setApellido(apellido);
 		autor.setDescripcion(descripcion);
 		
+		modeloAutor.conectar();
 		if (id_autorString != null) {
 		    int id_autor = Integer.parseInt(id_autorString);
 		    Autor autorId = new Autor();
@@ -71,6 +72,9 @@ public class InsertarAutor extends HttpServlet {
 		    HttpSession session = request.getSession();
 		    session.setAttribute("autor", autor);
 		    response.sendRedirect("InsertarEditorial");
-		}
+		} 
+		modeloAutor.cerrar();
+		
+		
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
   <head>
     <title>Formulario de inserción de libro</title>
@@ -65,19 +65,21 @@
 	  <label for="descripcion">Descripción:</label>
 	  <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
 	</div>
-	<div class="form-group">
-    <label>id_editorial:</label>
-    <input type="text" name="id_editorial" required 
-           class="form-control" 
-           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
-           onchange="this.setCustomValidity('')" 
-           value="${not empty editorial ? editorial.id_editorial : id_editorial}"/><br/>  
+		<div class="form-group">
+  <label>id_editorial:</label>
+  <input type="text" name="id_editorial" required class="form-control"
+        oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')"
+        onchange="this.setCustomValidity('')"
+        value="${tieneEditorialCompleta ? editorialCompleta.id_editorial : id_editorial}"/><br/>  
 </div>
+
+		
+		
 			<c:if test="${not empty id_autor}">
 		  		<input type="hidden" name="id_autor" value="${id_autor}" />
 			</c:if>
 	
-	<input type="submit" value="guardar" class="btn btn-primary mt-4" href="InsertarEditorial"/>
+		<input type="submit" value="guardar" class="btn btn-primary mt-4"/>
 	</form>
 	</div>
   </body>

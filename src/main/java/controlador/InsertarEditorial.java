@@ -58,9 +58,7 @@ public class InsertarEditorial extends HttpServlet {
 		
 		
 		editorial.setNombre(nombre);
-	
-	
-		
+
 		modeloEditorial.conectar();
 		if (id_editorialString != null) {
 		    int id_editorial = Integer.parseInt(id_editorialString);
@@ -68,15 +66,9 @@ public class InsertarEditorial extends HttpServlet {
 		    session2.setAttribute("id_editorial", id_editorial);
 		    session.setAttribute("autorId", autorId);
 		    response.sendRedirect("InsertarLibro");
-		} else if (editorial != null) {
-		    modeloEditorial.registrarEditorial(editorial);
-		    Editorial editorialCompleta = modeloEditorial.getEditorialPorNombre(nombre);
-		    HttpSession session2 = request.getSession();
-		    session2.setAttribute("editorialCompleta", editorialCompleta);
-		    session.setAttribute("autor", autor);
-		    response.sendRedirect("InsertarLibro");
+		} else {
+			response.sendRedirect("InsertarEditorial");
 		}
-
 		modeloEditorial.cerrar();
 	}
 
