@@ -4,6 +4,11 @@ import java.util.Date;
 
 public class Prestamo {
 
+	@Override
+	public String toString() {
+		return "Prestamo [fecha_prestamo=" + fecha_prestamo + ", devuelto=" + devuelto + ", id_usuario=" + id_usuario
+				+ ", id_libro=" + id_libro + "]";
+	}
 	private Date fecha_prestamo;
 	private String devuelto;
 	private int id_usuario;

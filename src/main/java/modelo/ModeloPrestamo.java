@@ -37,7 +37,6 @@ public class ModeloPrestamo extends Conector{
 			e.printStackTrace();
 		}
 	}
-	
 	public void modificarPrestamo(java.util.Date fecha, int id_libro, int id_usuario, Prestamo prestamo, String devuelto) {
 	    try {
 	        pst = conexion.prepareStatement("UPDATE Prestamo SET Fecha_Prestamo = IFNULL(?, fecha), Id_Libro = IFNULL(?, id_libro), Id_Usuario = IFNULL(?, id_usuario, Devuelto = ? WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
@@ -70,9 +69,9 @@ public class ModeloPrestamo extends Conector{
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				prestamo.setFecha_prestamo(rs.getDate("Fecha_Prestamo"));
-				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamo.setId_libro(rs.getInt("Id_Libro"));
 				prestamo.setId_usuario(rs.getInt("Id_Usuario"));
+				prestamo.setDevuelto(rs.getString("Devuelto"));
 				prestamos.add(prestamo);
 			}
 		} catch (SQLException e) {

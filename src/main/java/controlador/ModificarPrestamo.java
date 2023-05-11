@@ -49,7 +49,7 @@ public class ModificarPrestamo extends HttpServlet {
 			prestamo.setId_usuario(id_usuario);
 			
 			modeloPrestamo.conectar();
-			modeloPrestamo.getPrestamo(fecha, id_libro, id_usuario);
+			prestamo = modeloPrestamo.getPrestamo(fecha, id_libro, id_usuario);
 			request.setAttribute("prestamo", prestamo);
 			modeloPrestamo.cerrar();
 			request.getRequestDispatcher("ModificarPrestamo.jsp").forward(request, response);

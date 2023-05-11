@@ -13,8 +13,8 @@
 		<p>Id: ${prestamo.fecha_prestamo}</p>
 		<p>Id_Libro: ${prestamo.id_usuario}</p>
 		<p>Id_Usuario: ${prestamo.id_libro}</p>
-		<p>Devueto: ${prestamo.devuelto}</p>
+		<p>Devuelto: ${prestamo.devuelto}</p>
 	</div>
-	<a href="OpcionesDeAdministrador"" class="btn btn-primary">Volver</a>
+	<a href="OpcionesDeAdministrador" class="btn btn-primary">Volver</a>
 </body>
 </html>

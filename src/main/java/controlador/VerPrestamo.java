@@ -39,7 +39,7 @@ public class VerPrestamo extends HttpServlet {
 		
 		String fechaR = request.getParameter("fecha_prestamo");
 		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		int id_usuario = Integer.parseInt(request.getParameter("id_libro"));
+		int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
 		
 		Date fecha;
 		try {
@@ -49,7 +49,7 @@ public class VerPrestamo extends HttpServlet {
 			prestamo.setId_usuario(id_usuario);
 			
 			modeloPrestamo.conectar();
-			modeloPrestamo.getPrestamo(fecha, id_libro, id_usuario);
+			prestamo =	modeloPrestamo.getPrestamo(fecha, id_libro, id_usuario);
 			modeloPrestamo.cerrar();
 		
 		} catch (ParseException e) {
@@ -57,7 +57,7 @@ public class VerPrestamo extends HttpServlet {
 			
 		}
 		request.setAttribute("prestamo", prestamo);
-		
+		System.out.println();
 		request.getRequestDispatcher("VerPrestamo.jsp").forward(request, response);
 	}
 
