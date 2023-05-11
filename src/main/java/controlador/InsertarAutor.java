@@ -32,7 +32,7 @@ public class InsertarAutor extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ModeloAutor modeloAutor = new ModeloAutor();
+ModeloAutor modeloAutor = new ModeloAutor();
 		
 		
 		modeloAutor.conectar();
@@ -54,6 +54,7 @@ public class InsertarAutor extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String descripcion = request.getParameter("descripcion");
+		String foto = request.getParameter("foto");
 		
 		autor.setNombre(nombre);
 		autor.setApellido(apellido);
@@ -62,10 +63,10 @@ public class InsertarAutor extends HttpServlet {
 		modeloAutor.conectar();
 		if (id_autorString != null) {
 		    int id_autor = Integer.parseInt(id_autorString);
-		    Autor autorId = new Autor();
-		    autorId.setId_autor(id_autor);
+		    Autor autorSoloConId = new Autor();
+		    autorSoloConId.setId_autor(id_autor);
 		    HttpSession session = request.getSession();
-		    session.setAttribute("autorId", autorId);
+		    session.setAttribute("autorSoloConId", autorSoloConId);
 		    response.sendRedirect("InsertarEditorial");
 		} else if (autor != null) {
 		    modeloAutor.registrarAutor(autor);

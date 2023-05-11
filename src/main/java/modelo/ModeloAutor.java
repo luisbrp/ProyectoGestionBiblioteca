@@ -11,10 +11,11 @@ public class ModeloAutor extends Conector {
 	
 	public void registrarAutor(Autor autor) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Autor (Nombre, Apellido, Descripcion) VALUES (?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Autor (Nombre, Apellido, Descripcion, Foto) VALUES (?,?,?,?)");
 			pst.setString(1, autor.getNombre());
 			pst.setString(2, autor.getApellido());
 			pst.setString(3, autor.getDescripcion());
+			pst.setString(4, autor.getFoto());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -37,11 +38,12 @@ public class ModeloAutor extends Conector {
 	
 	public void modificarAutor(int id_autor, Autor autor) {
 		try {
-			pst = conexion.prepareStatement("UPDATE autor SET Nombre = ?, Apellido = ?, Descripcion = ? WHERE Id_Autor = ?");
+			pst = conexion.prepareStatement("UPDATE autor SET Nombre = ?, Apellido = ?, Descripcion = ?, Foto = ? WHERE Id_Autor = ?");
 			pst.setInt(4, id_autor);
 			pst.setString(1, autor.getNombre());
 			pst.setString(2, autor.getApellido());
 			pst.setString(3, autor.getDescripcion());
+			pst.setString(4, autor.getFoto());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -65,6 +67,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
@@ -88,6 +91,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
@@ -112,6 +116,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {
@@ -136,6 +141,7 @@ public class ModeloAutor extends Conector {
 				autor.setNombre(rs.getString("Nombre"));
 				autor.setApellido(rs.getString("Apellido"));
 				autor.setDescripcion(rs.getString("Descripcion"));
+				autor.setFoto(rs.getString("Foto"));
 				autores.add(autor);
 			}
 		} catch (SQLException e) {

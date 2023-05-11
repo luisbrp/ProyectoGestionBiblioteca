@@ -10,7 +10,7 @@ public class Autor {
 	private String nombre;
 	private String apellido;
 	private String descripcion;
-	
+	private String foto;
 	
 	public int getId_autor() {
 		return id_autor;
@@ -35,5 +35,11 @@ public class Autor {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 }

@@ -11,7 +11,7 @@ public class ModeloLibro extends Conector{
 	
 	public void registrarLibro(Libro libro) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto, Id_Editorial) VALUES (?,?,?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto, Descripcion, Id_Editorial) VALUES (?,?,?,?,?,?,?,?,?,?)");
 			pst.setLong(1, libro.getIsbn());
 			pst.setString(2, libro.getTitulo());
 			pst.setInt(3, libro.getNum_paginas());
@@ -20,7 +20,8 @@ public class ModeloLibro extends Conector{
 			pst.setInt(6, libro.getStock());
 			pst.setString(7, libro.getCategoria());
 			pst.setString(8, libro.getFoto());
-			pst.setInt(9, libro.getId_editorial());
+			pst.setString(9, libro.getDescripcion());
+			pst.setInt(10, libro.getId_editorial());
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -43,7 +44,7 @@ public class ModeloLibro extends Conector{
 	
 	public void modificarLibro(int id_libro, Libro libro) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ?, Id_Editorial = ? WHERE Id_Libro = ?");
+			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ?, Descripcion = ?, Id_Editorial = ? WHERE Id_Libro = ?");
 			pst.setInt(9, libro.getId_libro());
 			pst.setLong(1, libro.getIsbn());
 			pst.setString(2, libro.getTitulo());
@@ -53,7 +54,8 @@ public class ModeloLibro extends Conector{
 			pst.setInt(6, libro.getStock());
 			pst.setString(7, libro.getCategoria());
 			pst.setString(8, libro.getFoto());
-			pst.setInt(9, libro.getId_editorial());
+			pst.setString(9, libro.getDescripcion());
+			pst.setInt(10, libro.getId_editorial());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -83,6 +85,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
@@ -113,6 +116,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
@@ -143,6 +147,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				libros.add(libro);
 			}
@@ -176,6 +181,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				librosDelAutor.add(libro);
 			}
@@ -207,6 +213,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				librosPorCategoria.add(libro);
 			}
@@ -338,6 +345,7 @@ public class ModeloLibro extends Conector{
 				libro.setStock(rs.getInt("Stock"));
 				libro.setCategoria(rs.getString("Categoria"));
 				libro.setFoto(rs.getString("Foto"));
+				libro.setDescripcion(rs.getString("Descripcion"));
 				libro.setId_editorial(rs.getInt("Id_Editorial"));
 				
 			}

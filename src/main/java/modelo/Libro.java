@@ -16,6 +16,7 @@ public class Libro {
 	private int stock;
 	private String categoria;
 	private String foto;
+	private String descripcion; 
 	private int id_editorial;
 	
 	
@@ -80,7 +81,12 @@ public class Libro {
 	public void setId_editorial(int id_editorial) {
 		this.id_editorial = id_editorial;
 	}
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	
 	
 	

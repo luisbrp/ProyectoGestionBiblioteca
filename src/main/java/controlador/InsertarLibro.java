@@ -38,18 +38,19 @@ public class InsertarLibro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Editorial editorialCompleta = (Editorial) session.getAttribute("editorial");
-        int id_editorial = (Integer) session.getAttribute("id_editorial");
+    	   HttpSession session = request.getSession();
+           Editorial editorialCompleta = (Editorial) session.getAttribute("editorial");
+           int id_editorial = (Integer) session.getAttribute("id_editorial");
 
-        if (editorialCompleta != null) {
-            request.setAttribute("editorialCompleta", editorialCompleta);
-            request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
-        } else if (id_editorial != 0) {
-            request.setAttribute("id_editorial", id_editorial);
-            request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
-        }
-    }
+           if (editorialCompleta != null) {
+               request.setAttribute("editorialCompleta", editorialCompleta);
+               request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
+           } else if (id_editorial != 0) {
+               request.setAttribute("id_editorial", id_editorial);
+               request.getRequestDispatcher("InsertarLibro.jsp").forward(request, response);
+           }
+       }
+    
 
 
 	/**
@@ -64,7 +65,8 @@ public class InsertarLibro extends HttpServlet {
 		ModeloAutor modeloAutor = new ModeloAutor();
 		HttpSession session = request.getSession();
 		Autor autor = (Autor) session.getAttribute("autor");
-		Autor autor2 = (Autor) session.getAttribute("autorId");
+		Autor autorSoloConId = (Autor) session.getAttribute("autorSoloConId");
+
 
 		
 		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
@@ -79,10 +81,10 @@ public class InsertarLibro extends HttpServlet {
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		String categoria = request.getParameter("categoria");
 		String foto = request.getParameter("foto");
+		String descripcion = request.getParameter("descripcion");
 		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
-		System.out.println(fechaR);
 		
-
+		System.out.println(autor);
 		    try {
 		        Date fecha = fechaFormato.parse(fechaR);
 		        libro.setFecha_publicacion(fecha);
@@ -93,36 +95,36 @@ public class InsertarLibro extends HttpServlet {
 				libro.setStock(stock);
 				libro.setCategoria(categoria);
 				libro.setFoto(foto);
+				libro.setDescripcion(descripcion);
 				libro.setId_editorial(id_editorial);
 		    } catch (ParseException e) {
 		        e.printStackTrace();
 		    }
 		
-			
 		modeloLibro.conectar();
 		modeloLibro.registrarLibro(libro);
 		
 		if (libro != null) {
-			
-			//Sacar el libro completo para conseguir el id_libro 
-			modeloLibro.conectar();
-			Libro libroCompleto = modeloLibro.getLibroPorTitulo(libro);
-			modeloLibro.cerrar();
-			
-			modeloLibroInfo.conectar();
-			modeloLibroInfo.insertarLibro_Info(autor2, libroCompleto);
-			modeloLibroInfo.cerrar();
-				
-			
-			
-			//Insertar los parametros previamente consultados a la base de datos, en libro_info
-			/*
-			 *Para poder insertar en libro_info, necesitamos los id de ambos campos
-			 */
-			
+		    modeloLibro.conectar();
+		    Libro libroCompleto = modeloLibro.getLibroPorTitulo(libro);
+		    modeloLibro.cerrar();
 
+		    modeloLibroInfo.conectar();
+		    if (autor != null) {
+		    	String nombre = autor.getNombre();
+
+		    	modeloAutor.conectar();
+		    	Autor autorCompleto = modeloAutor.getAutorPorNombre(nombre);
+		    	modeloAutor.cerrar();
+
+		        modeloLibroInfo.insertarLibro_Info(autorCompleto, libroCompleto);
+		    } else {
+		        modeloLibroInfo.insertarLibro_Info(autorSoloConId, libroCompleto);
+		    }
+		    modeloLibroInfo.cerrar();
 		} 
 		modeloLibro.cerrar();
+
 	}
 
 }

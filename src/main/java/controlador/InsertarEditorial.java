@@ -40,7 +40,9 @@ public class InsertarEditorial extends HttpServlet {
 		modeloEditorial.cerrar();
 		
 		request.setAttribute("editoriales", editoriales);
-		request.getRequestDispatcher("InsertarEditorial.jsp").forward(request, response);    }
+		request.getRequestDispatcher("InsertarEditorial.jsp").forward(request, response);  
+		
+    }
 
 
 	/**
@@ -51,7 +53,7 @@ public class InsertarEditorial extends HttpServlet {
 		Editorial editorial = new Editorial();
 		HttpSession session = request.getSession();
 		Autor autor = (Autor) session.getAttribute("autor");
-		Autor autorId = (Autor) session.getAttribute("autorId");
+		Autor autorSoloConId = (Autor) session.getAttribute("autorSoloConId");
 		
 		String id_editorialString = request.getParameter("id_editorial");
 		String nombre = request.getParameter("nombre");
@@ -64,12 +66,13 @@ public class InsertarEditorial extends HttpServlet {
 		    int id_editorial = Integer.parseInt(id_editorialString);
 		    HttpSession session2 = request.getSession();
 		    session2.setAttribute("id_editorial", id_editorial);
-		    session.setAttribute("autorId", autorId);
+		    session.setAttribute("autorSoloConId", autorSoloConId);
+		    session.setAttribute("autor", autor);
 		    response.sendRedirect("InsertarLibro");
 		} else {
 			response.sendRedirect("InsertarEditorial");
 		}
 		modeloEditorial.cerrar();
-	}
+	}	
 
 }

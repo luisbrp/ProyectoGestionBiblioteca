@@ -217,7 +217,7 @@
                   <td>${autor.id_autor}</td>
                  <td>${autor.nombre}</td>
                   <td>${autor.apellido}</td>
-                <td><a href="Autor?nombre=${autor.nombre}" class="btn btn-primary ">Ver</a>
+                <td><a href="VerAutor?id_autor=${autor.id_autor}" class="btn btn-primary ">Ver</a>
                   <a href="ModificarAutor?id_autor=${autor.id_autor}" class="btn btn-success ">Editar</a> 
                   <a href="EliminarAutor?id_autor=${autor.id_autor}" class="btn btn-danger">Eliminar</a></td>
               </tr>
