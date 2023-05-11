@@ -15,6 +15,7 @@ public class Libro {
 	private String descripcion;
 	private String foto;
 	private String editorial;
+	private int id_editorial;
 	
 	
 	public String getFoto() {
@@ -84,6 +85,12 @@ public class Libro {
 	}
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
+	}
+	public int getId_editorial() {
+		return id_editorial;
+	}
+	public void setId_editorial(int id_editorial) {
+		this.id_editorial = id_editorial;
 	}
 	
 }

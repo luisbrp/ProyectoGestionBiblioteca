@@ -9,11 +9,6 @@
 </head>
 <body>
 <form method="post" action="ModificarPrestamo">
-    <div class="form-group">
-        <label for="nombre">Id:</label>
-        <input type="hidden" name="id" value="${prestamo.fecha_prestamo}&amp;${prestamo.id_libro}&amp;${prestamo.id_usuario}">
-        <span class="form-control" id="id-display">${prestamo.fecha_prestamo}&${prestamo.id_libro}&${prestamo.id_usuario}</span>
-    </div>
 
     <div class="form-group">
         <label>Fecha del prestamo:</label>

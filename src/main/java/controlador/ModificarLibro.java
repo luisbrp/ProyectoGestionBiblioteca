@@ -64,6 +64,8 @@ public class ModificarLibro extends HttpServlet {
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		String categoria = request.getParameter("categoria");
 		String foto = request.getParameter("foto");
+		String descripcion = request.getParameter("descripcion");
+		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
 		System.out.println(id_libro);
 		try {
 			libro.setId_libro(id_libro);
@@ -76,6 +78,8 @@ public class ModificarLibro extends HttpServlet {
 			libro.setStock(stock);
 			libro.setCategoria(categoria);
 			libro.setFoto(foto);
+			libro.setDescripcion(descripcion);
+			libro.setId_editorial(id_editorial);
 			modeloLibro.conectar();
 			modeloLibro.modificarLibro(id_libro, libro);
 			modeloLibro.cerrar();

@@ -28,7 +28,7 @@ public class ModificarEditorial extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloEditorial modeloEditorial = new ModeloEditorial();
 		modeloEditorial.conectar();
 		
@@ -51,10 +51,10 @@ public class ModificarEditorial extends HttpServlet {
 		
 		int id_editorial = Integer.parseInt(request.getParameter("id_editorial"));
 		String nombre = request.getParameter("nombre");
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		
 		
 		editorial.setNombre(nombre);
-		editorial.setId_libro(id_libro);
+		
 	
 		
 		modeloEditorial.conectar();

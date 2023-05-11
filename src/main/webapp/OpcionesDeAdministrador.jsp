@@ -383,7 +383,7 @@
 		                        <td>
 		                        <a href="VerPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}&devuelto=${prestamo.devuelto}" class="btn btn-success">Ver</a>
 		                        <a href="ModificarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-primary">Editar</a>
-		                        <a href="EliminarPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a>
+		                        <a href="AnularPrestamo?fecha_prestamo=${prestamo.fecha_prestamo}&id_libro=${prestamo.id_libro}&id_usuario=${prestamo.id_usuario}" class="btn btn-danger">Eliminar</a>
 		                    </td>
 		                          
 		                    </tr>

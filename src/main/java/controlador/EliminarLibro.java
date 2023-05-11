@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Libro;
+import modelo.ModeloAutor;
 import modelo.ModeloLibro;
+import modelo.ModeloLibro_Info;
 
 /**
  * Servlet implementation class EliminarLibro
@@ -32,18 +34,21 @@ public class EliminarLibro extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloLibro modeloLibro = new ModeloLibro();
+		ModeloLibro_Info modeloLibroInfo = new ModeloLibro_Info();
 		
-		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		int id_libro1 = Integer.parseInt(request.getParameter("id_libro"));
+		int id_libro2 = id_libro1;
+		modeloLibroInfo.conectar();
+		int id_autor = modeloLibroInfo.getIdAutor(id_libro2);
+		modeloLibroInfo.EliminarLibro_Info(id_libro2, id_autor);
+		modeloLibroInfo.cerrar();
+		
 		modeloLibro.conectar();
-		modeloLibro.eliminarLibro(id_libro);
-		libros = modeloLibro.getLibros();
+		modeloLibro.eliminarLibro(id_libro1);
 		modeloLibro.cerrar();
 	
-		
-		request.setAttribute("libros", libros);
-		request.getRequestDispatcher("OpcionesDeAdministrador.jsp").forward(request, response);
+		response.sendRedirect("OpcionesDeAdministrador");
 	}
 
 	/**

@@ -20,18 +20,11 @@
 		    <label>Nombre:</label>
 		    <input type="text" name="nombre" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha válida')" 
-		           onchange="this.setCustomValidity('')" /><br/>
+		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha valida')" 
+		           onchange="this.setCustomValidity('')"
+		           value="${editorial.nombre}" /><br/>
   		</div>
   		
-  		<div class="form-group">
-    		<label>id_libro:</label>
-    			<input type="text" name="id_libro" required 
-		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingrese un id valido')" 
-		           onchange="this.setCustomValidity('')" /><br/>
-		           
-  		</div>
   		</div>
   		<input type="submit" value="Guardar" class="btn btn-primary mt-4"/>
   		</form>

@@ -9,11 +9,6 @@
 </head>
 <body>
 	<form method="post" action="ModificarReserva">
-  		<div class="form-group">
-                <label for="nombre">Id:</label>
-              <input type="hidden" value="${reserva.fecha_Reserva}&${reserva.id_libro}&${reserva.id_usuario}">
-                <span class="form-control" id="id-display">${reserva.fecha_Reserva}&${reserva.id_libro}&${reserva.id_usuario}</span>
-              </div>
               
   		<div class="form-group">
     		<div class="form-group">

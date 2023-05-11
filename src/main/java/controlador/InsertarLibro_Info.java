@@ -39,20 +39,7 @@ public class InsertarLibro_Info extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ModeloLibro_Info modeloLibro_Info = new ModeloLibro_Info();
-		Libro_Info libro_Info = new Libro_Info();
 		
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
-		int id_autor = Integer.parseInt(request.getParameter("id_autor"));
-		
-		
-		libro_Info.setId_libro(id_libro);
-		libro_Info.setId_autor(id_autor);
-	
-		
-		modeloLibro_Info.conectar();
-		modeloLibro_Info.insertarLibro_Info(libro_Info);
-		modeloLibro_Info.cerrar();
 	}
 
 }

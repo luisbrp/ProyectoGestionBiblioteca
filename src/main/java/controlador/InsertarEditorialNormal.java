@@ -6,18 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Editorial;
+import modelo.ModeloEditorial;
 
 /**
- * Servlet implementation class EliminarPrestamo
+ * Servlet implementation class InsertarEditorialNormal
  */
-@WebServlet("/EliminarPrestamo")
-public class EliminarPrestamo extends HttpServlet {
+@WebServlet("/InsertarEditorialNormal")
+public class InsertarEditorialNormal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EliminarPrestamo() {
+    public InsertarEditorialNormal() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +29,26 @@ public class EliminarPrestamo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("InsertarEditorialNormal.jsp").forward(request, response); 
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ModeloEditorial modeloEditorial = new ModeloEditorial();
+		Editorial editorial = new Editorial();
+		
+		String nombre = request.getParameter("nombre");
+		
+		
+		editorial.setNombre(nombre);
+	
+		
+		modeloEditorial.conectar();
+		modeloEditorial.registrarEditorial(editorial);
+		modeloEditorial.cerrar();
+		response.sendRedirect("OpcionesDeAdministrador");
 	}
 
 }

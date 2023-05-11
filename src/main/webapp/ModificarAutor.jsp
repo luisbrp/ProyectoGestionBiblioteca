@@ -20,16 +20,18 @@
 		    <label>Nombre:</label>
 		    <input type="text" name="nombre" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha válida')" 
-		           onchange="this.setCustomValidity('')" /><br/>
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un nombre valido')" 
+		           onchange="this.setCustomValidity('')" 
+		           value="${autor.nombre}"><br/>
   		</div>
   		
   		<div class="form-group">
     		<label>Apellido:</label>
     			<input type="text" name="apellido" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingrese un id valido')" 
-		           onchange="this.setCustomValidity('')" /><br/>
+		           oninvalid="this.setCustomValidity('Por favor, ingrese un valor valido')" 
+		           onchange="this.setCustomValidity('')"
+		           value="${autor.apellido}"/><br/>
 		           
   		</div>
   		
@@ -38,8 +40,9 @@
     		<label>Descripcion:</label>
     			<input type="text" name="descripcion" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
-		           onchange="this.setCustomValidity('')" /><br/>
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
+		           onchange="this.setCustomValidity('')"
+		            value="${autor.descripcion}" /><br/>
 		           
   		</div>
   		</div>

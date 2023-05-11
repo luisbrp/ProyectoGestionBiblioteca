@@ -1,11 +1,14 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Autor;
 import modelo.Editorial;
@@ -30,10 +33,16 @@ public class InsertarEditorial extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("InsertarEditorial.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	ModeloEditorial modeloEditorial = new ModeloEditorial();
+    	modeloEditorial.conectar();
+		ArrayList<Editorial> editoriales = modeloEditorial.getEditoriales();
+		modeloEditorial.cerrar();
+		
+		request.setAttribute("editoriales", editoriales);
+		request.getRequestDispatcher("InsertarEditorial.jsp").forward(request, response); 
+	   }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,16 +50,27 @@ public class InsertarEditorial extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloEditorial modeloEditorial = new ModeloEditorial();
 		Editorial editorial = new Editorial();
+		HttpSession session = request.getSession();
+		Autor autor = (Autor) session.getAttribute("autor");
+		Autor autorSoloConId = (Autor) session.getAttribute("autorSoloConId");
 		
+		String id_editorialString = request.getParameter("id_editorial");
 		String nombre = request.getParameter("nombre");
-		int id_libro = Integer.parseInt(request.getParameter("id_libro"));
+		
 		
 		editorial.setNombre(nombre);
-		editorial.setId_libro(id_libro);
-	
-		
+
 		modeloEditorial.conectar();
-		modeloEditorial.registrarEditorial(editorial);
+		if (id_editorialString != null) {
+		    int id_editorial = Integer.parseInt(id_editorialString);
+		    HttpSession session2 = request.getSession();
+		    session2.setAttribute("id_editorial", id_editorial);
+		    session.setAttribute("autorSoloConId", autorSoloConId);
+		    session.setAttribute("autor", autor);
+		    response.sendRedirect("InsertarLibro");
+		} else {
+			response.sendRedirect("InsertarEditorial");
+		}
 		modeloEditorial.cerrar();
 	}
 

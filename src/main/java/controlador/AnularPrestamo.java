@@ -32,7 +32,7 @@ public class AnularPrestamo extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
 		ModeloPrestamo modeloPrestamo = new ModeloPrestamo();
 		Prestamo prestamo = new Prestamo();
@@ -55,6 +55,7 @@ public class AnularPrestamo extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		response.sendRedirect("OpcionesDeAdministrador");
 	}
 
 	/**

@@ -12,13 +12,12 @@
   		<div class="form-group">
         <label for="nombre">Id:</label>
         <input type="hidden" value="${libro.id_libro}" id="id_libro" name="id_libro">
-        <span class="form-control" id="id-display">${libro.id_libro}</span>
     	</div>
   		
   		<div class="form-group">
     		<label>ISBN:</label>
     			<input type="text" name="isbn" required class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa un nombre válido')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un isbn valido')" 
 		           onchange="this.setCustomValidity('')" 
 		           value="${libro.isbn}"/><br/>
   		</div>
@@ -27,7 +26,7 @@
     		<label>TITULO:</label>
     			<input type="text" name="titulo" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
 		           onchange="this.setCustomValidity('')"
 		            value="${libro.titulo}" /><br/>
 		           
@@ -37,7 +36,7 @@
     		<label>NUM PAGINAS:</label>
     			<input type="text" name="num_pag" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.num_paginas}"/><br/>
 		           
@@ -47,7 +46,7 @@
 		    <label>Fecha:</label>
 		    <input type="Date" name="fecha" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa una fecha valida')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.fecha_publicacion}"/><br/>
   		</div>
@@ -56,7 +55,7 @@
     		<label>idioma:</label>
     			<input type="text" name="idioma" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.idioma}"/><br/>
 		           
@@ -66,7 +65,7 @@
     		<label>stock:</label>
     			<input type="text" name="stock" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa valor valido')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.stock}"/><br/>
 		           
@@ -76,7 +75,7 @@
     		<label>categoria:</label>
     			<input type="text" name="categoria" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, selecciona un valor valido')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.categoria}"/><br/>  
   		</div>
@@ -84,9 +83,25 @@
     		<label>foto:</label>
     			<input type="text" name="foto" required 
 		           class="form-control" 
-		           oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
 		           onchange="this.setCustomValidity('')" 
 		            value="${libro.foto}"/><br/>  
+  		</div>
+  		<div class="form-group">
+    		<label>Descripcion:</label>
+    			<input type="text" name="descripcion" required 
+		           class="form-control" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
+		           onchange="this.setCustomValidity('')" 
+		            value="${libro.descripcion}"/><br/>  
+  		</div>
+  			<div class="form-group">
+    		<label>Id Editorial:</label>
+    			<input type="text" name="id_editorial" required 
+		           class="form-control" 
+		           oninvalid="this.setCustomValidity('Por favor, ingresa un valor valido')" 
+		           onchange="this.setCustomValidity('')" 
+		            value="${libro.id_editorial}"/><br/>  
   		</div>
   <input type="submit" value="Guardar" class="btn btn-primary mt-4"/>
   </form>

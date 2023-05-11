@@ -9,11 +9,11 @@ public class ModeloLibro_Info extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
-	public void insertarLibro_Info(Libro_Info libro_info) {
+	public void insertarLibroInfo(Libro libro, int id_autor) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Libro_Info (Id_Libro, Id_Autor) VALUES (?,?)");
-			pst.setInt(1, libro_info.getId_libro());
-			pst.setInt(2, libro_info.getId_autor());
+			pst.setInt(1, libro.getId_libro());
+			pst.setInt(2, id_autor);
 			
 			pst.execute();
 		} catch (SQLException e) {
@@ -22,7 +22,21 @@ public class ModeloLibro_Info extends Conector{
 		}
 	}
 	
-	public void EliminarLibro_Info(int id_libro, int id_autor) {
+	
+	public void insertarLibro_Info(Autor autor, Libro libro) {
+		try {
+			pst = conexion.prepareStatement("INSERT INTO Libro_Info (Id_Libro, Id_Autor) VALUES (?,?)");
+			pst.setInt(1, libro.getId_libro());
+			pst.setInt(2, autor.getId_autor());
+			
+			pst.execute();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void EliminarLibro_Info( int id_libro, int id_autor) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Libro_Info WHERE Id_Libro = ? AND Id_Autor = ?");
 			pst.setInt(1, id_libro);
@@ -89,5 +103,42 @@ public class ModeloLibro_Info extends Conector{
 			e.printStackTrace();
 		}
 		return libros_Info;
+	}
+	
+	public int getIdAutor (int id_libro) {
+		int id_autor = 0;
+		try {
+			pst = conexion.prepareStatement("SELECT Id_Autor FROM libro_info where Id_Libro = ?");
+			pst.setInt(1, id_libro);
+			
+			pst.executeQuery();
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				id_autor = rs.getInt("Id_Autor");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id_autor;
+	}
+
+
+	public int getIdLibro(int id_autor) {
+		int id_libro = 0;
+		try {
+			pst = conexion.prepareStatement("SELECT Id_Libro FROM libro_info where Id_Autor = ?");
+			pst.setInt(1, id_autor);
+			
+			pst.executeQuery();
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				id_libro = rs.getInt("Id_Libro");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id_libro;
 	}
 }
