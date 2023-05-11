@@ -341,7 +341,7 @@
             <tr>
               <th>Id_Editorial</th>
               <th>Nombre</th>
-              <th>Lista de Editoriales<a href="InsertarEditorial" class="btn btn-primary" style="margin-left: 100px;">InsertarEditorial</a></th>
+              <th>Lista de Editoriales<a href="InsertarEditorialNormal" class="btn btn-primary" style="margin-left: 100px;">InsertarEditorial</a></th>
               <th><form class="d-flex search-form">
               	<button class="btn btn-outline-secondary" name="recargarEditoriales">Recargar</button>
                   <input class="form-control me-2 ms-2" type="search" placeholder="Buscar nombre" aria-label="Buscar Editorial" name="nombre">
