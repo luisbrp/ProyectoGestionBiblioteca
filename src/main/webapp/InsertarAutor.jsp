@@ -36,17 +36,17 @@
   <form method="post" action="InsertarAutor" id="form_insertar_autor" style="display:none;">
     <div class="form-group">
       <label>Nombre:</label>
-      <input type="text" name="nombre" class="form-control" /><br/>
+      <input type="text" name="nombre" class="form-control" required /><br/>
     </div>
       
     <div class="form-group">
       <label>Apellido:</label>
-      <input type="text" name="apellido" class="form-control" /><br/>
+      <input type="text" name="apellido" class="form-control" required /><br/>
     </div>
       
     <div class="form-group">
       <label>Descripcion:</label>
-      <input type="text" name="descripcion" class="form-control" /><br/>
+      <input type="text" name="descripcion" class="form-control" required /><br/>
     </div>
       
     <input type="submit" value="Continuar" class="btn btn-primary mt-4" name="continuar_insertar_autor"/>
