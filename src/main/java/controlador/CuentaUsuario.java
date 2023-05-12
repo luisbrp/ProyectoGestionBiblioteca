@@ -103,8 +103,8 @@ HttpSession session = request.getSession();
 		
 		/*Busqueda*/
 		
-		 String nombreBusqueda = request.getParameter("nombreBusqueda");
-		    
+			String nombreBusqueda = request.getParameter("nombreBusqueda");
+		    if(nombreBusqueda != null) {
 		    ModeloLibro modeloLibro = new ModeloLibro();
 		    modeloLibro.conectar();
 		    ResultadoBusqueda resultado = modeloLibro.BuscarTituloLibroNombreAutor(nombreBusqueda);
@@ -114,12 +114,13 @@ HttpSession session = request.getSession();
 		    modeloLibro.cerrar();
 			    
 		    request.setAttribute("librosRelacionados", librosRelacionados);
-		    request.setAttribute("autoresRelacionados", autoresRelacionados);
-		   
-		 
+		    request.setAttribute("autoresRelacionados", autoresRelacionados); 
 		    response.sendRedirect(request.getContextPath() + "/Busqueda?nombreBusqueda=" + nombreBusqueda);
+		    }
+		 
+		    response.sendRedirect("PaginaPrincipal");
 		    
-		response.sendRedirect("PaginaPrincipal");
+		
 	}
 
 }

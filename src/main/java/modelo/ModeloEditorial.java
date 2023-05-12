@@ -27,7 +27,7 @@ public class ModeloEditorial extends Conector {
 			
 			pst.execute();
 		} catch (SQLException e) {
-			
+		    
 			e.printStackTrace();
 		}
 	}

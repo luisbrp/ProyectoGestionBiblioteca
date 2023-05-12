@@ -168,7 +168,7 @@
                 <th>Dni</th>
                 <th>Nombre</th>
                 <th>Rol</th>
-                <th>Lista de Usuarios<a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
+                <th><a href="InsertarUsuario" class="btn btn-primary" style="margin-left: 100px;">InsertarUsuario</a></th>
                 <th><form class="d-flex search-form" method="get">
                 	<button class="btn btn-outline-secondary" name="recargarUsuario">Recargar</button>
                     <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (Dni)" aria-label="Buscar Libro" name="dni">
@@ -209,7 +209,7 @@
                 <th>Titulo</th>
                 <th>Isbn</th>
                 <th>Stock</th>
-                <th>Lista de libros<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
+                <th><a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarLibro</a></th>
                 <th>
                     <form class="d-flex search-form" method="get">
                         <button class="btn btn-outline-secondary" name="recargarLibros">Recargar</button>
@@ -253,7 +253,7 @@
               <th>Id</th>
               <th>Nombre</th>
               <th>Apellido</th>
-              <th>Lista de Autores<a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
+              <th><a href="InsertarAutor" class="btn btn-primary" style="margin-left: 100px;">InsertarAutor</a></th>
               <th><form class="d-flex search-form2" method="get">
               	  <button class="btn btn-outline-secondary" name="recargarAutores">Recargar</button>
                   <input class="form-control me-2 ms-2" type="search" placeholder="Buscar (nombre)" aria-label="Buscar Autor" name="nombre">
@@ -289,7 +289,7 @@
             <th>Fecha</th>
             <th>Id del libro</th>
             <th>Id del usuario</th>
-            <th>Reservas<a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
+            <th><a href="RealizarReserva" class="btn btn-primary" style="margin-left: 100px;">RealizarReserva</a></th>
             <th><form class="d-flex search-form2" method="get" action="#">
 				    <button class="btn btn-outline-secondary" name="recargarReservas">Recargar</button>
 				    <input class="form-control me-2 ms-2" type="search" placeholder="Buscar Reserva (Dni Usuario)" aria-label="Buscar Reserva" name="dniReserva">
@@ -397,7 +397,7 @@
   </section>
     
      <section class="ms-5"  id="VerEditoriales">
-      <h3 class="mt-5">Gestionar Editoriales</h3>
+      <h3 class="mt-5">Gestionar Editoriales (para eliminar una editorial no tiene que haber ningun libro que pertenezca a ella)</h3>
       <div class="table-container mt-5">
       <table class="table table-striped table-dark mt-5">
           <thead>
