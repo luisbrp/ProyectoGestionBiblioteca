@@ -15,7 +15,7 @@ import modelo.ModeloReserva;
 import modelo.Reserva;
 
 /**
- * Servlet implementation class RealizarReserva
+ * Servlet Realiza una Reserva
  */
 @WebServlet("/RealizarReserva")
 public class RealizarReserva extends HttpServlet {

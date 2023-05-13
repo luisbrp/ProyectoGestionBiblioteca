@@ -16,7 +16,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class EliminarAutor
+ * Servlet Elimina un Autor
  */
 @WebServlet("/EliminarAutor")
 public class EliminarAutor extends HttpServlet {

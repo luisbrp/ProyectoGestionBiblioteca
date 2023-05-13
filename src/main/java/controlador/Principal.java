@@ -15,7 +15,7 @@ import modelo.CategoriaLibros;
 import modelo.ModeloLibro;
 
 /**
- * Servlet implementation class Principal
+ * Servlet Principal
  */
 @WebServlet("/Principal")
 public class Principal extends HttpServlet {

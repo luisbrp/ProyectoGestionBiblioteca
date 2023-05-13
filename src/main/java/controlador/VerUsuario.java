@@ -15,7 +15,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class VerUsuario
+ * Servlet Ver info del usuario 
  */
 @WebServlet("/VerUsuario")
 public class VerUsuario extends HttpServlet {

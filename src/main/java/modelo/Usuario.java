@@ -9,7 +9,7 @@ public class Usuario {
 	private int telefono;
 	private String email;
 	private String rol;
-	private String contraseña;
+	private String contrasena;
 	
 	public int getId_usuario() {
 		return id_usuario;
@@ -59,11 +59,11 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	
 }

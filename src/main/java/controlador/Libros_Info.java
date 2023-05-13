@@ -13,7 +13,7 @@ import modelo.Libro_Info;
 import modelo.ModeloLibro_Info;
 
 /**
- * Servlet implementation class Libros_Info
+ * Servlet de prueba para cargar una lista de libros junto con su autor 
  */
 @WebServlet("/Libros_Info")
 public class Libros_Info extends HttpServlet {

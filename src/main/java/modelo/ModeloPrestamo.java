@@ -24,6 +24,12 @@ public class ModeloPrestamo extends Conector{
 		}
 	}
 	
+	/**
+
+	Realiza un préstamo de un libro a un usuario.
+	@param prestamo el objeto Prestamo que contiene la información del préstamo a realizar. Debe contener la fecha de préstamo, el id del libro prestado, el id del usuario que realiza el préstamo y el estado del libro (devuelto o no).
+	@throws SQLException si ocurre algún error al interactuar con la base de datos.
+	*/
 	public void AnularPrestamo(java.util.Date fecha, int id_libro, int id_usuario) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Prestamo WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
@@ -38,6 +44,15 @@ public class ModeloPrestamo extends Conector{
 		}
 	}
 	
+	/**
+
+	Modifica un registro de préstamo en la base de datos.
+
+	@param fechaVieja la fecha anterior del préstamo a modificar
+	@param id_libroViejo el ID del libro anteriormente prestado
+	@param id_usuarioViejo el ID del usuario que había tomado prestado el libro anteriormente
+	@param prestamo el objeto Prestamo con los nuevos valores a guardar en la base de datos
+	*/
 	public void modificarPrestamo(java.util.Date fechaVieja, int id_libroViejo, int id_usuarioViejo, Prestamo prestamo) {
 	    try {
 	        pst = conexion.prepareStatement("UPDATE prestamo SET Fecha_Prestamo = ?, Id_Libro = ?, Id_Usuario = ?, Devuelto = ? WHERE Fecha_Prestamo = ? AND Id_Libro = ? AND Id_Usuario = ?");
@@ -55,7 +70,13 @@ public class ModeloPrestamo extends Conector{
 	    }
 	}
 
-	
+	/**
+	 * Retorna un objeto Prestamo que coincide con la fecha, libro y usuario especificados.
+	 * @param fecha la fecha del préstamo a buscar.
+	 * @param id_libro el ID del libro del préstamo a buscar.
+	 * @param id_usuario el ID del usuario que tomó el préstamo a buscar.
+	 * @return un objeto Prestamo que coincide con los parámetros de búsqueda.
+	 */
 	public Prestamo getPrestamo(java.util.Date fecha, int id_libro, int id_usuario) {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		Prestamo prestamo = new Prestamo();
@@ -105,7 +126,12 @@ public class ModeloPrestamo extends Conector{
 		}
 		return prestamos;
 	}
+	
+	/**
 
+	Retorna un ArrayList con todos los préstamos registrados en la base de datos.
+	@return ArrayList de Prestamo que contiene todos los préstamos registrados en la base de datos.
+	*/
 	public Prestamo getReservaPorUsuario(int id_usuarioPrestamo) {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		Prestamo prestamo = new Prestamo();
@@ -129,7 +155,14 @@ public class ModeloPrestamo extends Conector{
 		}
 		return prestamo;
 	}
-		
+	
+	/**
+
+	Obtiene la lista de prestamos realizados por un usuario especificado por su DNI. La lista incluye información
+	del libro prestado y del estado de devolución del mismo.
+	@param dniPrestamo el DNI del usuario para el cual se quieren obtener los prestamos.
+	@return una lista de objetos Prestamo que corresponden a los prestamos realizados por el usuario especificado. Si no hay prestamos para el usuario, la lista estará vacía.
+	*/
 	public ArrayList<Prestamo> getPrestamoPorDni(String dniPrestamo) {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {

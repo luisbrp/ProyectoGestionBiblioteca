@@ -19,7 +19,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class PaginaPrincipalADMIN
+ * Servlet Pagina Principal para el ADMIN
  */
 @WebServlet("/PaginaPrincipalADMIN")
 public class PaginaPrincipalADMIN extends HttpServlet {

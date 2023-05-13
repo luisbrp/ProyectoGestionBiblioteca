@@ -15,7 +15,7 @@ import modelo.ModeloPrestamo;
 import modelo.Prestamo;
 
 /**
- * Servlet implementation class VerPrestamo
+ * Servlet Ver un Prestamo
  */
 @WebServlet("/VerPrestamo")
 public class VerPrestamo extends HttpServlet {

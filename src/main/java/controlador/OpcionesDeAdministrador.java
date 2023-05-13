@@ -24,7 +24,7 @@ import modelo.Reserva;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class OpcionesDeAdministrador
+ * Servlet Opciones De Administrador
  */
 @WebServlet("/OpcionesDeAdministrador")
 public class OpcionesDeAdministrador extends HttpServlet {

@@ -11,7 +11,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class InsertarUsuario
+ * Servlet de prueba para insertar un usuario
  */
 @WebServlet("/InsertarUsuario")
 public class InsertarUsuario extends HttpServlet {
@@ -44,7 +44,7 @@ public class InsertarUsuario extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String direccion = request.getParameter("direccion");
-		String contraseña = request.getParameter("contraseña");
+		String contrasena = request.getParameter("contraseña");
 		int telefono = Integer.parseInt(request.getParameter("telefono"));
 		String email = request.getParameter("email");
 		String rol = request.getParameter("rol");
@@ -54,7 +54,7 @@ public class InsertarUsuario extends HttpServlet {
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
 		usuario.setDireccion(direccion);
-		usuario.setContraseña(contraseña);
+		usuario.setContrasena(contrasena);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
 		usuario.setRol(rol);

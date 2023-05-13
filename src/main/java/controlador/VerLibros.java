@@ -18,7 +18,7 @@ import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
- * Servlet implementation class VerLibros
+ * Servlet Ver todos los Libros por categorias
  */
 @WebServlet("/VerLibros")
 public class VerLibros extends HttpServlet {

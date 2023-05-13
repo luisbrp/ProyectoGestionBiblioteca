@@ -9,6 +9,10 @@ public class ModeloLibro extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
 	
+	/**
+	Registra un libro en la base de datos.
+	@param libro el libro a registrar.
+	*/
 	public void registrarLibro(Libro libro) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Libro (ISBN, Titulo, Num_pag, Fecha_Publicacion, Idioma, Stock, Categoria, Foto, Descripcion, Id_Editorial) VALUES (?,?,?,?,?,?,?,?,?,?)");
@@ -30,6 +34,10 @@ public class ModeloLibro extends Conector{
 		}
 	}
 	
+	/**
+	Elimina un libro de la base de datos.
+	@param id_libro el ID del libro a eliminar
+	*/
 	public void eliminarLibro(int id_libro) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Libro WHERE Id_Libro = ?");
@@ -42,6 +50,12 @@ public class ModeloLibro extends Conector{
 		}
 	}
 	
+	/**
+
+	Modifica la información de un libro en la base de datos.
+	@param id_libro El identificador del libro a modificar.
+	@param libro El objeto Libro con la información actualizada.
+	*/
 	public void modificarLibro(int id_libro, Libro libro) {
 		try {
 			pst = conexion.prepareStatement("UPDATE Libro SET ISBN = ?, Titulo = ?, Num_pag = ?, Fecha_Publicacion = ?, Idioma = ?, Stock = ?, Categoria = ?, Foto = ?, Descripcion = ?, Id_Editorial = ? WHERE Id_Libro = ?");
@@ -64,6 +78,12 @@ public class ModeloLibro extends Conector{
 		}
 	}
 	
+	/**
+
+	Retorna el objeto Libro correspondiente al id proporcionado.
+	@param id_libro El id del libro a buscar.
+	@return El objeto Libro correspondiente al id proporcionado.
+	*/
 	public Libro getLibro(int id_libro) {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		Libro libro = new Libro();
@@ -100,6 +120,11 @@ public class ModeloLibro extends Conector{
 		return libro;
 	}
 	
+	/**
+
+	Obtiene una lista de todos los libros registrados en la base de datos.
+	@return una lista de objetos Libro que representan los libros registrados en la base de datos.
+	*/
 	public ArrayList<Libro> getLibros() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
@@ -130,7 +155,13 @@ public class ModeloLibro extends Conector{
 		}
 		return libros;
 	}
+	
+	/**
 
+	Obtiene una lista de libros que tienen como autor al autor con el nombre especificado.
+	@param nombre el nombre del autor a buscar
+	@return una lista de libros que tienen como autor al autor con el nombre especificado
+	*/
 	public ArrayList<Libro> getLibrosPorNombreAutor (String nombre) {
 		ArrayList<Libro> librosDelAutor = new ArrayList<Libro>();
 		try {
@@ -165,7 +196,12 @@ public class ModeloLibro extends Conector{
 		return librosDelAutor;
 	}
 	
+	/**
 
+	Busca en la base de datos todos los libros que pertenecen a una determinada categoría.
+	@param categoriaSeleccionada la categoría de los libros a buscar
+	@return una lista de objetos de tipo Libro que pertenecen a la categoría especificada
+	*/
 	public ArrayList<Libro> buscarPorCategoria(String categoriaSeleccionada) {
 		ArrayList<Libro> librosPorCategoria = new ArrayList<Libro>();
 		try {
@@ -198,9 +234,13 @@ public class ModeloLibro extends Conector{
 	}	
 	
 	/**
-	 * devuleve 3
-	 * @return
-	 */
+
+	Este método devuelve una lista de categorías de libros recomendadas. Para ello, selecciona aleatoriamente
+	tres categorías distintas de libros y devuelve una lista con los títulos, fotos y IDs de tres libros de cada categoría.
+	Los libros se seleccionan aleatoriamente y se ordenan por categoría y de manera aleatoria dentro de cada categoría.
+	La lista resultante contiene un máximo de 25 libros, 3 por cada una de las 3 categorías seleccionadas.
+	@return una lista de objetos de la clase CategoriaLibros, que contienen el nombre de la categoría y una lista de libros de esa categoría, cada uno representado por un objeto de la clase Libro con su título, foto e ID.
+	*/
 	public ArrayList<CategoriaLibros> categoriasRecomendadas() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
@@ -257,7 +297,13 @@ public class ModeloLibro extends Conector{
 	    return categoriasLibros;
 	}
 	
-	
+	/**
+
+	Obtiene todas las categorías de libros presentes en la base de datos y devuelve una lista de objetos CategoriaLibros
+	que contienen la categoría y una lista de libros pertenecientes a esa categoría.
+	@return una lista de objetos CategoriaLibros que representan todas las categorías de libros presentes en la base de datos
+	*/
+
 	public ArrayList<CategoriaLibros> TodasLasCategorias() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
@@ -297,6 +343,13 @@ public class ModeloLibro extends Conector{
 
 	    return categoriasLibros;
 	}
+	
+	/**
+	Retorna una lista de todas las categorías de libros y los libros que pertenecen a cada una de ellas,
+	ordenados por categoría y título del libro.
+	@return una lista de objetos CategoriaLibros, cada uno de los cuales contiene una categoría y una lista de libros pertenecientes a esa categoría
+	@throws SQLException si ocurre un error al ejecutar la consulta SQL
+	*/
 	public ArrayList<CategoriaLibros> LibrosPorCategoria() {
 		ArrayList<CategoriaLibros> categoriasLibros = new ArrayList<>();
 
@@ -338,6 +391,7 @@ public class ModeloLibro extends Conector{
 
 	    return categoriasLibros;
 	}
+	
 	
 	public class ResultadoBusqueda {
 	    private ArrayList<Libro> librosRelacionados;
@@ -417,7 +471,13 @@ public class ModeloLibro extends Conector{
 
 	    return new ResultadoBusqueda(librosRelacionados, autoresRelacionados);
 	}
+	
+	/**
 
+	Busca un libro por su ISBN en la base de datos y devuelve un objeto Libro con la información encontrada.
+	@param isbn el número de ISBN del libro a buscar
+	@return un objeto Libro con la información del libro encontrado, o un objeto vacío si no se encontró ningún libro con ese ISBN
+	*/
 	public Libro buscarPorISBN(Long isbn) {
         Libro libro = new Libro();
         try {
@@ -446,7 +506,13 @@ public class ModeloLibro extends Conector{
         }
         return libro;
     }
+	
+	/**
 
+	Busca un libro por título en la base de datos y devuelve el objeto Libro correspondiente.
+	@param libro El objeto Libro con el título a buscar.
+	@return El objeto Libro correspondiente al título buscado, o null si no se encontró.
+	*/
 	public Libro getLibroPorTitulo(Libro libro) {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		try {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class PaginaPrincipalCliente
+ * Servlet Pagina Principal para el Cliente
  */
 @WebServlet("/PaginaPrincipalCliente")
 public class PaginaPrincipalCliente extends HttpServlet {

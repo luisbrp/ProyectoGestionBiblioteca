@@ -15,7 +15,7 @@ import modelo.ModeloAutor;
 import modelo.ModeloLibro_Info;
 
 /**
- * Servlet implementation class EliminarLibro_Info
+ * Servlet Elimina la informacion de un libro, junto con su autor
  */
 @WebServlet("/EliminarLibro_Info")
 public class EliminarLibro_Info extends HttpServlet {

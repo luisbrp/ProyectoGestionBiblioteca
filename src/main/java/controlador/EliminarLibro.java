@@ -15,7 +15,7 @@ import modelo.ModeloLibro;
 import modelo.ModeloLibro_Info;
 
 /**
- * Servlet implementation class EliminarLibro
+ * Servlet Eliminar un Libro
  */
 @WebServlet("/EliminarLibro")
 public class EliminarLibro extends HttpServlet {

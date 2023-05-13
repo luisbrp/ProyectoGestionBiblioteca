@@ -14,7 +14,7 @@ import modelo.Autor;
 import modelo.ModeloAutor;
 
 /**
- * Servlet implementation class InsertarAutor
+ * Servlet Inserta un Autor
  */
 @WebServlet("/InsertarAutor")
 public class InsertarAutor extends HttpServlet {

@@ -9,6 +9,11 @@ public class ModeloAutor extends Conector {
 	PreparedStatement pst;
 	ResultSet rs;
 	
+	/**
+	Registra un nuevo autor en la base de datos.
+	@param autor objeto de la clase Autor que contiene los datos del autor a registrar
+	@throws SQLException si hay un error al ejecutar la sentencia SQL
+	*/
 	public void registrarAutor(Autor autor) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Autor (Nombre, Apellido, Descripcion) VALUES (?,?,?)");
@@ -23,6 +28,11 @@ public class ModeloAutor extends Conector {
 		}
 	}
 	
+	/**
+	Elimina un autor de la base de datos según su identificador.
+	@param id_autor el identificador del autor a eliminar
+	@throws SQLException si hay un error al ejecutar la sentencia SQL
+	*/
 	public void eliminarAutor(int id_autor) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM Autor WHERE Id_Autor = ?");
@@ -35,6 +45,12 @@ public class ModeloAutor extends Conector {
 		}
 	}
 	
+	/**
+	Modifica los datos de un autor en la base de datos según su identificador.
+	@param id_autor el identificador del autor a modificar
+	@param autor objeto de la clase Autor que contiene los nuevos datos del autor
+	@throws SQLException si hay un error al ejecutar la sentencia SQL
+	*/
 	public void modificarAutor(int id_autor, Autor autor) {
 		try {
 			pst = conexion.prepareStatement("UPDATE autor SET Nombre = ?, Apellido = ?, Descripcion = ? WHERE Id_Autor = ?");
@@ -50,6 +66,12 @@ public class ModeloAutor extends Conector {
 		}
 	}
 	
+	/**
+	Devuelve un objeto de la clase Autor que corresponde al autor con el identificador especificado.
+	@param id_autor el identificador del autor buscado
+	@return el objeto Autor correspondiente al autor con el identificador especificado, o null si no se encuentra
+	@throws SQLException si hay un error al ejecutar la sentencia SQL
+	*/
 	public Autor getAutor(int id_autor) {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();
@@ -74,6 +96,16 @@ public class ModeloAutor extends Conector {
 		}
 		return autor;
 	}
+	
+	
+	
+	/**
+	Devuelve un objeto de la clase Autor que corresponde al autor del libro con el identificador especificado.
+	@param id_libro el identificador del libro para el cual se busca el autor
+	@return el objeto Autor correspondiente al autor del libro con el identificador especificado, o null si no se encuentra
+	@throws SQLException si hay un error al ejecutar la sentencia SQL
+	*/
+	
 	public Autor getAutorDeLibro(int id_libro) {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();
@@ -102,6 +134,8 @@ public class ModeloAutor extends Conector {
 		}
 		return autor;
 	}
+	
+	
 	public ArrayList<Autor> getAutoresDeLibro(int id_libro) {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		
@@ -131,6 +165,13 @@ public class ModeloAutor extends Conector {
 		}
 		return autores;
 	}
+	
+	/**
+	 * Obtiene una lista de autores que han escrito un libro dado.
+	 *
+	 * @param id_libro el identificador del libro del que se quieren obtener los autores
+	 * @return una lista de autores que han escrito el libro correspondiente
+	 */
 	public Autor getAutorPorNombre(String nombre) {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		Autor autor = new Autor();
@@ -154,6 +195,11 @@ public class ModeloAutor extends Conector {
 		}
 		return autor;
 	}
+	
+	/**
+	Devuelve una lista de todos los autores en la base de datos.
+	@return una lista de objetos Autor que representan a los autores en la base de datos
+	*/
 	
 	public ArrayList<Autor> getAutores() {
 		ArrayList<Autor> autores = new ArrayList<Autor>();

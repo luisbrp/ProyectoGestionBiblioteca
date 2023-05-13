@@ -15,7 +15,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class Login
+ * Servlet Login
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
@@ -44,25 +44,25 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Dni;
-		String contraseña;
-		String ContraseñaBBDD;
+		String contrasena;
+		String ContrasenaBBDD;
 		
 		Dni = request.getParameter("Dni");
-		contraseña = request.getParameter("password");
+		contrasena = request.getParameter("password");
 		ModeloUsuario ModeloUsuario = new ModeloUsuario();
 		
 		ModeloUsuario.conectar();
 		
 
 			try {
-				ContraseñaBBDD = ModeloUsuario.getContraseña(Dni);
+				ContrasenaBBDD = ModeloUsuario.getContrasena(Dni);
 			
-				if (contraseña.equals(ContraseñaBBDD)) {
+				if (contrasena.equals(ContrasenaBBDD)) {
 			
 						
 					
 					
-					Usuario usuariologeado = ModeloUsuario.getUsuarioLogin(Dni,contraseña);
+					Usuario usuariologeado = ModeloUsuario.getUsuarioLogin(Dni,contrasena);
 					
 					
 					

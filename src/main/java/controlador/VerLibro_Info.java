@@ -11,7 +11,7 @@ import modelo.Libro_Info;
 import modelo.ModeloLibro_Info;
 
 /**
- * Servlet implementation class VerLibro_Info
+ * Servlet Ver Libro_Info
  */
 @WebServlet("/VerLibro_Info")
 public class VerLibro_Info extends HttpServlet {

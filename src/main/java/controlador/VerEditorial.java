@@ -13,7 +13,7 @@ import modelo.Editorial;
 import modelo.ModeloEditorial;
 
 /**
- * Servlet implementation class VerEditorial
+ * Servlet Ver una Editorial
  */
 @WebServlet("/VerEditorial")
 public class VerEditorial extends HttpServlet {

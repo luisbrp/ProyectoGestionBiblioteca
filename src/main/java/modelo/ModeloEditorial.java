@@ -9,6 +9,10 @@ public class ModeloEditorial extends Conector {
 	PreparedStatement pst;
 	ResultSet rs;
 	
+	/**
+	Registra una nueva editorial en la base de datos.
+	@param editorial el objeto Editorial que contiene los datos de la editorial a registrar
+	*/
 	public void registrarEditorial(Editorial editorial) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO editorial (Nombre) VALUES (?)");
@@ -20,6 +24,10 @@ public class ModeloEditorial extends Conector {
 		}
 	}
 	
+	/**
+	Elimina una editorial de la base de datos según su ID.
+	@param id_editorial el ID de la editorial a eliminar.
+	*/
 	public void eliminarEditorial(int id_editorial) {
 		try {
 			pst = conexion.prepareStatement("DELETE FROM editorial WHERE Id_Editorial = ?");
@@ -31,6 +39,13 @@ public class ModeloEditorial extends Conector {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+
+	Modifica el nombre de una editorial en la base de datos
+	@param id_editorial el ID de la editorial a modificar
+	@param editorial la nueva información de la editorial
+	*/
 	
 	public void modificarEditorial(int id_editorial, Editorial editorial) {
 		try {
@@ -45,6 +60,11 @@ public class ModeloEditorial extends Conector {
 		}
 	}
 	
+	/**
+	 * Recupera una editorial utilizando su ID.
+	 * @param id_editorial El ID de la editorial a recuperar.
+	 * @return La editorial recuperada o null si no se encuentra en la base de datos.
+	 */
 	public Editorial getEditorial(int id_editorial) {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
 		try {
@@ -69,7 +89,12 @@ public class ModeloEditorial extends Conector {
 		}
 	}
 
-	
+	/**
+
+	Obtiene todas las editoriales registradas
+
+	@return un ArrayList de objetos Editorial con la información de las editoriales encontradas.
+	*/
 	public ArrayList<Editorial> getEditoriales() {
 		ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
 		try {
@@ -90,6 +115,12 @@ public class ModeloEditorial extends Conector {
 		}
 		return editoriales;
 	}
+	
+	/**
+	 * Busca una editorial en la base de datos por su nombre.
+	 * @param nombre El nombre de la editorial a buscar.
+	 * @return Un objeto Editorial con los datos de la editorial encontrada.
+	 */
 	public Editorial getEditorialPorNombre(String nombre) {
         ArrayList<Editorial> editoriales = new ArrayList<Editorial>();
         Editorial editorial = new Editorial();

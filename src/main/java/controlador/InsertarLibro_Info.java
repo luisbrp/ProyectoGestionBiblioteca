@@ -14,7 +14,7 @@ import modelo.ModeloEditorial;
 import modelo.ModeloLibro_Info;
 
 /**
- * Servlet implementation class InsertarLibro_Info
+ * Servlet de prueba para Insertar informacion de un libro
  */
 @WebServlet("/InsertarLibro_Info")
 public class InsertarLibro_Info extends HttpServlet {

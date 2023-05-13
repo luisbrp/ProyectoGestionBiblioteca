@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public class ModeloUsuario extends Conector{
 	PreparedStatement pst;
 	ResultSet rs;
+	
+	/**
+	Registra un nuevo usuario en la base de datos.
+	@param usuario El objeto Usuario a insertar.
+	*/
 	public void registrarUsuario(Usuario usuario) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
@@ -15,7 +20,7 @@ public class ModeloUsuario extends Conector{
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
 			pst.setString(4, usuario.getDireccion());
-			pst.setString(5, usuario.getContraseña());
+			pst.setString(5, usuario.getContrasena());
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			pst.setString(8, usuario.getRol());
@@ -27,6 +32,10 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
+	/**
+	Registra un nuevo usuario en la base de datos, estableciendo "Cliente" como valor por defecto para el campo "Rol" en caso de que este sea nulo o vacío.
+	@param usuario El objeto Usuario a insertar.
+	*/
 	public void registroDeUsuario(Usuario usuario) {
 		try {
 			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
@@ -34,7 +43,7 @@ public class ModeloUsuario extends Conector{
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
 			pst.setString(4, usuario.getDireccion());
-			pst.setString(5, usuario.getContraseña());
+			pst.setString(5, usuario.getContrasena());
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			if(usuario.getRol() == null || usuario.getRol().isEmpty()) {
@@ -50,7 +59,11 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 
-	
+	/**
+
+	Elimina un usuario de la base de datos.
+	@param id_usuario El ID del usuario a eliminar.
+	*/
 	public void eliminarUsuario(int id_usuario) {
 		
 		try {
@@ -64,6 +77,11 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
+	/**
+	Modifica los datos de un usuario existente en la base de datos.
+	@param id_usuario El ID del usuario a modificar.
+	@param usuario El objeto Usuario con los nuevos valores a actualizar.
+	*/
 	public void modificarUsuario(int id_usuario, Usuario usuario) {
 		try {
 			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, Direccion = ?, Contraseña = ?, Tlfno = ?, Email = ?, Rol = ? WHERE Id_Usuario = ?");
@@ -71,7 +89,7 @@ public class ModeloUsuario extends Conector{
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
 			pst.setString(4, usuario.getDireccion());
-			pst.setString(5, usuario.getContraseña());
+			pst.setString(5, usuario.getContrasena());
 			pst.setInt(6, usuario.getTelefono());
 			pst.setString(7, usuario.getEmail());
 			pst.setString(8, usuario.getRol());
@@ -84,6 +102,12 @@ public class ModeloUsuario extends Conector{
 		}
 	}
 	
+	/**
+
+	Busca un usuario en la base de datos a partir de su ID de usuario.
+	@param id_usuario El ID del usuario a buscar.
+	@return El usuario encontrado o null si no se encuentra.
+	*/
 	public Usuario getUsuario(int id_usuario) {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		Usuario usuario = new Usuario();
@@ -101,7 +125,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
-				usuario.setContraseña(rs.getString("Contraseña"));
+				usuario.setContrasena(rs.getString("Contraseña"));
 				usuario.setEmail(rs.getString("Email"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
@@ -114,6 +138,11 @@ public class ModeloUsuario extends Conector{
 		return usuario;
 	}
 	
+	/**
+
+	Obtiene todos los usuarios de la base de datos.
+	@return Un ArrayList que contiene todos los usuarios de la base de datos.
+	*/
 	public ArrayList<Usuario> getUsuarios() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		
@@ -130,7 +159,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
-				usuario.setContraseña(rs.getString("Contraseña"));
+				usuario.setContrasena(rs.getString("Contraseña"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
@@ -141,7 +170,15 @@ public class ModeloUsuario extends Conector{
 		}
 		return usuarios;
 	}
-public String getContraseña(String Dni) throws SQLException {
+	
+	/**
+
+	Obtiene la contraseña de un usuario a partir de su DNI.
+	@param Dni El DNI del usuario del que se quiere obtener la contraseña.
+	@return La contraseña del usuario.
+	@throws SQLException si se produce un error de SQL.
+	*/
+	public String getContrasena(String Dni) throws SQLException {
 		
 		pst = conexion.prepareStatement("SELECT Contraseña FROM usuario WHERE Dni = ?; ");
 		
@@ -154,17 +191,26 @@ public String getContraseña(String Dni) throws SQLException {
 		Usuario usuario = new Usuario();
 		
 		while(rs.next()) {	
-		usuario.setContraseña(rs.getString("Contraseña"));
+		usuario.setContrasena(rs.getString("Contraseña"));
 		}
 		
-		return usuario.getContraseña();
+		return usuario.getContrasena();
 	}
-public Usuario getUsuarioLogin(String Dni, String contraseña) throws SQLException {
+	
+	/**
+
+	Busca un usuario en la base de datos a partir de su DNI y contraseña.
+	@param Dni El DNI del usuario a buscar.
+	@param contrasena La contraseña del usuario a buscar.
+	@return El usuario encontrado o null si no se encuentra.
+	@throws SQLException si se produce un error de SQL.
+	*/
+public Usuario getUsuarioLogin(String Dni, String contrasena) throws SQLException {
 	
 	pst = conexion.prepareStatement("SELECT u.* FROM usuario u WHERE u.Dni = ? AND u.Contraseña = ?;");
 	
 	pst.setString(1, Dni);
-	pst.setString(2, contraseña);
+	pst.setString(2, contrasena);
 	
 	pst.executeQuery();
 
@@ -176,7 +222,7 @@ public Usuario getUsuarioLogin(String Dni, String contraseña) throws SQLExcepti
 	
 	usuario.setId_usuario(rs.getInt("Id_usuario"));
 	usuario.setNombre(rs.getString("Nombre"));
-	usuario.setContraseña(rs.getString("Contraseña"));
+	usuario.setContrasena(rs.getString("Contraseña"));
 	usuario.setApellido(rs.getString("Apellido"));
 	usuario.setDni(rs.getString("Dni"));
 	usuario.setDireccion(rs.getString("Direccion"));
@@ -187,6 +233,11 @@ public Usuario getUsuarioLogin(String Dni, String contraseña) throws SQLExcepti
 	
 	return usuario;
 }
+	/**
+	Devuelve el objeto Usuario correspondiente al dni especificado.
+	@param dni el dni del usuario a buscar
+	@return el objeto Usuario correspondiente al dni especificado
+	*/
 public Usuario getUsuarioPorDni(String dni) {
     ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     Usuario usuario = new Usuario();
@@ -204,7 +255,7 @@ public Usuario getUsuarioPorDni(String dni) {
             usuario.setNombre(rs.getString("Nombre"));
             usuario.setApellido(rs.getString("Apellido"));
             usuario.setDireccion(rs.getString("Direccion"));
-            usuario.setContraseña(rs.getString("Contrasena"));
+            usuario.setContrasena(rs.getString("Contrasena"));
             usuario.setTelefono(rs.getInt("Tlfno"));
             usuario.setRol(rs.getString("Rol"));
             usuarios.add(usuario);
@@ -214,5 +265,5 @@ public Usuario getUsuarioPorDni(String dni) {
         e.printStackTrace();
     }
         return usuario;
-}
+	}
 }

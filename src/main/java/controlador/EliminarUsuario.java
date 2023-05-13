@@ -13,7 +13,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class EliminarUsuario
+ * Servlet Elimina un Usuario
  */
 @WebServlet("/EliminarUsuario")
 public class EliminarUsuario extends HttpServlet {

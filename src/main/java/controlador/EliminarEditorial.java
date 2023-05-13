@@ -15,7 +15,7 @@ import modelo.ModeloEditorial;
 import modelo.ModeloLibro;
 
 /**
- * Servlet implementation class EliminarEditorial
+ * Servlet Elimina un Editorial
  */
 @WebServlet("/EliminarEditorial")
 public class EliminarEditorial extends HttpServlet {

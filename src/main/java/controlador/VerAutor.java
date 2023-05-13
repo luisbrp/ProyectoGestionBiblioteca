@@ -20,7 +20,7 @@ import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
- * Servlet implementation class VerAutor
+ * Servlet Ver un Autor
  */
 @WebServlet("/VerAutor")
 public class VerAutor extends HttpServlet {

@@ -11,7 +11,7 @@ import modelo.Editorial;
 import modelo.ModeloEditorial;
 
 /**
- * Servlet implementation class ModificarEditorial
+ * Servlet Modificar una Editorial
  */
 @WebServlet("/ModificarEditorial")
 public class ModificarEditorial extends HttpServlet {

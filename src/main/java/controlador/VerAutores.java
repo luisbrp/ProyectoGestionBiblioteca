@@ -19,7 +19,7 @@ import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
- * Servlet implementation class VerAutores
+ * Servlet  Ver todos los Autores
  */
 @WebServlet("/VerAutores")
 public class VerAutores extends HttpServlet {

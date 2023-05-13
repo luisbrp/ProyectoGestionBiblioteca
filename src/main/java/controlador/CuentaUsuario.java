@@ -19,7 +19,7 @@ import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
- * Servlet implementation class CuentaUsuario
+ * Servlet Cuenta del usuario
  */
 @WebServlet("/CuentaUsuario")
 public class CuentaUsuario extends HttpServlet {
@@ -81,7 +81,7 @@ HttpSession session = request.getSession();
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String direccion = request.getParameter("direccion");
-		String contraseña = request.getParameter("contraseña");
+		String contrasena = request.getParameter("contraseña");
 		int telefono = Integer.parseInt(request.getParameter("telefono"));
 		String email = request.getParameter("email");
 		String rol = request.getParameter("rol");
@@ -91,7 +91,7 @@ HttpSession session = request.getSession();
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
 		usuario.setDireccion(direccion);
-		usuario.setContraseña(contraseña);
+		usuario.setContrasena(contrasena);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
 		usuario.setRol(rol);

@@ -21,7 +21,7 @@ import modelo.Autor;
 
 
 /**
- * Servlet implementation class InsertarLibro
+ * Servlet de prueba para Insertar un Libro
  */
 @WebServlet("/InsertarLibro")
 public class InsertarLibro extends HttpServlet {

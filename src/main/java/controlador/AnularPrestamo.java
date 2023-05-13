@@ -15,7 +15,7 @@ import modelo.ModeloPrestamo;
 import modelo.Prestamo;
 
 /**
- * Servlet implementation class AnularPrestamo
+ * Servlet anula el prestamo
  */
 @WebServlet("/AnularPrestamo")
 public class AnularPrestamo extends HttpServlet {

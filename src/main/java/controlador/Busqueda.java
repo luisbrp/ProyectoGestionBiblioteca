@@ -18,7 +18,7 @@ import modelo.Usuario;
 import modelo.ModeloLibro.ResultadoBusqueda;
 
 /**
- * Servlet implementation class Busqueda
+ * Servlet Busqueda
  */
 @WebServlet("/Busqueda")
 public class Busqueda extends HttpServlet {

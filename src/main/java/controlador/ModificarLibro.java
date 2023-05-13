@@ -15,7 +15,7 @@ import modelo.Libro;
 import modelo.ModeloLibro;
 
 /**
- * Servlet implementation class ModificarLibro
+ * Servlet Modificar un Libro
  */
 @WebServlet("/ModificarLibro")
 public class ModificarLibro extends HttpServlet {

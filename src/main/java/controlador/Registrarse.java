@@ -18,7 +18,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class Registrarse
+ * Servlet Registrarse
  */
 @WebServlet("/Registrarse")
 public class Registrarse extends HttpServlet {
@@ -79,7 +79,7 @@ public class Registrarse extends HttpServlet {
 		usuario.setDireccion(direccion);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
-		usuario.setContraseña(password);
+		usuario.setContrasena(password);
 
 	
 		ModeloUsuario.registroDeUsuario(usuario);
@@ -91,11 +91,11 @@ public class Registrarse extends HttpServlet {
 		ModeloUsuario.conectar();
 	
 		
-		String ContraseñaBBDD;
+		String ContrasenaBBDD;
 		try {
-			ContraseñaBBDD = ModeloUsuario.getContraseña(dni);
+			ContrasenaBBDD = ModeloUsuario.getContrasena(dni);
 		
-			if (password.equals(ContraseñaBBDD)) {
+			if (password.equals(ContrasenaBBDD)) {
 		
 					
 				

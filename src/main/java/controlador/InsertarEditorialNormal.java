@@ -10,7 +10,7 @@ import modelo.Editorial;
 import modelo.ModeloEditorial;
 
 /**
- * Servlet implementation class InsertarEditorialNormal
+ * Servlet Insertar una Editorial
  */
 @WebServlet("/InsertarEditorialNormal")
 public class InsertarEditorialNormal extends HttpServlet {

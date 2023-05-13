@@ -15,7 +15,7 @@ import modelo.ModeloPrestamo;
 import modelo.Prestamo;
 
 /**
- * Servlet implementation class RealizarPrestamo
+ * Servlet Realiza un Prestamo
  */
 @WebServlet("/RealizarPrestamo")
 public class RealizarPrestamo extends HttpServlet {

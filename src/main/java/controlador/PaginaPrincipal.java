@@ -20,7 +20,7 @@ import modelo.Usuario;
 import modelo.Autor;
 
 /**
- * Servlet implementation class PaginaPrincipal
+ * Servlet  PaginaPrincipal
  */
 @WebServlet("/PaginaPrincipal")
 public class PaginaPrincipal extends HttpServlet {

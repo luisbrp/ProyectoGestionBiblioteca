@@ -13,7 +13,7 @@ import modelo.ModeloUsuario;
 import modelo.Usuario;
 
 /**
- * Servlet implementation class ModificarAutor
+ * Servlet Modificar un Autor
  */
 @WebServlet("/ModificarAutor")
 public class ModificarAutor extends HttpServlet {
