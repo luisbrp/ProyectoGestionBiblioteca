@@ -76,7 +76,7 @@
         <input type="password" name="contraseña" required class="form-control"
             oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña válida')"
             onchange="this.setCustomValidity('')" 
-            value="${usuario.contraseña}"/>
+            value="${usuario.contrasena}"/>
     </div>
     
     <input type="submit" value="Guardar" class="btn btn-primary mt-4"/>

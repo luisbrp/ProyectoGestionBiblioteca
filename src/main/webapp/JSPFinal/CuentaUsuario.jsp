@@ -183,7 +183,7 @@ header {
               </div>
                <div class="form-group">
                 <label for="contraseña"><strong>Contraseña:</strong></label>
-                <input type="password" class="form-control" name="contraseña" id="contraseña" value="${usuario.contraseña}" required disabled pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" title="La Contraseña debe tener al menos 8 caracteres y estar formado por una combinación de letras y números.">
+                <input type="password" class="form-control" name="contraseña" id="contraseña" value="${usuario.contrasena}" required disabled pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" title="La Contraseña debe tener al menos 8 caracteres y estar formado por una combinación de letras y números.">
               </div>
               <div class="form-group">
                 <label for="telefono"><strong>Telefono:</strong></label>
