@@ -15,7 +15,7 @@ public class ModeloUsuario extends Conector{
 	*/
 	public void registrarUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contrasena, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
 			pst.setString(1, usuario.getDni());
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
@@ -38,7 +38,7 @@ public class ModeloUsuario extends Conector{
 	*/
 	public void registroDeUsuario(Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contraseña, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
+			pst = conexion.prepareStatement("INSERT INTO Usuario (Dni, Nombre, Apellido, Direccion, Contrasena, Tlfno, Email, Rol) VALUES (?,?,?,?,?,?,?,?)");
 			pst.setString(1, usuario.getDni());
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
@@ -84,7 +84,7 @@ public class ModeloUsuario extends Conector{
 	*/
 	public void modificarUsuario(int id_usuario, Usuario usuario) {
 		try {
-			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, Direccion = ?, Contraseña = ?, Tlfno = ?, Email = ?, Rol = ? WHERE Id_Usuario = ?");
+			pst = conexion.prepareStatement("UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, Direccion = ?, Contrasena = ?, Tlfno = ?, Email = ?, Rol = ? WHERE Id_Usuario = ?");
 			pst.setString(1, usuario.getDni());
 			pst.setString(2, usuario.getNombre());
 			pst.setString(3, usuario.getApellido());
@@ -125,7 +125,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
-				usuario.setContrasena(rs.getString("Contraseña"));
+				usuario.setContrasena(rs.getString("Contrasena"));
 				usuario.setEmail(rs.getString("Email"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
@@ -159,7 +159,7 @@ public class ModeloUsuario extends Conector{
 				usuario.setNombre(rs.getString("Nombre"));
 				usuario.setApellido(rs.getString("Apellido"));
 				usuario.setDireccion(rs.getString("Direccion"));
-				usuario.setContrasena(rs.getString("Contraseña"));
+				usuario.setContrasena(rs.getString("Contrasena"));
 				usuario.setTelefono(rs.getInt("Tlfno"));
 				usuario.setRol(rs.getString("Rol"));
 				usuarios.add(usuario);
@@ -180,7 +180,7 @@ public class ModeloUsuario extends Conector{
 	*/
 	public String getContrasena(String Dni) throws SQLException {
 		
-		pst = conexion.prepareStatement("SELECT Contraseña FROM usuario WHERE Dni = ?; ");
+		pst = conexion.prepareStatement("SELECT Contrasena FROM usuario WHERE Dni = ?; ");
 		
 		pst.setString(1, Dni);
 		
@@ -191,7 +191,7 @@ public class ModeloUsuario extends Conector{
 		Usuario usuario = new Usuario();
 		
 		while(rs.next()) {	
-		usuario.setContrasena(rs.getString("Contraseña"));
+		usuario.setContrasena(rs.getString("Contrasena"));
 		}
 		
 		return usuario.getContrasena();
@@ -207,7 +207,7 @@ public class ModeloUsuario extends Conector{
 	*/
 public Usuario getUsuarioLogin(String Dni, String contrasena) throws SQLException {
 	
-	pst = conexion.prepareStatement("SELECT u.* FROM usuario u WHERE u.Dni = ? AND u.Contraseña = ?;");
+	pst = conexion.prepareStatement("SELECT u.* FROM usuario u WHERE u.Dni = ? AND u.Contrasena = ?;");
 	
 	pst.setString(1, Dni);
 	pst.setString(2, contrasena);
@@ -222,7 +222,7 @@ public Usuario getUsuarioLogin(String Dni, String contrasena) throws SQLExceptio
 	
 	usuario.setId_usuario(rs.getInt("Id_usuario"));
 	usuario.setNombre(rs.getString("Nombre"));
-	usuario.setContrasena(rs.getString("Contraseña"));
+	usuario.setContrasena(rs.getString("Contrasena"));
 	usuario.setApellido(rs.getString("Apellido"));
 	usuario.setDni(rs.getString("Dni"));
 	usuario.setDireccion(rs.getString("Direccion"));
